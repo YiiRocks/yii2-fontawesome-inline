@@ -22,8 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Thoulah\\FontAwesomeInline\\": "src/main",
-            "Thoulah\\FontAwesomeInline\\bootstrap4\\": "src/bootstrap4"
+            "Thoulah\\FontAwesomeInline\\": "src"
         }
     },
     "autoload-dev": {

@@ -27,11 +27,35 @@ class Icon extends \yii\bootstrap4\Widget {
 	}
 
 	/*
+	 *  Return the complete ActiveField inputTemplate
+	 */
+	public function activeFieldAddon(string $name, array $options = []): string {
+		$location = ArrayHelper::getValue($options, 'location', 'prepend');
+
+		return Html::tag('div',
+			($location === 'prepend')
+				? $this->activeFieldIcon($name, $options).'{input}'
+				: '{input}'.$this->activeFieldIcon($name, $options)
+		, ['class' => 'input-group']);
+	}
+
+	/*
+	 *  Return the partial ActiveField inputTemplate for manual use
+	 */
+	public function activeFieldIcon(string $name, array $options = []): string {
+		Html::addCssClass($options, $this->prefix.'-fw');
+		$location = ArrayHelper::remove($options, 'location', 'prepend');
+
+		$icon = Html::tag('div', $this->show($name, $options), ['class' => 'input-group-text']);
+		return Html::tag('div', $icon, ['class' => "input-group-{$location}"]);
+	}
+
+	/*
 	 *  Load Font Awesome SVG file. Falls back to default if not found
 	 *  @see $fallbackIcon
 	 */
 	protected function loadSvg(string $fileName): DOMDocument {
-		if (!file_exists(Yii::getAlias($fileName)))
+		if (!is_file(Yii::getAlias($fileName)))
 			$fileName = $this->fallbackIcon;
 
 		$doc = new DOMDocument();
@@ -64,10 +88,10 @@ class Icon extends \yii\bootstrap4\Widget {
 				ArrayHelper::setValue($options, 'width', round($height * $svgWidth / $svgHeight));
 		endswitch;
 
-		// currentColor for every path, unless the target is pdf
-		if (ArrayHelper::remove($options, 'target', 'web') !== 'pdf')
+		// Fill for every path, unless the target is pdf
+		if ($fill = ArrayHelper::remove($options, 'fill', 'currentColor'))
 			foreach ($doc->getElementsByTagName('path') as $path)
-				$path->setAttribute('fill', 'currentColor');
+				$path->setAttribute('fill', $fill);
 
 		// copy all options to svg tag
 		foreach ($options as $key => $value)
