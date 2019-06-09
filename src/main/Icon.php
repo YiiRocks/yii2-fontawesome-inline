@@ -6,9 +6,21 @@ use Yii;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
-class Icon {
+class Icon extends \yii\bootstrap4\Widget {
 	public $fallbackIcon = '@bower/fontawesome/svgs/solid/question-circle.svg';
-	public $prefix = 'fa';
+	public $prefix = 'svg-inline--fa';
+
+    public function __construct()
+    {
+        FontAwesomeAsset::register($this->getView());
+    }
+
+	public function show(string $name, array $options = []): string
+	{
+		$style = ArrayHelper::remove($options, 'style', 'solid');
+		$svg = $this->loadSvg("@bower/fontawesome/svgs/{$style}/{$name}.svg");
+		return $this->processSvg($svg, $options);
+	}
 
 	protected function loadSvg(string $fileName): DOMDocument {
 		if (!file_exists(Yii::getAlias($fileName)))
@@ -19,7 +31,8 @@ class Icon {
 		return $doc;
 	}
 
-	protected function processSvg(DOMDocument $doc, array $options): string {
+	protected function processSvg(DOMDocument $doc, array $options): string
+	{
 		ArrayHelper::setValue($options, 'aria-hidden', 'true');
 		ArrayHelper::setValue($options, 'role', 'img');
 
@@ -43,11 +56,5 @@ class Icon {
 		foreach ($options as $key => $value)
 			$svg->setAttribute($key, $value);
 		return $doc->saveXML($svg);
-	}
-
-	public function show(string $name, array $options = []): string {
-		$style = ArrayHelper::remove($options, 'style', 'solid');
-		$svg = $this->loadSvg("@bower/fontawesome/svgs/{$style}/{$name}.svg");
-		return $this->processSvg($svg, $options);
 	}
 }

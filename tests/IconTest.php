@@ -12,17 +12,19 @@ class IconTest extends tests
     public function testShow()
     {
         $icon = new Icon();
-        $out = $icon->show('github', ['style' => 'brands']);
 
-        $this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="fa fa-w-16"', $out);
+        $this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('cookie'));
+        $this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('github', ['style' => 'brands']));
+        $this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('zzzzzz'));
     }
 
     public function testPrefix()
     {
         $icon = new Icon();
         $icon->prefix = 'icon';
-        $out = $icon->show('github', ['style' => 'brands']);
 
-        $this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="icon icon-w-16"', $out);
+        $this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', $icon->show('cookie'));
+        $this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="icon icon-w-16"', $icon->show('github', ['style' => 'brands']));
+        $this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', $icon->show('zzzzzz'));
     }
 }
