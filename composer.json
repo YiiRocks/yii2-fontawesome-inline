@@ -2,13 +2,15 @@
     "name": "thoulah/yii2-fontawesome-inline",
     "description": "Font Awesome inline for Yii2",
     "type": "yii2-extension",
+    "keywords": ["yii2", "FontAwesome", "Font Awesome"],
     "license": "GPL-3.0-only",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=7.1.0",
-        "yiisoft/yii2": "^2.0.0",
-        "yiisoft/yii2-bootstrap4": "^2.0",
+        "ext-dom": "*",
+        "yiisoft/yii2": "~2.0",
+        "yiisoft/yii2-bootstrap4": "~2.0",
         "bower-asset/fontawesome": "^5.1"
     },
     "require-dev": {
@@ -18,6 +20,11 @@
         "psr-4": {
             "Thoulah\\FontAwesomeInline\\": "src/main",
             "Thoulah\\FontAwesomeInline\\bootstrap4\\": "src/bootstrap4"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Thoulah\\FontAwesomeInline\\tests\\": "tests"
         }
     },
     "repositories": [

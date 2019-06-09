@@ -1,8 +1,8 @@
-Inline [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons for Yii2
-===============================
+Inline Font Awesome icons for Yii2
+==================================
 
 This extension provides a simple function for [Yii framework 2.0](http://www.yiiframework.com/) applications to add
-[Font Awesome](https://fontawesome.com/) icons inline without the use of JavaScript.
+[Font Awesome](https://fontawesome.com/) [icons](https://fontawesome.com/icons) inline without the use of JavaScript.
 
 For license information check the [LICENSE](https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE)-file.
 
@@ -20,7 +20,7 @@ composer require thoulah/yii2-fontawesome-inline
 or add
 
 ```
-"thoulah/yii2-fontawesome-inline": "dev-master",
+"thoulah/yii2-fontawesome-inline": "^1.0"
 ```
 
 to the `require` section of your `composer.json` file.
