@@ -12,4 +12,5 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 Yii::setAlias('@Thoulah/FontAwesomeInline/tests', __DIR__);
-Yii::setAlias('@Thoulah/FontAwesomeInline', dirname(__DIR__) . '/src');
+Yii::setAlias('@Thoulah/FontAwesomeInline', dirname(__DIR__) . '/src/main');
+Yii::setAlias('@Thoulah/FontAwesomeInline/bootstrap4', dirname(__DIR__) . '/src/bootstrap4');
