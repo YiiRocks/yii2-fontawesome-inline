@@ -6,7 +6,7 @@
     "license": "GPL-3.0-only",
     "support": {
         "issues": "https://github.com/Thoulah/yii2-fontawesome-inline/issues",
-        "source": "https://github.com/Thoulah/yii2-fontawesome-inline"
+        "source": "https://github.com/Thoulah/yii2-fontawesome-inline/tree/master"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
