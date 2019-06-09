@@ -10,7 +10,7 @@ class Icon {
 	public $fallbackIcon = '@bower/fontawesome/svgs/solid/question-circle.svg';
 	public $prefix = 'fa';
 
-	private function loadSvg(string $fileName): DOMDocument {
+	protected function loadSvg(string $fileName): DOMDocument {
 		if (!file_exists(Yii::getAlias($fileName)))
 			$fileName = $this->fallbackIcon;
 
@@ -19,7 +19,7 @@ class Icon {
 		return $doc;
 	}
 
-	private function processSvg(DOMDocument $doc, array $options): string {
+	protected function processSvg(DOMDocument $doc, array $options): string {
 		ArrayHelper::setValue($options, 'aria-hidden', 'true');
 		ArrayHelper::setValue($options, 'role', 'img');
 
