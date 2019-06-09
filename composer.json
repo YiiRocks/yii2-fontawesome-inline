@@ -4,6 +4,10 @@
     "type": "yii2-extension",
     "keywords": ["yii2", "FontAwesome", "Font Awesome"],
     "license": "GPL-3.0-only",
+    "support": {
+        "issues": "https://github.com/Thoulah/yii2-fontawesome-inline/issues",
+        "source": "https://github.com/Thoulah/yii2-fontawesome-inline"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
