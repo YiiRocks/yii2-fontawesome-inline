@@ -6,6 +6,7 @@ This extension provides a simple function for [Yii framework 2.0](http://www.yii
 
 For license information check the [LICENSE](https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE)-file.
 
+
 Installation
 ------------
 
@@ -25,15 +26,79 @@ or add
 
 to the `require` section of your `composer.json` file.
 
-Usage
------
+
+Default Usage
+-------------
+
+#### Option 1
 
 ```php
 $icon = new \Thoulah\FontAwesomeInline\Icon();
 echo $icon->show('at');
-echo $icon->show('github', ['style' => 'brand']);
-echo $icon->show('font-awesome', ['class' => 'mb-2', 'style' => 'brand']);
+echo $icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
+echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
 ```
+
+#### Option 2
+
+Add the class to the Yii config file:
+```php
+'modules' => [
+	'icon' => [
+		'class' => Thoulah\FontAwesomeInline\Icon::class,
+		// 'fallbackIcon' => 'path/to/your/icon.svg',
+		// 'prefix' => 'icon',
+	]
+]
+```
+
+Now you can globally insert an icon:
+```php
+echo Yii::$app->icon->show('at');
+echo Yii::$app->icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
+echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
+```
+
+##### This is the prefered way if you override any of the default options.
+
+
+Additional Usage: ActiveForm
+----------------------------
+
+It is also possible to use the icons in forms as described on the Bootstrap [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
+```php
+use Thoulah\FontAwesomeInline\bootstrap4\ActiveForm;
+
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'field1', [
+	'icon' => 'user',
+]);
+
+echo $form->field($model, 'field2', [
+	'icon' => [
+		'name' => 'github',
+		'class' => 'yourClass',
+		'fill' => '#003865',
+		'direction' => 'append', //defaults to prepend
+		'style' => 'brand',
+	],
+]);
+
+ActiveForm::end();
+```
+or
+```php
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'field', [
+	'inputTemplate' => '<div id="someClassHere" class="float-right">Addition Info?</div>'.Yii::$app->icon->activeFieldAddon('font-awesome', ['style' => 'brand']),
+]);
+
+ActiveForm::end();
+```
+
+##### ActiveForm Icons are currently highly experimental and subject to change.
 
 Status
 ------

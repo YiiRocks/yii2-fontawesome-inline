@@ -30,10 +30,10 @@ class Icon extends \yii\bootstrap4\Widget {
 	 *  Return the complete ActiveField inputTemplate
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
-		$location = ArrayHelper::getValue($options, 'location', 'prepend');
+		$direction = ArrayHelper::getValue($options, 'direction', 'prepend');
 
 		return Html::tag('div',
-			($location === 'prepend')
+			($direction === 'prepend')
 				? $this->activeFieldIcon($name, $options).'{input}'
 				: '{input}'.$this->activeFieldIcon($name, $options)
 		, ['class' => 'input-group']);
@@ -44,10 +44,10 @@ class Icon extends \yii\bootstrap4\Widget {
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
 		Html::addCssClass($options, $this->prefix.'-fw');
-		$location = ArrayHelper::remove($options, 'location', 'prepend');
+		$direction = ArrayHelper::remove($options, 'direction', 'prepend');
 
 		$icon = Html::tag('div', $this->show($name, $options), ['class' => 'input-group-text']);
-		return Html::tag('div', $icon, ['class' => "input-group-{$location}"]);
+		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
 	}
 
 	/*
