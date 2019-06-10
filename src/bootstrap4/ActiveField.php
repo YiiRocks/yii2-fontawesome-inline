@@ -19,12 +19,12 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 		parent::__construct($config);
 
 		$direction = ArrayHelper::getValue($this->icon, 'direction', 'prepend');
-		if (!ArrayHelper::isIn($direction, $this->validDirections))
-			throw new InvalidConfigException('The \'direction\' option should be either '.Inflector::sentence($this->validDirections, ' or ').'.');
+		if (!in_array($direction, $this->validDirections))
+			throw new InvalidConfigException('The \'direction\' option should be either '.Inflector::sentence($this->validDirections, ', or ').'.');
 
 		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
 		if (!ArrayHelper::isIn($style, $this->validStyles))
-			throw new InvalidConfigException('The \'style\' option can be '.Inflector::sentence($this->validStyles, ' or ').'.');
+			throw new InvalidConfigException('The \'style\' option can be '.Inflector::sentence($this->validStyles, ', or ').'.');
 
 		$this->setInputTemplate();
 	}

@@ -30,7 +30,7 @@ to the `require` section of your `composer.json` file.
 ```php
 $icon = new \Thoulah\FontAwesomeInline\Icon();
 echo $icon->show('at');
-echo $icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
+echo $icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
 echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 ```
 
