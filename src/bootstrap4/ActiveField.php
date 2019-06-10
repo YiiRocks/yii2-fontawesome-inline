@@ -22,9 +22,9 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 		if (empty($this->icon))
 			return;
 
-		$icon = (Yii::$app->icon instanceof Icon) ? Yii::$app->icon : new Icon();
+		$icon = (isset(Yii::$app->icon) && Yii::$app->icon instanceof Icon) ? Yii::$app->icon : new Icon();
 
-		if (!Yii::$app->icon instanceof Icon)
+		if (!isset(Yii::$app->icon) || !Yii::$app->icon instanceof Icon)
 			$icon->prefix = $this->iconPrefix;
 
 		if (is_string($this->icon)) :

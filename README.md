@@ -31,7 +31,7 @@ to the `require` section of your `composer.json` file.
 $icon = new \Thoulah\FontAwesomeInline\Icon();
 echo $icon->show('at');
 echo $icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
-echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
+echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 ```
 
 ### Option 2
@@ -51,10 +51,10 @@ Now you can globally insert an icon:
 ```php
 echo Yii::$app->icon->show('at');
 echo Yii::$app->icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
-echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
+echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 ```
 
-### This is the prefered way if you override any of the default options
+### This is the prefered method if you need to override any of the default options
 
 ## Additional Usage: ActiveForm
 
@@ -74,7 +74,7 @@ echo $form->field($model, 'field2', [
 		'class' => 'yourClass',
 		'fill' => '#003865',
 		'direction' => 'append', //defaults to prepend
-		'style' => 'brand',
+		'style' => 'brands',
 	],
 ]);
 
@@ -85,7 +85,7 @@ or
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field', [
-	'inputTemplate' => '<div id="someClassHere" class="float-right">Addition Info?</div>'.Yii::$app->icon->activeFieldAddon('font-awesome', ['style' => 'brand']),
+	'inputTemplate' => '<div id="someClassHere" class="float-right">Addition Info?</div>'.Yii::$app->icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
 ]);
 
 ActiveForm::end();

@@ -1,6 +1,7 @@
 <?php
 namespace Thoulah\FontAwesomeInline\tests;
 
+use yii\base\DynamicModel;
 use yii\helpers\ArrayHelper;
 
 /**
