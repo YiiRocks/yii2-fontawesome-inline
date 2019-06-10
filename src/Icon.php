@@ -88,7 +88,7 @@ class Icon extends \yii\bootstrap4\Widget {
 				ArrayHelper::setValue($options, 'width', round($height * $svgWidth / $svgHeight));
 		endswitch;
 
-		// Fill for every path, unless the target is pdf
+		// Fill for every path, unless set to false
 		if ($fill = ArrayHelper::remove($options, 'fill', 'currentColor'))
 			foreach ($doc->getElementsByTagName('path') as $path)
 				$path->setAttribute('fill', $fill);

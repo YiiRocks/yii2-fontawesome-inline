@@ -50,7 +50,7 @@ Add the class to the Yii config file:
 Now you can globally insert an icon:
 ```php
 echo Yii::$app->icon->show('at');
-echo Yii::$app->icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
+echo Yii::$app->icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
 echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 ```
 
@@ -59,6 +59,28 @@ echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => '
 ## Additional Usage: ActiveForm
 
 It is also possible to use the icons in forms as described on the Bootstrap [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
+
+### Manually
+```php
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'field', [
+	'inputTemplate' => '<div id="yourClass" class="float-right">YourText</div>'.Yii::$app->icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
+]);
+
+ActiveForm::end();
+```
+```php
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'field', [
+	'inputTemplate' => '<div class="input-group">YourText'.Yii::$app->icon->activeFieldIcon('font-awesome', ['style' => 'brands']).'{input}</div>',
+]);
+
+ActiveForm::end();
+```
+
+### Automatically
 ```php
 use Thoulah\FontAwesomeInline\bootstrap4\ActiveForm;
 
@@ -73,19 +95,9 @@ echo $form->field($model, 'field2', [
 		'name' => 'github',
 		'class' => 'yourClass',
 		'fill' => '#003865',
-		'direction' => 'append', //defaults to prepend
+		'direction' => 'append',
 		'style' => 'brands',
 	],
-]);
-
-ActiveForm::end();
-```
-or
-```php
-$form = ActiveForm::begin();
-
-echo $form->field($model, 'field', [
-	'inputTemplate' => '<div id="someClassHere" class="float-right">Addition Info?</div>'.Yii::$app->icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
 ]);
 
 ActiveForm::end();
