@@ -40,11 +40,11 @@ html;
 			echo $form->field($model, 'test', [
 				'icon' => [
 					'name' => 'bandcamp',
-					'class' => 'yourClass',
-					'fill' => '#003865',
-					'direction' => 'append',
-					'size' => 'sm',
 					'style' => 'brands',
+					'class' => 'yourClass',
+					'direction' => 'append',
+					'fill' => '#003865',
+					'groupsize' => 'sm',
 				]
 			]);
 		ActiveForm::end();

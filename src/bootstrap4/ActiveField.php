@@ -9,7 +9,7 @@ use yii\helpers\{ArrayHelper, Inflector};
 class ActiveField extends \yii\bootstrap4\ActiveField {
 	private $validDirections = ['prepend', 'append'];
 	private $validStyles = ['solid', 'regular', 'light', 'brands'];
-	private $validSizes = ['sm', 'lg'];
+	private $validGroupSizes = ['sm', 'lg'];
 	public $icon;
 	public $iconPrefix = 'svg-inline--fa';
 
@@ -21,15 +21,15 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 
 		$direction = ArrayHelper::getValue($this->icon, 'direction', 'prepend');
 		if (!in_array($direction, $this->validDirections))
-			throw new InvalidConfigException('The \'direction\' option should be either '.Inflector::sentence($this->validDirections, ', or ').'.');
+			throw new InvalidConfigException('The \'direction\' option can be either '.Inflector::sentence($this->validDirections, ' or ').'.');
 
-		$size = ArrayHelper::getValue($this->icon, 'size', 'sm');
-		if (!in_array($size, $this->validSizes))
-			throw new InvalidConfigException('The \'size\' option can be '.Inflector::sentence($this->validSizes, ', or ').'.');
+		$groupsize = ArrayHelper::getValue($this->icon, 'groupsize', 'sm');
+		if (!in_array($groupsize, $this->validGroupSizes))
+			throw new InvalidConfigException('The \'size\' option can be '.Inflector::sentence($this->validGroupSizes, ', or ').'.');
 
 		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
 		if (!in_array($style, $this->validStyles))
-			throw new InvalidConfigException('The \'style\' option can be '.Inflector::sentence($this->validStyles, ', or ').'.');
+			throw new InvalidConfigException('The \'style\' option can be either '.Inflector::sentence($this->validStyles, ' or ').'.');
 
 		$this->setInputTemplate();
 	}

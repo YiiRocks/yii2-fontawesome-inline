@@ -32,10 +32,10 @@ class Icon extends \yii\bootstrap4\Widget {
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
 		$direction = ArrayHelper::getValue($options, 'direction', 'prepend');
-		$size = ArrayHelper::remove($options, 'size');
+		$groupsize = ArrayHelper::remove($options, 'groupsize');
 
-		if ($size)
-			Html::addCssClass($this->inputGroupClass, "input-group-{$size}");
+		if ($groupsize)
+			Html::addCssClass($this->inputGroupClass, "input-group-{$groupsize}");
 
 		return Html::tag('div',
 			($direction === 'prepend')
