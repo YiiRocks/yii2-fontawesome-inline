@@ -3,10 +3,12 @@ namespace Thoulah\FontAwesomeInline\bootstrap4;
 
 use Yii;
 use Thoulah\FontAwesomeInline\Icon;
-use yii\bootstrap4\Html;
-use yii\helpers\ArrayHelper;
+use yii\base\InvalidConfigException;
+use yii\helpers\{ArrayHelper, Inflector};
 
 class ActiveField extends \yii\bootstrap4\ActiveField {
+	private $validDirections = ['prepend', 'append'];
+	private $validStyles = ['solid', 'regular', 'light', 'brands'];
 	public $icon;
 	public $iconPrefix = 'svg-inline--fa';
 
@@ -15,10 +17,19 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 	 */
 	public function __construct($config = []) {
 		parent::__construct($config);
+
+		$direction = ArrayHelper::getValue($this->icon, 'direction', 'prepend');
+		if (!ArrayHelper::isIn($direction, $this->validDirections))
+			throw new InvalidConfigException('The \'direction\' option should be either '.Inflector::sentence($this->validDirections, ' or ').'.');
+
+		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
+		if (!ArrayHelper::isIn($style, $this->validStyles))
+			throw new InvalidConfigException('The \'style\' option can be '.Inflector::sentence($this->validStyles, ' or ').'.');
+
 		$this->setInputTemplate();
 	}
 
-	public function setInputTemplate() {
+	public function setInputTemplate(): void {
 		if (empty($this->icon))
 			return;
 
