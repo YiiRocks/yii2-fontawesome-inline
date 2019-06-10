@@ -1,14 +1,11 @@
-Inline Font Awesome icons for Yii2
-==================================
+# Inline Font Awesome icons for Yii2
 
 This extension provides a simple function for [Yii framework 2.0](http://www.yiiframework.com/) applications to add
 [Font Awesome](https://fontawesome.com/) [icons](https://fontawesome.com/icons) inline without the use of JavaScript.
 
 For license information check the [LICENSE](https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE)-file.
 
-
-Installation
-------------
+## Installation
 
 The preferred way to install this extension is through [composer](https://getcomposer.org/).
 
@@ -26,11 +23,9 @@ or add
 
 to the `require` section of your `composer.json` file.
 
+## Default Usage
 
-Default Usage
--------------
-
-#### Option 1
+### Option 1
 
 ```php
 $icon = new \Thoulah\FontAwesomeInline\Icon();
@@ -39,7 +34,7 @@ echo $icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
 echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
 ```
 
-#### Option 2
+### Option 2
 
 Add the class to the Yii config file:
 ```php
@@ -59,11 +54,9 @@ echo Yii::$app->icon->show('github', ['style' => 'brand', 'fill' => '#003865']);
 echo Yii::$app->icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brand']);
 ```
 
-##### This is the prefered way if you override any of the default options.
+### This is the prefered way if you override any of the default options
 
-
-Additional Usage: ActiveForm
-----------------------------
+## Additional Usage: ActiveForm
 
 It is also possible to use the icons in forms as described on the Bootstrap [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
 ```php
@@ -98,10 +91,9 @@ echo $form->field($model, 'field', [
 ActiveForm::end();
 ```
 
-##### ActiveForm Icons are currently highly experimental and subject to change.
+### ActiveForm Icons are currently highly experimental and subject to change
 
-Status
-------
+## Status
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-brightgreen.svg)](https://www.yiiframework.com/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Thoulah/yii2-fontawesome-inline/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Thoulah/yii2-fontawesome-inline/?branch=master)
