@@ -96,6 +96,7 @@ echo $form->field($model, 'field2', [
 		'class' => 'yourClass',
 		'fill' => '#003865',
 		'direction' => 'append',
+		'size' => 'sm',
 		'style' => 'brands',
 	],
 ]);

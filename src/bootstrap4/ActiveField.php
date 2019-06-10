@@ -9,6 +9,7 @@ use yii\helpers\{ArrayHelper, Inflector};
 class ActiveField extends \yii\bootstrap4\ActiveField {
 	private $validDirections = ['prepend', 'append'];
 	private $validStyles = ['solid', 'regular', 'light', 'brands'];
+	private $validSizes = ['sm', 'lg'];
 	public $icon;
 	public $iconPrefix = 'svg-inline--fa';
 
@@ -22,8 +23,12 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 		if (!in_array($direction, $this->validDirections))
 			throw new InvalidConfigException('The \'direction\' option should be either '.Inflector::sentence($this->validDirections, ', or ').'.');
 
+		$size = ArrayHelper::getValue($this->icon, 'size', 'sm');
+		if (!in_array($size, $this->validSizes))
+			throw new InvalidConfigException('The \'size\' option can be '.Inflector::sentence($this->validSizes, ', or ').'.');
+
 		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
-		if (!ArrayHelper::isIn($style, $this->validStyles))
+		if (!in_array($style, $this->validStyles))
 			throw new InvalidConfigException('The \'style\' option can be '.Inflector::sentence($this->validStyles, ', or ').'.');
 
 		$this->setInputTemplate();

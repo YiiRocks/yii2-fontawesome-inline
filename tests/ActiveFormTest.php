@@ -43,6 +43,7 @@ html;
 					'class' => 'yourClass',
 					'fill' => '#003865',
 					'direction' => 'append',
+					'size' => 'sm',
 					'style' => 'brands',
 				]
 			]);
@@ -50,7 +51,7 @@ html;
 		$out = ob_get_clean();
 
 		$expected = <<<html
-<div class="input-group"><input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"><div class="input-group-append"><div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="yourClass svg-inline--fa-fw svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm48.2 326.1h-181L199.9 178h181l-84.7 156.1z" fill="#003865"/></svg></div></div></div>
+<div class="input-group input-group-sm"><input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"><div class="input-group-append"><div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="yourClass svg-inline--fa-fw svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm48.2 326.1h-181L199.9 178h181l-84.7 156.1z" fill="#003865"/></svg></div></div></div>
 html;
 
 		$this->assertContains($expected, $out);

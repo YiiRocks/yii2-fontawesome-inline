@@ -7,6 +7,7 @@ use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
 class Icon extends \yii\bootstrap4\Widget {
+	public $inputGroupClass = ['input-group'];
 	public $fallbackIcon = '@bower/fontawesome/svgs/solid/question-circle.svg';
 	public $prefix = 'svg-inline--fa';
 
@@ -31,12 +32,16 @@ class Icon extends \yii\bootstrap4\Widget {
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
 		$direction = ArrayHelper::getValue($options, 'direction', 'prepend');
+		$size = ArrayHelper::remove($options, 'size');
+
+		if ($size)
+			Html::addCssClass($this->inputGroupClass, "input-group-{$size}");
 
 		return Html::tag('div',
 			($direction === 'prepend')
 				? $this->activeFieldIcon($name, $options).'{input}'
 				: '{input}'.$this->activeFieldIcon($name, $options)
-		, ['class' => 'input-group']);
+		, ['class' => $this->inputGroupClass]);
 	}
 
 	/*
