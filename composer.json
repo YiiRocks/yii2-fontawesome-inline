@@ -1,6 +1,6 @@
 {
     "name": "thoulah/yii2-fontawesome-inline",
-    "description": "Inline Font Awesome icons for Yii2",
+    "description": "Inline Font Awesome icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
     "keywords": ["yii2", "FontAwesome", "Font Awesome"],
     "license": "GPL-3.0-only",

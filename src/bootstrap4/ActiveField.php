@@ -25,11 +25,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 
 		$groupsize = ArrayHelper::getValue($this->icon, 'groupsize', 'sm');
 		if (!in_array($groupsize, $this->validGroupSizes))
-			throw new InvalidConfigException('The \'size\' option can be '.Inflector::sentence($this->validGroupSizes, ', or ').'.');
+			throw new InvalidConfigException('The \'groupsize\' option can be '.Inflector::sentence($this->validGroupSizes, ' or ').'.');
 
 		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
 		if (!in_array($style, $this->validStyles))
-			throw new InvalidConfigException('The \'style\' option can be either '.Inflector::sentence($this->validStyles, ' or ').'.');
+			throw new InvalidConfigException('The \'style\' option can be either '.Inflector::sentence($this->validStyles, ', or ').'.');
 
 		$this->setInputTemplate();
 	}
