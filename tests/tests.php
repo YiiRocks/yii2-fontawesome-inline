@@ -16,7 +16,6 @@ class tests extends \PHPUnit\Framework\TestCase {
 			'vendorPath' => dirname(__DIR__).'/vendor',
 			'aliases' => [
 				'@bower' => '@vendor/bower-asset',
-				'@npm' => '@vendor/npm-asset',
 			],
 			'components' => [
 				'request' => [

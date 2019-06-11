@@ -1,107 +1,62 @@
 <?php
 namespace thoulah\fontawesome;
 
-use DOMDocument;
-use Yii;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
-class Icon extends \yii\bootstrap4\Widget {
-	public $inputGroupClass = ['input-group'];
-	public $fallbackIcon = '@bower/fontawesome/svgs/solid/question-circle.svg';
-	public $prefix = 'svg-inline--fa';
+class Icon extends \yii\web\View {
+	public $default;
 
 	/*
-	 *  Register CSS automatically on load
+	 *  Initialize
 	 */
 	public function __construct() {
-		FontAwesomeAsset::register($this->getView());
+		parent::__construct();
+		$this->default = new Options();
+		$this->registerAssetBundle(FontAwesomeAsset::class);
 	}
 
 	/*
 	 *  Primary function. Outputs the SVG string
 	 */
 	public function show(string $name, array $options = []): string {
-		$style = ArrayHelper::remove($options, 'style', 'solid');
-		$svg = $this->loadSvg("@bower/fontawesome/svgs/{$style}/{$name}.svg");
-		return $this->processSvg($svg, $options);
+		$opt = new Options();
+		$validationOutput = $opt->validate($options);
+
+		$fontAwesomeFolder = ArrayHelper::remove($options, 'fontAwesomeFolder', $this->default->fontAwesomeFolder);
+		$style = ArrayHelper::remove($options, 'style', $this->default->defaultStyle);
+
+		$svg = new Svg();
+		$svg->default = $this->default;
+		$iconString = $svg->load("{$fontAwesomeFolder}/{$style}/{$name}.svg");
+		return $validationOutput.$svg->process($iconString, $options);
 	}
 
 	/*
 	 *  Return the complete ActiveField inputTemplate
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
-		$direction = ArrayHelper::getValue($options, 'direction', 'prepend');
-		$groupsize = ArrayHelper::remove($options, 'groupsize');
-
-		if ($groupsize)
-			Html::addCssClass($this->inputGroupClass, "input-group-{$groupsize}");
+		$inputGroupClass = ['input-group'];
+		$groupSize = ArrayHelper::remove($options, 'groupSize', $this->default->defaultGroupSize);
+		if ($groupSize !== 'md')
+			Html::addCssClass($inputGroupClass, "input-group-{$groupSize}");
 
 		return Html::tag('div',
-			($direction === 'prepend')
-				? $this->activeFieldIcon($name, $options).'{input}'
-				: '{input}'.$this->activeFieldIcon($name, $options)
-		, ['class' => $this->inputGroupClass]);
+			(ArrayHelper::getValue($options, 'append', $this->default->defaultAppend))
+				? '{input}'.$this->activeFieldIcon($name, $options)
+				: $this->activeFieldIcon($name, $options).'{input}'
+		, ['class' => $inputGroupClass]);
 	}
 
 	/*
 	 *  Return the partial ActiveField inputTemplate for manual use
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
-		Html::addCssClass($options, $this->prefix.'-fw');
-		$direction = ArrayHelper::remove($options, 'direction', 'prepend');
+		if (!isset($options['fixedWidth']))
+			ArrayHelper::setValue($options, 'fixedWidth', true);
 
 		$icon = Html::tag('div', $this->show($name, $options), ['class' => 'input-group-text']);
+		$direction = (ArrayHelper::remove($options, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';
 		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
-	}
-
-	/*
-	 *  Load Font Awesome SVG file. Falls back to default if not found
-	 *  @see $fallbackIcon
-	 */
-	protected function loadSvg(string $fileName): DOMDocument {
-		if (!is_file(Yii::getAlias($fileName)))
-			$fileName = $this->fallbackIcon;
-
-		$doc = new DOMDocument();
-		$doc->load(Yii::getAlias($fileName));
-		return $doc;
-	}
-
-	/*
-	 *  Prepares and adds the SVG data
-	 */
-	protected function processSvg(DOMDocument $doc, array $options): string {
-		ArrayHelper::setValue($options, 'aria-hidden', 'true');
-		ArrayHelper::setValue($options, 'role', 'img');
-
-		// loading the SVG data
-		$svg = $doc->getElementsByTagName('svg')->item(0);
-
-		// adding title tag
-		if ($title = ArrayHelper::remove($options, 'title'))
-			$svg->appendChild($doc->createElement('title', $title));
-
-		// dimension dependent class. This is overruled if height is given manually
-		[,, $svgWidth, $svgHeight] = explode(' ', $svg->getAttribute('viewBox'));
-		switch ($height = ArrayHelper::getValue($options, 'height', 0)) :
-			case 0:
-				Html::addCssClass($options, $this->prefix);
-				Html::addCssClass($options, $this->prefix.'-w-'.ceil($svgWidth / $svgHeight * 16));
-				break;
-			default:
-				ArrayHelper::setValue($options, 'width', round($height * $svgWidth / $svgHeight));
-		endswitch;
-
-		// Fill for every path, unless set to false
-		if ($fill = ArrayHelper::remove($options, 'fill', 'currentColor'))
-			foreach ($doc->getElementsByTagName('path') as $path)
-				$path->setAttribute('fill', $fill);
-
-		// copy all options to svg tag
-		foreach ($options as $key => $value)
-			$svg->setAttribute($key, $value);
-
-		return $doc->saveXML($svg);
 	}
 }

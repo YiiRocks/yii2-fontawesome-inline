@@ -2,53 +2,38 @@
 namespace thoulah\fontawesome\bootstrap4;
 
 use Yii;
-use thoulah\fontawesome\Icon;
-use yii\base\InvalidConfigException;
-use yii\helpers\{ArrayHelper, Inflector};
+use thoulah\fontawesome\{Icon, IconComponent, Options};
+use yii\helpers\ArrayHelper;
 
 class ActiveField extends \yii\bootstrap4\ActiveField {
-	private $validDirections = ['prepend', 'append'];
-	private $validStyles = ['solid', 'regular', 'light', 'brands'];
-	private $validGroupSizes = ['sm', 'lg'];
 	public $icon;
-	public $iconPrefix = 'svg-inline--fa';
 
-	/*
-	 * {@inheritdoc}
-	 */
 	public function __construct($config = []) {
 		parent::__construct($config);
 
-		$direction = ArrayHelper::getValue($this->icon, 'direction', 'prepend');
-		if (!in_array($direction, $this->validDirections))
-			throw new InvalidConfigException('The \'direction\' option can be either '.Inflector::sentence($this->validDirections, ' or ').'.');
-
-		$groupsize = ArrayHelper::getValue($this->icon, 'groupsize', 'sm');
-		if (!in_array($groupsize, $this->validGroupSizes))
-			throw new InvalidConfigException('The \'groupsize\' option can be '.Inflector::sentence($this->validGroupSizes, ' or ').'.');
-
-		$style = ArrayHelper::getValue($this->icon, 'style', 'solid');
-		if (!in_array($style, $this->validStyles))
-			throw new InvalidConfigException('The \'style\' option can be either '.Inflector::sentence($this->validStyles, ', or ').'.');
-
+		$options = new Options();
+		$options->validate($this->icon);
 		$this->setInputTemplate();
 	}
 
-	public function setInputTemplate(): void {
+	private function setInputTemplate(): void {
 		if (empty($this->icon))
 			return;
+		$iconName = (is_string($this->icon)) ? $this->icon : (string) ArrayHelper::remove($this->icon, 'name');
 
-		$icon = (isset(Yii::$app->icon) && Yii::$app->icon instanceof Icon) ? Yii::$app->icon : new Icon();
+		if (isset(Yii::$app->fontawesome) && Yii::$app->fontawesome instanceof IconComponent) :
+			$iconStyle = ArrayHelper::remove($this->icon, 'style');
+			$icon = Yii::$app->fontawesome->name($iconName, $iconStyle);
 
-		if (!isset(Yii::$app->icon) || !Yii::$app->icon instanceof Icon)
-			$icon->prefix = $this->iconPrefix;
+			foreach (['append', 'class', 'fill', 'fixedWidth', 'groupSize', 'height', 'title'] as $property)
+				if ($prop = ArrayHelper::remove($this->icon, $property))
+					$icon->$property($prop);
 
-		if (is_string($this->icon)) :
-			$this->inputTemplate = $icon->activeFieldAddon($this->icon);
+			$this->inputTemplate = $icon->activeFieldAddon();
 			return;
 		endif;
 
-		$iconName = ArrayHelper::remove($this->icon, 'name', 'question-circle');
-		$this->inputTemplate = $icon->activeFieldAddon($iconName, $this->icon);
+		$icon = new Icon();
+		$this->inputTemplate = (is_string($this->icon)) ? $icon->activeFieldAddon($iconName) : $icon->activeFieldAddon($iconName, $this->icon);
 	}
 }
