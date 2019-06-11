@@ -1,13 +1,10 @@
 <?php
-namespace Thoulah\FontAwesomeInline\tests;
+namespace thoulah\fontawesome\tests;
 
 use Yii;
-use Thoulah\FontAwesomeInline\bootstrap4\ActiveForm;
+use thoulah\fontawesome\bootstrap4\ActiveForm;
 use yii\base\DynamicModel;
 
-/**
- * @group FontAwesomeInline
- */
 class ActiveFormTest extends tests {
 	protected function setUp() {
 		$_SERVER['REQUEST_URI'] = "index.php";

@@ -1,5 +1,5 @@
 <?php
-namespace Thoulah\FontAwesomeInline;
+namespace thoulah\fontawesome;
 
 use yii\web\AssetBundle;
 

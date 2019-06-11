@@ -28,7 +28,7 @@ to the `require` section of your `composer.json` file.
 ### Option 1
 
 ```php
-$icon = new \Thoulah\FontAwesomeInline\Icon();
+$icon = new \thoulah\fontawesome\Icon();
 echo $icon->show('at');
 echo $icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
 echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
@@ -36,11 +36,11 @@ echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 
 ### Option 2
 
-Add the class to the Yii config file:
+Add as module to the Yii config file:
 ```php
 'modules' => [
 	'icon' => [
-		'class' => Thoulah\FontAwesomeInline\Icon::class,
+		'class' => thoulah\fontawesome\Icon::class,
 		// 'fallbackIcon' => 'path/to/your/icon.svg',
 		// 'prefix' => 'icon',
 	]
@@ -62,6 +62,16 @@ It is also possible to use the icons in forms as described on the Bootstrap [Inp
 
 ### Manually
 ```php
+$icon = new \thoulah\fontawesome\Icon();
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'field', [
+	'inputTemplate' => $icon->activeFieldAddon('user'),
+]);
+
+ActiveForm::end();
+```
+```php
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field', [
@@ -82,7 +92,7 @@ ActiveForm::end();
 
 ### Automatically
 ```php
-use Thoulah\FontAwesomeInline\bootstrap4\ActiveForm;
+use thoulah\fontawesome\bootstrap4\ActiveForm;
 
 $form = ActiveForm::begin();
 
@@ -98,13 +108,12 @@ echo $form->field($model, 'field2', [
 		'direction' => 'append',
 		'fill' => '#003865',
 		'groupsize' => 'sm',
+		'title' => 'Your Title',
 	],
 ]);
 
 ActiveForm::end();
 ```
-
-### ActiveForm Icons are currently highly experimental and subject to change
 
 ## Status
 

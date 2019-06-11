@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Thoulah\\FontAwesomeInline\\": "src"
+            "thoulah\\fontawesome\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Thoulah\\FontAwesomeInline\\tests\\": "tests"
+            "thoulah\\fontawesome\\tests\\": "tests"
         }
     },
     "repositories": [

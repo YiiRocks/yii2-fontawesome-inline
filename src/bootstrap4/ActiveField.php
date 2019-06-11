@@ -1,8 +1,8 @@
 <?php
-namespace Thoulah\FontAwesomeInline\bootstrap4;
+namespace thoulah\fontawesome\bootstrap4;
 
 use Yii;
-use Thoulah\FontAwesomeInline\Icon;
+use thoulah\fontawesome\Icon;
 use yii\base\InvalidConfigException;
 use yii\helpers\{ArrayHelper, Inflector};
 

@@ -1,12 +1,9 @@
 <?php
-namespace Thoulah\FontAwesomeInline\tests;
+namespace thoulah\fontawesome\tests;
 
-use Thoulah\FontAwesomeInline\Icon;
+use thoulah\fontawesome\Icon;
 use yii\helpers\ArrayHelper;
 
-/**
- * @group FontAwesomeInline
- */
 class IconTest extends tests {
 	public function testClass() {
 		$icon = new Icon();

@@ -1,12 +1,8 @@
 <?php
-namespace Thoulah\FontAwesomeInline\tests;
+namespace thoulah\fontawesome\tests;
 
-use yii\base\DynamicModel;
 use yii\helpers\ArrayHelper;
 
-/**
- * @group FontAwesomeInline
- */
 class tests extends \PHPUnit\Framework\TestCase {
 	protected function setUp() {
 		parent::setUp();

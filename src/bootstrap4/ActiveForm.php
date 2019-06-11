@@ -1,6 +1,6 @@
 <?php
-namespace Thoulah\FontAwesomeInline\bootstrap4;
+namespace thoulah\fontawesome\bootstrap4;
 
 class ActiveForm extends \yii\bootstrap4\ActiveForm {
-	public $fieldClass = 'Thoulah\FontAwesomeInline\bootstrap4\ActiveField';
+	public $fieldClass = 'thoulah\fontawesome\bootstrap4\ActiveField';
 }

@@ -10,6 +10,5 @@ $_SERVER['SCRIPT_FILENAME'] = __FILE__;
 require_once(__DIR__.'/../vendor/autoload.php');
 require_once(__DIR__.'/../vendor/yiisoft/yii2/Yii.php');
 
-Yii::setAlias('@Thoulah/FontAwesomeInline/tests', __DIR__);
-Yii::setAlias('@Thoulah/FontAwesomeInline', dirname(__DIR__).'/src/main');
-Yii::setAlias('@Thoulah/FontAwesomeInline/bootstrap4', dirname(__DIR__).'/src/bootstrap4');
+Yii::setAlias('@thoulah/fontawesome', dirname(__DIR__).'/src');
+Yii::setAlias('@thoulah/fontawesome/tests', __DIR__);
