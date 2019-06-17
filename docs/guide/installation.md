@@ -11,7 +11,7 @@ composer require thoulah/yii2-fontawesome-inline
 or add
 
 ```json
-"thoulah/yii2-fontawesome-inline": "^1.2"
+"thoulah/yii2-fontawesome-inline": "^1.1"
 ```
 
 to the `require` section of your `composer.json` file.

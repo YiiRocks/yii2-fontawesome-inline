@@ -1,4 +1,4 @@
-# Ignore all test and documentation for archive
+# Ignore all tests for archive
 /.github            export-ignore
 /.editorconfig      export-ignore
 /.gitattributes     export-ignore

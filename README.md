@@ -29,6 +29,8 @@ This extension provides simple functions for [Yii framework 2.0](http://www.yiif
 
     *   [ActiveForm](docs/guide/usageActiveForm.md)
 
+*   [Examples](https://thoulah.mr42.me/fontawesome/examples)
+
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Thoulah/yii2-fontawesome-inline.svg)](https://codeclimate.com/github/Thoulah/yii2-fontawesome-inline/maintainability)
 [![Codacy branch grade](https://img.shields.io/codacy/grade/77359b0ae813411895da7d33bb009bf0/master.svg)](https://www.codacy.com/app/Thoulah/yii2-fontawesome-inline)
 [![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/Thoulah/yii2-fontawesome-inline/master.svg)](https://scrutinizer-ci.com/g/Thoulah/yii2-fontawesome-inline/?branch=master)
