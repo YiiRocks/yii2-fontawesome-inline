@@ -4,7 +4,19 @@ namespace thoulah\fontawesome\tests;
 use thoulah\fontawesome\bootstrap4\ActiveForm;
 use yii\base\DynamicModel;
 
-class ActiveFormTest extends tests {
+class ActiveFormComponentTest extends tests {
+	protected function setUp() {
+		parent::setUp();
+		$this->mockWebApplication([
+			'components' => [
+				'fontawesome' => [
+					'class' => '\thoulah\fontawesome\IconComponent',
+				],
+			],
+		]);
+	}
+
+
 	public function testBasic() {
 		ActiveForm::$counter = 0;
 		ob_start();
@@ -127,6 +139,21 @@ html;
 		$out = ob_get_clean();
 
 		$this->assertContains('<div class="input-group input-group-sm">', $out);
+
+		ActiveForm::$counter = 0;
+		ob_start();
+		$model = new DynamicModel(['test']);
+		$form = ActiveForm::begin();
+			echo $form->field($model, 'test', [
+				'icon' => [
+					'name' => 'user',
+					'groupSize' => 'lg',
+				]
+			]);
+		ActiveForm::end();
+		$out = ob_get_clean();
+
+		$this->assertContains('<div class="input-group input-group-lg">', $out);
 	}
 
 	public function testTitle() {

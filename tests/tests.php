@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 
 class tests extends \PHPUnit\Framework\TestCase {
 	protected function setUp() {
+		$_SERVER['REQUEST_URI'] = "index.php";
 		parent::setUp();
 		$this->mockWebApplication();
 	}

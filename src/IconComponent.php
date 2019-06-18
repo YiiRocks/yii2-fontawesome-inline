@@ -84,8 +84,8 @@ class IconComponent extends \yii\base\Component {
 		if (!isset($this->icon['fixedWidth']))
 			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->default->defaultAFFixedWidth);
 
-		$icon = Html::tag('div', $this, ['class' => 'input-group-text']);
 		$direction = (ArrayHelper::remove($this->icon, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';
+		$icon = Html::tag('div', $this, ['class' => 'input-group-text']);
 		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
 	}
 
