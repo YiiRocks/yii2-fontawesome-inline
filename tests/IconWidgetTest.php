@@ -24,6 +24,11 @@ class IconWidgetTest extends tests {
 		$this->assertContains('fill="#003865"/></svg>', IconWidget::widget(['name' => 'cookie', 'options' => ['fill' => '#003865']]));
 	}
 
+	public function testFixedWidth() {
+		$this->assertNotContains('svg-inline--fa-fw', IconWidget::widget(['name' => 'cookie']));
+		$this->assertContains('svg-inline--fa-fw', IconWidget::widget(['name' => 'cookie', 'options' => ['fixedWidth' => true]]));
+	}
+
 	public function testHeight() {
 		IconWidget::$counter = 0;
 		$this->assertContains('viewBox="0 0 512 512" height="42" id="w0" aria-hidden="true" role="img" width="42"', IconWidget::widget(['name' => 'cookie', 'options' => ['height' => 42]]));

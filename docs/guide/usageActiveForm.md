@@ -1,4 +1,4 @@
-# ActiveForm
+# Usage from ActiveForm
 
 It is possible to use the icons in forms as described on the Bootstrap [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
 
@@ -64,3 +64,5 @@ echo $form->field($model, 'field', [
 
 ActiveForm::end();
 ```
+
+Please see [Options](options.md) for more information.

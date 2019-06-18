@@ -53,7 +53,7 @@ class Icon extends \yii\web\View {
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
 		if (!isset($options['fixedWidth']))
-			ArrayHelper::setValue($options, 'fixedWidth', true);
+			ArrayHelper::setValue($options, 'fixedWidth', $this->default->defaultAFFixedWidth);
 
 		$icon = Html::tag('div', $this->show($name, $options), ['class' => 'input-group-text']);
 		$direction = (ArrayHelper::remove($options, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';

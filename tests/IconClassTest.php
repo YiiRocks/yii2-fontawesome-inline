@@ -25,6 +25,12 @@ class IconClassTest extends tests {
 		$this->assertContains('fill="#003865"/></svg>', $icon->show('cookie', ['fill' => '#003865']));
 	}
 
+	public function testFixedWidth() {
+		$icon = new Icon();
+		$this->assertNotContains('svg-inline--fa-fw', $icon->show('cookie'));
+		$this->assertContains('svg-inline--fa-fw', $icon->show('cookie', ['fixedWidth' => true]));
+	}
+
 	public function testHeight() {
 		$icon = new Icon();
 		$this->assertContains('viewBox="0 0 512 512" height="42" aria-hidden="true" role="img" width="42"', $icon->show('cookie', ['height' => 42]));

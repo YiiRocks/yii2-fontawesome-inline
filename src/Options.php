@@ -9,8 +9,10 @@ class Options {
 	private $validGroupSizes = ['sm', 'md', 'lg'];
 	private $validStyles = ['solid', 'regular', 'light', 'brands'];
 
+	public $defaultAFFixedWidth = true;
 	public $defaultAppend = false;
 	public $defaultFill = 'currentColor';
+	public $defaultFixedWidth = false;
 	public $defaultGroupSize = 'md';
 	public $defaultStyle = 'solid';
 	public $fallbackIcon = '@vendor/fortawesome/font-awesome/svgs/solid/question-circle.svg';
@@ -29,11 +31,12 @@ class Options {
 			[
 				'name' => ArrayHelper::getValue($options, 'name'),
 				'style' => ArrayHelper::getValue($options, 'style', $this->defaultStyle),
+				'defaultAFFixedWidth' => ArrayHelper::getValue($options, 'defaultAFFixedWidth', $this->defaultAFFixedWidth),
 				'append' => ArrayHelper::getValue($options, 'append', $this->defaultAppend),
 				'class' => ArrayHelper::getValue($options, 'class'),
 				'height' => ArrayHelper::getValue($options, 'height'),
 				'fill' => ArrayHelper::getValue($options, 'fill'),
-				'fixedWidth' => ArrayHelper::getValue($options, 'fixedWidth'),
+				'fixedWidth' => ArrayHelper::getValue($options, 'fixedWidth', $this->defaultFixedWidth),
 				'groupSize' => ArrayHelper::getValue($options, 'groupSize', $this->defaultGroupSize),
 				'prefix' => ArrayHelper::getValue($options, 'prefix'),
 				'title' => ArrayHelper::getValue($options, 'title'),
@@ -41,7 +44,7 @@ class Options {
 			[
 				[['name'], 'required', 'when' => function($options) { return is_array($options); }],
 				[['style'], 'in', 'range' => $this->validStyles],
-				[['append', 'fixedWidth'], 'boolean'],
+				[['defaultAFFixedWidth', 'append', 'fixedWidth'], 'boolean'],
 				[['class', 'fill', 'prefix', 'title'], 'string'],
 				[['height'], 'integer'],
 				[['groupSize'], 'in', 'range' => $this->validGroupSizes],

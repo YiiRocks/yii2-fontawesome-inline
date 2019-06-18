@@ -1,4 +1,4 @@
-# Option 3 – Component
+# Usage as a Component
 
 ## This is the preferred method if you need to override any of the default options throughout your application
 
@@ -26,3 +26,5 @@ The component will not register the CSS for you, so you can add this to your lay
 ```php
 \thoulah\fontawesome\FontAwesomeAsset::register($this);
 ```
+
+Please see [Options](options.md) for more information.

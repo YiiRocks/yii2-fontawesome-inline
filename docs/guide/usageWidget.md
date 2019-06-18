@@ -1,4 +1,4 @@
-# Option 2 – Widget
+# Usage as a Widget
 
 ```php
 use thoulah\fontawesome\IconWidget;
@@ -13,3 +13,5 @@ echo IconWidget::widget([
 	],
 ]);
 ```
+
+Please see [Options](options.md) for more information.

@@ -31,7 +31,7 @@ class IconComponent extends \yii\base\Component {
 		return $this;
 	}
 
-	public function append(string $append): self {
+	public function append(bool $append): self {
 		$this->icon['append'] = $append;
 		return $this;
 	}
@@ -97,7 +97,7 @@ class IconComponent extends \yii\base\Component {
 	 */
 	public function activeFieldIcon(): string {
 		if (!isset($this->icon['fixedWidth']))
-			ArrayHelper::setValue($this->icon, 'fixedWidth', true);
+			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->default->defaultAFFixedWidth);
 
 		$icon = Html::tag('div', $this->show(), ['class' => 'input-group-text']);
 		$direction = (ArrayHelper::remove($this->icon, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';

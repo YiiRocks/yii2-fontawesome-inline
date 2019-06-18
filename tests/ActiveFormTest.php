@@ -114,7 +114,7 @@ html;
 		ActiveForm::end();
 		$out = ob_get_clean();
 
-		$this->assertNotContains('svg-inline--fa-fw"', $out);
+		$this->assertNotContains('svg-inline--fa-fw', $out);
 	}
 
 	public function testGroupsize() {

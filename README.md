@@ -19,15 +19,17 @@ This extension provides simple functions for [Yii framework 2.0](http://www.yiif
 
 *   [Configuration](docs/guide/configuration.md)
 
+*   [Options](docs/guide/options.md)
+
 *   Usage
 
-    *   [Class](docs/guide/usageClass.md)
+    *   [Usage as a Class](docs/guide/usageClass.md)
 
-    *   [Widget](docs/guide/usageWidget.md)
+    *   [Usage as a Widget](docs/guide/usageWidget.md)
 
-    *   [Component](docs/guide/usageComponent.md)
+    *   [Usage as a Component](docs/guide/usageComponent.md)
 
-    *   [ActiveForm](docs/guide/usageActiveForm.md)
+    *   [Usage from ActiveForm](docs/guide/usageActiveForm.md)
 
 *   [Examples](https://thoulah.mr42.me/fontawesome/examples)
 

@@ -25,8 +25,9 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 			$iconStyle = ArrayHelper::remove($this->icon, 'style');
 			$icon = Yii::$app->fontawesome->name($iconName, $iconStyle);
 
-			foreach (['append', 'class', 'fill', 'fixedWidth', 'groupSize', 'height', 'title'] as $property)
-				if ($prop = ArrayHelper::remove($this->icon, $property))
+			foreach (['activeFormFixedWidth', 'append', 'class', 'fill', 'fixedWidth', 'groupSize', 'height', 'title'] as $property)
+				$prop = ArrayHelper::remove($this->icon, $property);
+				if (!is_null($prop))
 					$icon->$property($prop);
 
 			$this->inputTemplate = $icon->activeFieldAddon();
