@@ -17,9 +17,9 @@ Add `fontawesome` as component to your Yii config file:
 
 Now you can globally insert an icon:
 ```php
-echo Yii::$app->fontawesome->name('at')->show();
-echo Yii::$app->fontawesome->name('github', 'brands')->fill->('#003865')->show();
-echo Yii::$app->fontawesome->name('font-awesome', 'brands')->class('yourClass')->show();
+echo Yii::$app->fontawesome->name('at');
+echo Yii::$app->fontawesome->name('github', 'brands')->fill->('#003865');
+echo Yii::$app->fontawesome->name('font-awesome', 'brands')->class('yourClass');
 ```
 
 The component will not register the CSS for you, so you can add this to your layout.

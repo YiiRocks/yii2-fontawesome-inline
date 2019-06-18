@@ -61,21 +61,6 @@ class IconComponent extends \yii\base\Component {
 		return $this;
 	}
 
-	public function show(): string {
-		$options = new Options();
-		$validationOutput = $options->validate($this->icon);
-
-		$name = ArrayHelper::remove($this->icon, 'name');
-		$style = ArrayHelper::remove($this->icon, 'style');
-
-		$svg = new Svg();
-		$svg->default = $this->default;
-		$iconString = $svg->load("{$this->default->fontAwesomeFolder}/{$style}/{$name}.svg");
-		$image = $svg->process($iconString, $this->icon);
-		$this->icon = [];
-		return $validationOutput.$image;
-	}
-
 	/*
 	 *  Return the complete ActiveField inputTemplate
 	 */
@@ -99,8 +84,24 @@ class IconComponent extends \yii\base\Component {
 		if (!isset($this->icon['fixedWidth']))
 			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->default->defaultAFFixedWidth);
 
-		$icon = Html::tag('div', $this->show(), ['class' => 'input-group-text']);
+		$icon = Html::tag('div', $this, ['class' => 'input-group-text']);
 		$direction = (ArrayHelper::remove($this->icon, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';
 		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
+	}
+
+	public function __toString(): string {
+		$options = new Options();
+		$validationOutput = $options->validate($this->icon);
+
+		$fontAwesomeFolder = ArrayHelper::remove($this->icon, 'fontAwesomeFolder', $this->default->fontAwesomeFolder);
+		$style = ArrayHelper::remove($this->icon, 'style');
+		$name = ArrayHelper::remove($this->icon, 'name');
+
+		$svg = new Svg();
+		$svg->default = $this->default;
+		$iconString = $svg->load("{$fontAwesomeFolder}/{$style}/{$name}.svg");
+		$image = $svg->process($iconString, $this->icon);
+		$this->icon = [];
+		return $validationOutput.$image;
 	}
 }
