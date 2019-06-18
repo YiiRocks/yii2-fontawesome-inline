@@ -82,7 +82,7 @@ class IconComponent extends \yii\base\Component {
 	public function activeFieldAddon(): string {
 		$inputGroupClass = ['input-group'];
 		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->default->defaultGroupSize);
-		if ($groupSize)
+		if ($groupSize !== 'md')
 			Html::addCssClass($inputGroupClass, "input-group-{$groupSize}");
 
 		return Html::tag('div',
