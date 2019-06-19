@@ -26,7 +26,7 @@ class IconComponentTest extends tests {
 		$this->assertContains('viewBox="0 0 512 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('cookie')->class('mr42'));
 		$this->assertContains('viewBox="0 0 496 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('github', 'brands')->class('mr42'));
 
-		Yii::$app->fontawesome->default->prefix = 'icon';
+		Yii::$app->fontawesome->defaults->prefix = 'icon';
 		$this->assertContains('viewBox="0 0 512 512" class="mr42 icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('cookie')->class('mr42'));
 		$this->assertContains('viewBox="0 0 496 512" class="mr42 icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('github', 'brands')->class('mr42'));
 	}
@@ -48,7 +48,7 @@ class IconComponentTest extends tests {
 	}
 
 	public function testPrefix() {
-		Yii::$app->fontawesome->default->prefix = 'icon';
+		Yii::$app->fontawesome->defaults->prefix = 'icon';
 		$this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', (string) Yii::$app->fontawesome->name('cookie'));
 		$this->assertContains('viewBox="0 0 192 512" aria-hidden="true" role="img" class="icon icon-w-6"', (string) Yii::$app->fontawesome->name('ellipsis-v'));
 		$this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="icon icon-w-16"', (string) Yii::$app->fontawesome->name('github', 'brands'));

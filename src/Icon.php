@@ -1,62 +1,52 @@
 <?php
 namespace thoulah\fontawesome;
 
-use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
 class Icon extends \yii\web\View {
-	public $default;
+	public $defaults;
 
 	/*
-	 *  Initialize
+	 *	Construct
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->default = new Options();
+		$this->defaults = new Options();
 		$this->registerAssetBundle(FontAwesomeAsset::class);
 	}
 
 	/*
-	 *  Primary function. Outputs the SVG string
+	 *  Outputs the SVG string
 	 */
 	public function show(string $name, array $options = []): string {
-		$opt = new Options();
-		$validationOutput = $opt->validate($options);
+		ArrayHelper::setValue($options, 'name', $name);
 
-		$fontAwesomeFolder = ArrayHelper::remove($options, 'fontAwesomeFolder', $this->default->fontAwesomeFolder);
-		$style = ArrayHelper::remove($options, 'style', $this->default->defaultStyle);
-
-		$svg = new Svg();
-		$svg->default = $this->default;
-		$iconString = $svg->load("{$fontAwesomeFolder}/{$style}/{$name}.svg");
-		return $validationOutput.$svg->process($iconString, $options);
+		$svg = new Svg($this->defaults);
+		return $svg->getString($options);
 	}
 
 	/*
 	 *  Return the complete ActiveField inputTemplate
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
-		$inputGroupClass = ['input-group'];
-		$groupSize = ArrayHelper::remove($options, 'groupSize', $this->default->defaultGroupSize);
-		if ($groupSize !== 'md')
-			Html::addCssClass($inputGroupClass, "input-group-{$groupSize}");
+		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
+		$groupSize = ArrayHelper::remove($options, 'groupSize', $this->defaults->groupSize);
 
-		return Html::tag('div',
-			(ArrayHelper::getValue($options, 'append', $this->default->defaultAppend))
-				? '{input}'.$this->activeFieldIcon($name, $options)
-				: $this->activeFieldIcon($name, $options).'{input}'
-		, ['class' => $inputGroupClass]);
+		$append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
+		$icon = $Html::activeFieldAddon($groupSize, $append);
+		return str_replace('{icon}', $this->activeFieldIcon($name, $options), $icon);
 	}
 
 	/*
 	 *  Return the partial ActiveField inputTemplate for manual use
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
+		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
 		if (!isset($options['fixedWidth']))
-			ArrayHelper::setValue($options, 'fixedWidth', $this->default->defaultAFFixedWidth);
+			ArrayHelper::setValue($options, 'fixedWidth', $this->defaults->activeFormFixedWidth);
 
-		$icon = Html::tag('div', $this->show($name, $options), ['class' => 'input-group-text']);
-		$direction = (ArrayHelper::remove($options, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';
-		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
+		$append = ArrayHelper::remove($options, 'append', $this->defaults->append);
+		$icon = $Html::activeFieldIcon($append);
+		return str_replace('{icon}', $this->show($name, $options), $icon);
 	}
 }

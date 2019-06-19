@@ -1,9 +1,9 @@
 <?php
 namespace thoulah\fontawesome\tests;
 
-use thoulah\fontawesome\IconWidget;
+use thoulah\fontawesome\IconWidget4 as IconWidget;
 
-class IconWidgetTest extends tests {
+class IconWidget4Test extends tests {
 	public function testBasic() {
 		IconWidget::$counter = 0;
 		$this->assertContains('viewBox="0 0 512 512" id="w0" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', IconWidget::widget(['name' => 'cookie']));
@@ -37,7 +37,7 @@ class IconWidgetTest extends tests {
 
 	public function testPrefix() {
 		IconWidget::$counter = 0;
-		IconWidget::$default = ['prefix' => 'icon'];
+		IconWidget::$defaults = ['prefix' => 'icon'];
 		$this->assertContains('viewBox="0 0 512 512" id="w0" aria-hidden="true" role="img" class="icon icon-w-16"', IconWidget::widget(['name' => 'cookie']));
 		$this->assertContains('viewBox="0 0 192 512" id="w1" aria-hidden="true" role="img" class="icon icon-w-6"', IconWidget::widget(['name' => 'ellipsis-v']));
 		$this->assertContains('viewBox="0 0 496 512" id="w2" aria-hidden="true" role="img" class="icon icon-w-16"', IconWidget::widget(['name' => 'github', 'options' => ['style' => 'brands']]));

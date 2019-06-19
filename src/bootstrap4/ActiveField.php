@@ -9,33 +9,48 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 	public $icon;
 
 	public function __construct($config = []) {
-		parent::__construct($config);
-
 		$options = new Options();
-		$options->validate($this->icon);
-		$this->setInputTemplate();
+		$options->validateOptions($this->icon);
+
+#		$this->template = (ArrayHelper::getValue($this->icon, 'append'))
+#			? "{label}\n{icon}\n{input}\n{hint}\n{error}"
+#			: "{label}\n{input}\n{icon}\n{hint}\n{error}";
+
+#		$this->setInputTemplate();
+		parent::__construct($config);
 	}
 
-	private function setInputTemplate(): void {
-		if (empty($this->icon))
-			return;
+	public function render($content = null) {
+		if (!empty($this->icon)) :
+			$groupSize = ArrayHelper::remove($this->icon, 'groupSize');
+			$append = ArrayHelper::getValue($this->icon, 'append');
+
+			$template = str_replace('{icon}', Html::activeFieldIcon($append), Html::activeFieldAddon($groupSize, $append));
+			$this->inputTemplate = str_replace('{icon}', $this->getIcon(), $template);
+		endif;
+
+		return parent::render($content);
+	}
+
+	private function getIcon(): string {
 		$iconName = (is_string($this->icon)) ? $this->icon : (string) ArrayHelper::remove($this->icon, 'name');
 
 		if (isset(Yii::$app->fontawesome) && Yii::$app->fontawesome instanceof IconComponent) :
 			$iconStyle = ArrayHelper::remove($this->icon, 'style');
 			$icon = Yii::$app->fontawesome->name($iconName, $iconStyle);
 
-			foreach (['append', 'class', 'fill', 'fixedWidth', 'groupSize', 'height', 'title'] as $property) :
+			$fixedWidth = ArrayHelper::remove($this->icon, 'fixedWidth', $icon->defaults->activeFormFixedWidth);
+			$icon->fixedWidth($fixedWidth);
+			foreach (['append', 'class', 'fill', 'height', 'title'] as $property) :
 				$prop = ArrayHelper::remove($this->icon, $property);
 				if ($prop !== null)
 					$icon->$property($prop);
 			endforeach;
 
-			$this->inputTemplate = $icon->activeFieldAddon();
-			return;
+			return $icon;
 		endif;
 
 		$icon = new Icon();
-		$this->inputTemplate = (is_string($this->icon)) ? $icon->activeFieldAddon($iconName) : $icon->activeFieldAddon($iconName, $this->icon);
+		return (is_string($this->icon)) ? $icon->activeFieldAddon($iconName) : $icon->activeFieldAddon($iconName, $this->icon);
 	}
 }

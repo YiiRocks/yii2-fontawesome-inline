@@ -1,63 +1,39 @@
 <?php
 namespace thoulah\fontawesome;
 
-use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
+/**
+ * @method class(string $class)
+ * @method append(bool $append)
+ * @method fill(string $fill)
+ * @method fixedWidth(bool $fixedWidth)
+ * @method groupSize(string $groupSize)
+ * @method height(int $height)
+ * @method title(string $title)
+ */
 class IconComponent extends \yii\base\Component {
 	protected $icon = [];
 
 	public $config;
-	public $default;
+	public $defaults;
 
+	/*
+	 *	Construct
+	 */
 	public function __construct($config = []) {
-		$this->default = new Options();
+		$this->defaults = new Options();
 
 		if ($config)
 			foreach (reset($config) as $key => $value)
-				$this->default->$key = $value;
+				$this->defaults->$key = $value;
 
 		parent::__construct($config);
 	}
 
 	public function name(string $name, ?string $style = null): self {
 		$this->icon['name'] = $name;
-		$this->icon['style'] = $style ?? $this->default->defaultStyle;
-		return $this;
-	}
-
-	public function class(string $class): self {
-		$this->icon['class'] = $class;
-		return $this;
-	}
-
-	public function append(bool $append): self {
-		$this->icon['append'] = $append;
-		return $this;
-	}
-
-	public function fill(string $fill): self {
-		$this->icon['fill'] = $fill;
-		return $this;
-	}
-
-	public function fixedWidth(bool $fixedWidth): self {
-		$this->icon['fixedWidth'] = $fixedWidth;
-		return $this;
-	}
-
-	public function groupSize(string $groupSize): self {
-		$this->icon['groupSize'] = $groupSize;
-		return $this;
-	}
-
-	public function height(int $height): self {
-		$this->icon['height'] = $height;
-		return $this;
-	}
-
-	public function title(string $title): self {
-		$this->icon['title'] = $title;
+		$this->icon['style'] = $style ?? $this->defaults->style;
 		return $this;
 	}
 
@@ -65,43 +41,38 @@ class IconComponent extends \yii\base\Component {
 	 *  Return the complete ActiveField inputTemplate
 	 */
 	public function activeFieldAddon(): string {
-		$inputGroupClass = ['input-group'];
-		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->default->defaultGroupSize);
-		if ($groupSize !== 'md')
-			Html::addCssClass($inputGroupClass, "input-group-{$groupSize}");
+		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
+		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
+		$append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
 
-		return Html::tag('div',
-			(ArrayHelper::getValue($this->icon, 'append', $this->default->defaultAppend))
-				? '{input}'.$this->activeFieldIcon()
-				: $this->activeFieldIcon().'{input}'
-		, ['class' => $inputGroupClass]);
+		return $Html::activeFieldAddon($groupSize, $append);
 	}
 
 	/*
 	 *  Return the partial ActiveField inputTemplate for manual use
 	 */
 	public function activeFieldIcon(): string {
+		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
 		if (!isset($this->icon['fixedWidth']))
-			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->default->defaultAFFixedWidth);
+			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
 
-		$direction = (ArrayHelper::remove($this->icon, 'append', $this->default->defaultAppend)) ? 'append' : 'prepend';
-		$icon = Html::tag('div', $this, ['class' => 'input-group-text']);
-		return Html::tag('div', $icon, ['class' => "input-group-{$direction}"]);
+		$append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
+		$icon = $Html::activeFieldIcon($append);
+		return str_replace('{icon}', $this, $icon);
 	}
 
+	public function __call($name, $value) {
+		$this->icon[$name] = $value[0];
+		return $this;
+	}
+
+	/*
+	 *  Magic function, returns the SVG string
+	 */
 	public function __toString(): string {
-		$options = new Options();
-		$validationOutput = $options->validate($this->icon);
-
-		$fontAwesomeFolder = ArrayHelper::remove($this->icon, 'fontAwesomeFolder', $this->default->fontAwesomeFolder);
-		$style = ArrayHelper::remove($this->icon, 'style');
-		$name = ArrayHelper::remove($this->icon, 'name');
-
-		$svg = new Svg();
-		$svg->default = $this->default;
-		$iconString = $svg->load("{$fontAwesomeFolder}/{$style}/{$name}.svg");
-		$image = $svg->process($iconString, $this->icon);
+		$svg = new Svg($this->defaults);
+		$string = $svg->getString($this->icon);
 		$this->icon = [];
-		return $validationOutput.$image;
+		return $string;
 	}
 }

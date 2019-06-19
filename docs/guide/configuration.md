@@ -2,11 +2,13 @@
 
 ## Global Options and Default Configuration
 
-*   `defaultFill` string `currentColor`. Color of the icon. Set to empty string to disable this attribute
+*   `bootstrap` string `bootstrap4`. Bootstrap namespace to use – Currently the only supported option
 
-*   `defaultFixedWidth` bool `false`. Set to `true` to have fixed width icons
+*   `fill` string `currentColor`. Color of the icon. Set to empty string to disable this attribute
 
-*   `defaultStyle` string `solid`. See [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use) – Usable for Font Awesome Pro
+*   `fixedWidth` bool `false`. Set to `true` to have fixed width icons
+
+*   `style` string `solid`. See [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use) – Usable for Font Awesome Pro
 
 *   `fallbackIcon` string `@vendor/fortawesome/font-awesome/svgs/solid/question-circle.svg`. Backup icon in case requested icon cannot be found
 
@@ -16,8 +18,8 @@
 
 ### ActiveForm Specific Global Options and Default Configuration
 
-*   `defaultAFFixedWidth` bool `true`. Set to `false` to have variable width icons. Overrules `defaultFixedWidth`
+*   `ActiveFormFixedWidth` bool `true`. Set to `false` to have variable width icons. Overrules `fixedWidth`
 
-*   `defaultAppend` bool `false`. Whether to prepend or append the `input-group`
+*   `append` bool `false`. Whether to prepend or append the `input-group`
 
-*   `defaultGroupSize` string `md`. Set to `sm` for small or `lg` for large
+*   `groupSize` string `md`. Set to `sm` for small or `lg` for large

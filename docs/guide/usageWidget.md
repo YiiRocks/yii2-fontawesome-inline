@@ -1,7 +1,7 @@
 # Usage as a Widget
 
 ```php
-use thoulah\fontawesome\IconWidget;
+use thoulah\fontawesome\IconWidget4 as IconWidget;
 echo IconWidget::widget(['name' => 'at']);
 echo IconWidget::widget(['name' => 'github', 'options' => ['style' => 'brands', 'fill' => '#003865']]);
 

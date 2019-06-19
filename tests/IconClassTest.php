@@ -39,7 +39,7 @@ class IconClassTest extends tests {
 
 	public function testPrefix() {
 		$icon = new Icon();
-		$icon->default->prefix = 'icon';
+		$icon->defaults->prefix = 'icon';
 		$this->assertContains('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', $icon->show('cookie'));
 		$this->assertContains('viewBox="0 0 192 512" aria-hidden="true" role="img" class="icon icon-w-6"', $icon->show('ellipsis-v'));
 		$this->assertContains('viewBox="0 0 496 512" aria-hidden="true" role="img" class="icon icon-w-16"', $icon->show('github', ['style' => 'brands']));
