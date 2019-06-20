@@ -1,4 +1,9 @@
 <?php
+/**
+ *  @link https://thoulah.mr42.me/fontawesome
+ *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ */
+
 namespace thoulah\fontawesome;
 
 use yii\helpers\ArrayHelper;
@@ -29,7 +34,7 @@ class Icon extends \yii\web\View {
 	 *  Return the complete ActiveField inputTemplate
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
-		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
+		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 		$groupSize = ArrayHelper::remove($options, 'groupSize', $this->defaults->groupSize);
 
 		$append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
@@ -41,9 +46,10 @@ class Icon extends \yii\web\View {
 	 *  Return the partial ActiveField inputTemplate for manual use
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
-		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
-		if (!isset($options['fixedWidth']))
+		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		if (!isset($options['fixedWidth'])) {
 			ArrayHelper::setValue($options, 'fixedWidth', $this->defaults->activeFormFixedWidth);
+		}
 
 		$append = ArrayHelper::remove($options, 'append', $this->defaults->append);
 		$icon = $Html::activeFieldIcon($append);

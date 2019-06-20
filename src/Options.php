@@ -1,11 +1,27 @@
 <?php
+/**
+ *  @link https://thoulah.mr42.me/fontawesome
+ *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ */
+
 namespace thoulah\fontawesome;
 
 use yii\base\DynamicModel;
 use yii\helpers\ArrayHelper;
 
 class Options {
-	private $defaultOptions = ['activeFormFixedWidth', 'append', 'bootstrap', 'fallbackIcon', 'fill', 'fixedWidth', 'fontAwesomeFolder', 'groupSize', 'prefix', 'style'];
+	private $defaultOptions = [
+		'activeFormFixedWidth',
+		'append',
+		'bootstrap',
+		'fallbackIcon',
+		'fill',
+		'fixedWidth',
+		'fontAwesomeFolder',
+		'groupSize',
+		'prefix',
+		'style',
+	];
 	private $validBootstrap = ['bootstrap4'];
 	private $validGroupSizes = ['sm', 'md', 'lg'];
 	private $validStyles = ['solid', 'regular', 'light', 'brands'];
@@ -29,8 +45,9 @@ class Options {
 	}
 
 	public function validateDefaults($options): ?string {
-		foreach ($this->defaultOptions as $option)
+		foreach ($this->defaultOptions as $option) {
 			$values[$option] = ArrayHelper::getValue($options, $option, $this->$option);
+		}
 
 		$model = DynamicModel::validateData(
 			$values,
@@ -75,10 +92,10 @@ class Options {
 	}
 
 	private function outputErrors(DynamicModel $model): ?string {
-		if ($model->hasErrors()) :
-			$Html = __NAMESPACE__."\\{$this->bootstrap}\\Html";
+		if ($model->hasErrors()) {
+			$Html = __NAMESPACE__ . "\\{$this->bootstrap}\\Html";
 			return $Html::errorSummary($model);
-		endif;
+		}
 
 		return null;
 	}

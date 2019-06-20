@@ -1,4 +1,9 @@
 <?php
+/**
+ *  @link https://thoulah.mr42.me/fontawesome
+ *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ */
+
 namespace thoulah\fontawesome;
 
 use DOMDocument;
@@ -27,7 +32,7 @@ class Svg {
 		$this->validation .= $options->validateOptions($this->options);
 
 		$this->load();
-		return $this->validation.$this->process();
+		return $this->validation . $this->process();
 	}
 
 	/*
@@ -40,8 +45,9 @@ class Svg {
 		$name = ArrayHelper::remove($this->options, 'name');
 
 		$fileName = "{$fontAwesomeFolder}/{$style}/{$name}.svg";
-		if (!is_file(Yii::getAlias($fileName)))
+		if (!is_file(Yii::getAlias($fileName))) {
 			$fileName = $this->defaults->fallbackIcon;
+		}
 
 		$this->svg->load(Yii::getAlias($fileName));
 	}
@@ -50,34 +56,41 @@ class Svg {
 	 *  Prepares and adds the SVG data
 	 */
 	private function process(): string {
-		$Html = __NAMESPACE__."\\{$this->defaults->bootstrap}\\Html";
+		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 		ArrayHelper::setValue($this->options, 'aria-hidden', 'true');
 		ArrayHelper::setValue($this->options, 'role', 'img');
 
 		$svg = $this->svg->getElementsByTagName('svg')->item(0);
-		if ($title = ArrayHelper::remove($this->options, 'title'))
+		if ($title = ArrayHelper::remove($this->options, 'title')) {
 			$svg->appendChild($this->svg->createElement('title', $title));
+		}
 
-		[,, $svgWidth, $svgHeight] = explode(' ', $svg->getAttribute('viewBox'));
+		[$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $svg->getAttribute('viewBox'));
+		$svgWidth = $xEnd - $xStart;
+		$svgHeight = $yEnd - $yStart;
 		switch ($height = ArrayHelper::getValue($this->options, 'height', 0)) :
 			case 0:
 				$Html::addCssClass($this->options, $this->defaults->prefix);
-				$Html::addCssClass($this->options, $this->defaults->prefix.'-w-'.ceil($svgWidth / $svgHeight * 16));
-				break;
-			default:
+		$Html::addCssClass($this->options, $this->defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+		break;
+		default:
 				ArrayHelper::setValue($this->options, 'width', round($height * $svgWidth / $svgHeight));
 		endswitch;
 
-		if (ArrayHelper::remove($this->options, 'fixedWidth'))
-			$Html::addCssClass($this->options, $this->defaults->prefix.'-fw');
+		if (ArrayHelper::remove($this->options, 'fixedWidth')) {
+			$Html::addCssClass($this->options, $this->defaults->prefix . '-fw');
+		}
 
 		$fill = ArrayHelper::remove($this->options, 'fill', $this->defaults->fill);
-		if (!empty($fill))
-			foreach ($this->svg->getElementsByTagName('path') as $path)
+		if (!empty($fill)) {
+			foreach ($this->svg->getElementsByTagName('path') as $path) {
 				$path->setAttribute('fill', $fill);
+			}
+		}
 
-		foreach ($this->options as $key => $value)
+		foreach ($this->options as $key => $value) {
 			$svg->setAttribute($key, $value);
+		}
 
 		return $this->svg->saveXML($svg);
 	}

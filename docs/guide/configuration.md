@@ -2,23 +2,30 @@
 
 ## Global Options and Default Configuration
 
-*   `bootstrap` string `bootstrap4`. Bootstrap namespace to use – Currently the only supported option
+*   `bootstrap` string `bootstrap4`. Bootstrap namespace to use – Currently the only supported
+    option
 
 *   `fill` string `currentColor`. Color of the icon. Set to empty string to disable this attribute
 
 *   `fixedWidth` bool `false`. Set to `true` to have fixed width icons
 
-*   `style` string `solid`. See [Font Awesome](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use) – Usable for Font Awesome Pro
+*   `style` string `solid`. See
+    [Referencing Icons](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)  
+    Usable for Font Awesome Pro
 
-*   `fallbackIcon` string `@vendor/fortawesome/font-awesome/svgs/solid/question-circle.svg`. Backup icon in case requested icon cannot be found
+*   `fallbackIcon` string `@vendor/fortawesome/font-awesome/svgs/solid/question-circle.svg`. Backup
+    icon in case requested icon cannot be found
 
-*   `fontAwesomeFolder` string `@vendor/fortawesome/font-awesome/svgs`. Path to your Font Awesome installation – Usable for Font Awesome Pro
+*   `fontAwesomeFolder` string `@vendor/fortawesome/font-awesome/svgs`. Path to your Font Awesome
+    installation  
+    Usable for Font Awesome Pro
 
 *   `prefix` string `svg-inline--fa`. CSS class basename, requires custom CSS if changed
 
 ### ActiveForm Specific Global Options and Default Configuration
 
-*   `ActiveFormFixedWidth` bool `true`. Set to `false` to have variable width icons. Overrules `fixedWidth`
+*   `ActiveFormFixedWidth` bool `true`. Set to `false` to have variable width icons. Overrules
+    `fixedWidth`
 
 *   `append` bool `false`. Whether to prepend or append the `input-group`
 

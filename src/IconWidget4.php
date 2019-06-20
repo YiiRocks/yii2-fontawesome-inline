@@ -1,4 +1,9 @@
 <?php
+/**
+ *  @link https://thoulah.mr42.me/fontawesome
+ *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ */
+
 namespace thoulah\fontawesome;
 
 use yii\helpers\ArrayHelper;
@@ -11,7 +16,7 @@ class IconWidget4 extends \yii\bootstrap4\Widget {
 	/*
 	 *  Initialize
 	 */
-	public function init() {
+	public function init(): void {
 		parent::init();
 		FontAwesomeAsset::register($this->getView());
 	}
