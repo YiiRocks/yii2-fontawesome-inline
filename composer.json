@@ -2,7 +2,7 @@
     "name": "thoulah/yii2-fontawesome-inline",
     "description": "Inline Font Awesome icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
-    "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "module"],
+    "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "component"],
     "homepage" : "https://thoulah.mr42.me/fontawesome",
     "license": "MIT",
     "authors": [

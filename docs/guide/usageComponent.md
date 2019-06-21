@@ -22,9 +22,4 @@ echo Yii::$app->fontawesome->name('github', 'brands')->fill->('#003865');
 echo Yii::$app->fontawesome->name('font-awesome', 'brands')->class('yourClass');
 ```
 
-The component will not register the CSS for you, so you can add this to your layout.
-```php
-\thoulah\fontawesome\FontAwesomeAsset::register($this);
-```
-
 Please see [Options](options.md) for more information.

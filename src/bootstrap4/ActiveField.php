@@ -14,6 +14,9 @@ use yii\helpers\ArrayHelper;
  * {@inheritdoc}
  */
 class ActiveField extends \yii\bootstrap4\ActiveField {
+	/**
+	 * @var array per-icon settings
+	 */
 	public $icon;
 
 	/**
@@ -29,13 +32,15 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 	 * {@inheritdoc}
 	 */
 	public function render($content = null) {
-		$groupSize = ArrayHelper::remove($this->icon, 'groupSize');
-		$append = ArrayHelper::getValue($this->icon, 'append');
+		if (!empty($this->icon)) {
+			$groupSize = ArrayHelper::remove($this->icon, 'groupSize');
+			$append = ArrayHelper::getValue($this->icon, 'append');
 
-		$fieldAddon = Html::activeFieldAddon($groupSize, $append);
-		$fieldIcon = Html::activeFieldIcon($append);
-		$inputTemplate = str_replace('{icon}', $fieldIcon, $fieldAddon);
-		$this->inputTemplate = str_replace('{icon}', $this->getIcon(), $inputTemplate);
+			$fieldAddon = Html::activeFieldAddon($groupSize, $append);
+			$fieldIcon = Html::activeFieldIcon($append);
+			$inputTemplate = str_replace('{icon}', $fieldIcon, $fieldAddon);
+			$this->inputTemplate = str_replace('{icon}', $this->getIcon(), $inputTemplate);
+		}
 
 		return parent::render($content);
 	}

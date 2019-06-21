@@ -6,7 +6,13 @@
 
 namespace thoulah\fontawesome\bootstrap4;
 
+/**
+ * {@inheritdoc}
+ */
 class Html extends \yii\bootstrap4\Html {
+	/**
+	 *  Returns the ActiveField inputTemplate.
+	 */
 	public static function activeFieldAddon(?string $groupSize, ?bool $append): string {
 		$inputGroupClass = ['input-group'];
 		if ($groupSize !== null && $groupSize !== 'md') {
@@ -16,6 +22,9 @@ class Html extends \yii\bootstrap4\Html {
 		return static::tag('div', ($append) ? '{input}{icon}' : '{icon}{input}', ['class' => $inputGroupClass]);
 	}
 
+	/**
+	 *  Returns the partial ActiveField Icon.
+	 */
 	public static function activeFieldIcon(?bool $append): string {
 		$direction = ($append) ? 'append' : 'prepend';
 		$icon = static::tag('div', '{icon}', ['class' => 'input-group-text']);

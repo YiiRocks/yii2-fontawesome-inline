@@ -8,21 +8,37 @@ namespace thoulah\fontawesome;
 
 use yii\helpers\ArrayHelper;
 
+/**
+ * IconComponent provides an easy way to access Font Awesome icons using Widget.
+ *
+ * ```php
+ * use thoulah\fontawesome\IconWidget4 as IconWidget;
+ * echo IconWidget::widget(['name' => 'at']);
+ *
+ * echo IconWidget::widget([
+ *	'name' => 'github',
+ *	'options' => [
+ *		'style' => 'brands',
+ *		'fill' => '#003865'
+ * 	]
+ * ]);
+ *
+ * echo IconWidget::widget([
+ * 	'name' => 'font-awesome',
+ * 	'options' => [
+ * 		'class' => 'yourClass',
+ * 		'style' => 'brands'
+ * 	],
+ * ]);
+ * ```
+ */
 class IconWidget4 extends \yii\bootstrap4\Widget {
 	public static $defaults = [];
 	public $name;
 	public $options = [];
 
-	/*
-	 *  Initialize
-	 */
-	public function init(): void {
-		parent::init();
-		FontAwesomeAsset::register($this->getView());
-	}
-
-	/*
-	 *  Outputs the SVG string
+	/**
+	 * {@inheritdoc}
 	 */
 	public function run(): string {
 		ArrayHelper::setValue($this->options, 'name', $this->name);

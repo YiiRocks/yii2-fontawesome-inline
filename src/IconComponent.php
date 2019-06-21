@@ -6,8 +6,11 @@
 
 namespace thoulah\fontawesome;
 
-/*
- * IconComponent provides an easy way to access Font Awesome icons throughout your project. This\
+use Yii;
+use yii\helpers\ArrayHelper;
+
+/**
+ * IconComponent provides an easy way to access Font Awesome icons throughout your project. This
  * allows you to override default settings once instead of per usage.
  *
  * Add `IconComponent` as component to your Yii config file:
@@ -30,15 +33,7 @@ namespace thoulah\fontawesome;
  * echo Yii::$app->fontawesome->name('font-awesome', 'brands')->class('yourClass');
  * ```
  *
- * The component will not register the CSS for you, so you can add this to your layout.
- * ```php
- * \thoulah\fontawesome\FontAwesomeAsset::register($this);
- * ```
- */
-
-use yii\helpers\ArrayHelper;
-
-/**
+ * @method name(string $name, ?string $style)
  * @method append(bool $append)
  * @method class(string $class)
  * @method fill(string $fill)
@@ -47,14 +42,21 @@ use yii\helpers\ArrayHelper;
  * @method height(int $height)
  * @method title(string $title)
  */
-class IconComponent {
-	protected $icon = [];
+class IconComponent extends \yii\base\Component {
+	private $icon = [];
+
+	/**
+	 * @var array overrides for the default settings
+	 */
 	public $config;
+
+	/**
+	 * @var object the default settings
+	 */
 	public $defaults;
 
 	/**
-	 * Construct.
-	 * @param mixed $config
+	 * {@inheritdoc}
 	 */
 	public function __construct($config = []) {
 		$this->defaults = new Options();
@@ -66,6 +68,11 @@ class IconComponent {
 		}
 	}
 
+	/**
+	 *  Magic function, sets icon properties.
+	 * @param mixed $name
+	 * @param mixed $value
+	 */
 	public function __call($name, $value): self {
 		$this->icon[$name] = $value[0];
 		return $this;
@@ -81,6 +88,9 @@ class IconComponent {
 		return $string;
 	}
 
+	/**
+	 * Sets the name and the style of the icon.
+	 */
 	public function name(string $name, ?string $style = null): self {
 		$this->icon['name'] = $name;
 		$this->icon['style'] = $style ?? $this->defaults->style;
@@ -88,7 +98,7 @@ class IconComponent {
 	}
 
 	/**
-	 *  Return the complete ActiveField inputTemplate.
+	 *  Returns the ActiveField inputTemplate.
 	 */
 	public function activeFieldAddon(): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
@@ -99,7 +109,7 @@ class IconComponent {
 	}
 
 	/**
-	 *  Return the partial ActiveField inputTemplate for manual use.
+	 *  Returns the partial ActiveField Icon.
 	 */
 	public function activeFieldIcon(): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";

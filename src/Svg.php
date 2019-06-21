@@ -24,6 +24,10 @@ class Svg {
 		$options = new Options();
 		$this->defaults = (object) ArrayHelper::merge((array) $options, $defaults);
 		$this->validation = $options->validateDefaults($this->defaults);
+
+		if ($this->defaults->registerAssets) {
+			FontAwesomeAsset::register(Yii::$app->getView());
+		}
 	}
 
 	public function getString($options): string {

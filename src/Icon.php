@@ -8,20 +8,22 @@ namespace thoulah\fontawesome;
 
 use yii\helpers\ArrayHelper;
 
+/**
+ * {@inheritdoc}
+ */
 class Icon extends \yii\web\View {
 	public $defaults;
 
-	/*
-	 *	Construct
+	/**
+	 * {@inheritdoc}
 	 */
 	public function __construct() {
 		parent::__construct();
 		$this->defaults = new Options();
-		$this->registerAssetBundle(FontAwesomeAsset::class);
 	}
 
-	/*
-	 *  Outputs the SVG string
+	/**
+	 *  Outputs the SVG string.
 	 */
 	public function show(string $name, array $options = []): string {
 		ArrayHelper::setValue($options, 'name', $name);
@@ -30,8 +32,8 @@ class Icon extends \yii\web\View {
 		return $svg->getString($options);
 	}
 
-	/*
-	 *  Return the complete ActiveField inputTemplate
+	/**
+	 *  Returns the ActiveField inputTemplate.
 	 */
 	public function activeFieldAddon(string $name, array $options = []): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
@@ -42,8 +44,8 @@ class Icon extends \yii\web\View {
 		return str_replace('{icon}', $this->activeFieldIcon($name, $options), $icon);
 	}
 
-	/*
-	 *  Return the partial ActiveField inputTemplate for manual use
+	/**
+	 *  Returns the partial ActiveField Icon.
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";

@@ -20,6 +20,7 @@ class Options {
 		'fontAwesomeFolder',
 		'groupSize',
 		'prefix',
+		'registerAssets',
 		'style',
 	];
 	private $validBootstrap = ['bootstrap4'];
@@ -35,6 +36,7 @@ class Options {
 	public $fontAwesomeFolder = '@vendor/fortawesome/font-awesome/svgs';
 	public $groupSize = 'md';
 	public $prefix = 'svg-inline--fa';
+	public $registerAssets = true;
 	public $style = 'solid';
 
 	/*
@@ -53,7 +55,7 @@ class Options {
 			$values,
 			[
 				[$this->defaultOptions, 'required'],
-				[['activeFormFixedWidth', 'append', 'fixedWidth'], 'boolean'],
+				[['activeFormFixedWidth', 'append', 'fixedWidth', 'registerAssets'], 'boolean'],
 				[['fill', 'fallbackIcon', 'fontAwesomeFolder', 'prefix'], 'string'],
 				[['bootstrap'], 'in', 'range' => $this->validBootstrap],
 				[['groupSize'], 'in', 'range' => $this->validGroupSizes],
