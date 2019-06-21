@@ -1,12 +1,13 @@
 <?php
 /**
- *  @link https://thoulah.mr42.me/fontawesome
+ *  @link https://fontawesome.mr42.me/
  *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
 namespace thoulah\fontawesome\tests;
 
 use thoulah\fontawesome\bootstrap4\ActiveForm;
+use thoulah\fontawesome\Icon;
 use yii\base\DynamicModel;
 
 class ActiveFormTest extends tests {
@@ -26,6 +27,37 @@ class ActiveFormTest extends tests {
 html;
 
 		$this->assertStringContainsString($expected, $out);
+		$this->assertStringNotContainsString('{icon}', $out);
+	}
+
+	public function testActiveFieldAddon(): void {
+		ActiveForm::$counter = 0;
+		ob_start();
+		$model = new DynamicModel(['test']);
+		$icon = new Icon();
+		$form = ActiveForm::begin();
+		echo $form->field($model, 'test', [
+				'inputTemplate' => $icon->activeFieldAddon('user'),
+			]);
+		ActiveForm::end();
+		$out = ob_get_clean();
+
+		$this->assertStringNotContainsString('{icon}', $out);
+	}
+
+	public function testActiveFieldIcon(): void {
+		ActiveForm::$counter = 0;
+		ob_start();
+		$model = new DynamicModel(['test']);
+		$icon = new Icon();
+		$form = ActiveForm::begin();
+		echo $form->field($model, 'test', [
+				'inputTemplate' => $icon->activeFieldIcon('user'),
+			]);
+		ActiveForm::end();
+		$out = ob_get_clean();
+
+		$this->assertStringNotContainsString('{icon}', $out);
 	}
 
 	public function testAppend(): void {

@@ -1,6 +1,6 @@
 <?php
 /**
- *  @link https://thoulah.mr42.me/fontawesome
+ *  @link https://fontawesome.mr42.me/
  *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
@@ -103,9 +103,10 @@ class IconComponent extends \yii\base\Component {
 	public function activeFieldAddon(): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
-		$append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
 
-		return $Html::activeFieldAddon($groupSize, $append);
+		$append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
+		$icon = $Html::activeFieldAddon($groupSize, $append);
+		return str_replace('{icon}', $this->activeFieldIcon(), $icon);
 	}
 
 	/**

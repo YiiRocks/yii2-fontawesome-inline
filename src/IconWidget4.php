@@ -1,6 +1,6 @@
 <?php
 /**
- *  @link https://thoulah.mr42.me/fontawesome
+ *  @link https://fontawesome.mr42.me/
  *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
@@ -33,9 +33,18 @@ use yii\helpers\ArrayHelper;
  * ```
  */
 class IconWidget4 extends \yii\bootstrap4\Widget {
-	public static $defaults = [];
+	public static $defaults;
 	public $name;
 	public $options = [];
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function init(): void {
+		$defaults = ArrayHelper::toArray(static::$defaults);
+		static::$defaults = new Options($defaults);
+		parent::init();
+	}
 
 	/**
 	 * {@inheritdoc}

@@ -1,6 +1,6 @@
 <?php
 /**
- *  @link https://thoulah.mr42.me/fontawesome
+ *  @link https://fontawesome.mr42.me/
  *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
@@ -50,6 +50,18 @@ class Options {
 		'registerAssets',
 		'style',
 	];
+	private $iconOptions = [
+		'name',
+		'style',
+		'append',
+		'class',
+		'height',
+		'fill',
+		'fixedWidth',
+		'groupSize',
+		'prefix',
+		'title',
+	];
 	private $validBootstrap = ['bootstrap4'];
 	private $validGroupSizes = ['sm', 'md', 'lg'];
 	private $validStyles = ['solid', 'regular', 'light', 'brands'];
@@ -69,13 +81,19 @@ class Options {
 	/*
 	 *	Construct
 	 */
-	public function __construct() {
+	public function __construct(array $options = null) {
+		if ($options !== null) {
+			foreach ($options as $key => $value) {
+				$this->$key = $value;
+			}
+		}
+
 		return $this;
 	}
 
-	public function validateDefaults(object $defaults): ?string {
+	public function validateDefaults(): ?string {
 		foreach ($this->defaultOptions as $option) {
-			$values[$option] = ArrayHelper::getValue($defaults, $option, $this->$option);
+			$values[$option] = ArrayHelper::getValue($this, $option, $this->$option);
 		}
 
 		$model = DynamicModel::validateData(
@@ -93,20 +111,13 @@ class Options {
 		return $this->outputErrors($model);
 	}
 
-	public function validateOptions($options): ?string {
+	public function validateOptions(?array $options): ?string {
+		foreach ($this->iconOptions as $option) {
+			$values[$option] = ArrayHelper::getValue($options, $option);
+		}
+
 		$model = DynamicModel::validateData(
-			[
-				'name' => ArrayHelper::getValue($options, 'name'),
-				'style' => ArrayHelper::getValue($options, 'style', $this->style),
-				'append' => ArrayHelper::getValue($options, 'append', $this->append),
-				'class' => ArrayHelper::getValue($options, 'class'),
-				'height' => ArrayHelper::getValue($options, 'height'),
-				'fill' => ArrayHelper::getValue($options, 'fill'),
-				'fixedWidth' => ArrayHelper::getValue($options, 'fixedWidth', $this->fixedWidth),
-				'groupSize' => ArrayHelper::getValue($options, 'groupSize', $this->groupSize),
-				'prefix' => ArrayHelper::getValue($options, 'prefix'),
-				'title' => ArrayHelper::getValue($options, 'title'),
-			],
+			$values,
 			[
 				[['name'], 'required'],
 				[['style'], 'in', 'range' => $this->validStyles],

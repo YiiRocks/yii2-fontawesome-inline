@@ -1,6 +1,6 @@
 <?php
 /**
- *  @link https://thoulah.mr42.me/fontawesome
+ *  @link https://fontawesome.mr42.me/
  *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
@@ -17,7 +17,7 @@ class Config extends \PhpCsFixer\Config {
 		parent::__construct($name);
 
 		$header = <<<'HEADER'
- @link https://thoulah.mr42.me/fontawesome
+ @link https://fontawesome.mr42.me/
  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
 HEADER;
 

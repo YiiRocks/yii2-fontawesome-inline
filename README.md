@@ -15,23 +15,21 @@ This extension provides simple functions for [Yii framework 2.0](http://www.yiif
 [![Packagist](https://img.shields.io/packagist/dt/Thoulah/yii2-fontawesome-inline.svg)](https://packagist.org/packages/thoulah/yii2-fontawesome-inline)
 [![GitHub](https://img.shields.io/github/license/Thoulah/yii2-fontawesome-inline.svg)](https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE)
 
-*   [Installation](docs/guide/installation.md)
+*   [Installation](docs/installation.md)
 
-*   [Configuration](docs/guide/configuration.md)
+*   [Configuration](docs/configuration.md)
 
-*   [Options](docs/guide/options.md)
+*   [Options](docs/options.md)
 
 *   Usage
 
-    *   [Usage as a Class](docs/guide/usageClass.md)
+    *   [Usage as a Class](docs/usageClass.md)
 
-    *   [Usage as a Widget](docs/guide/usageWidget.md)
+    *   [Usage as a Widget](docs/usageWidget.md)
 
-    *   [Usage as a Component](docs/guide/usageComponent.md)
+    *   [Usage as a Component](docs/usageComponent.md)
 
-    *   [Usage from ActiveForm](docs/guide/usageActiveForm.md)
-
-*   [Examples](https://thoulah.mr42.me/fontawesome/examples)
+    *   [Usage from ActiveForm](docs/usageActiveForm.md)
 
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Thoulah/yii2-fontawesome-inline.svg)](https://codeclimate.com/github/Thoulah/yii2-fontawesome-inline/maintainability)
 [![Codacy branch grade](https://img.shields.io/codacy/grade/77359b0ae813411895da7d33bb009bf0/master.svg)](https://www.codacy.com/app/Thoulah/yii2-fontawesome-inline)
