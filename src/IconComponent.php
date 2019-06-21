@@ -109,7 +109,7 @@ class IconComponent extends \yii\base\Component {
 	}
 
 	/**
-	 *  Returns the partial ActiveField Icon.
+	 *  Returns the ActiveField Icon.
 	 */
 	public function activeFieldIcon(): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";

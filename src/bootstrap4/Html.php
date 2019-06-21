@@ -23,7 +23,7 @@ class Html extends \yii\bootstrap4\Html {
 	}
 
 	/**
-	 *  Returns the partial ActiveField Icon.
+	 *  Returns the ActiveField Icon.
 	 */
 	public static function activeFieldIcon(?bool $append): string {
 		$direction = ($append) ? 'append' : 'prepend';

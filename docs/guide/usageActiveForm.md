@@ -24,7 +24,7 @@ echo $form->field($model, 'field3', [
 	'icon' => [
 		'name' => 'github',
 		'style' => 'brands',
-        'append => true,
+		'append' => true,
 	],
 ]);
 

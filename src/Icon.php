@@ -12,6 +12,9 @@ use yii\helpers\ArrayHelper;
  * {@inheritdoc}
  */
 class Icon extends \yii\web\View {
+	/**
+	 * @var object the default settings
+	 */
 	public $defaults;
 
 	/**
@@ -45,7 +48,7 @@ class Icon extends \yii\web\View {
 	}
 
 	/**
-	 *  Returns the partial ActiveField Icon.
+	 *  Returns the ActiveField Icon.
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";

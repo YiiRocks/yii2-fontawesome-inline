@@ -1,6 +1,6 @@
 # Configuration
 
-## Global Options and Default Configuration
+## Global Options
 
 *   `bootstrap` string `bootstrap4`. Bootstrap namespace to use – Currently the only supported
     option
@@ -22,7 +22,9 @@
 
 *   `prefix` string `svg-inline--fa`. CSS class basename, requires custom CSS if changed
 
-### ActiveForm Specific Global Options and Default Configuration
+*   `registerAssets` bool `true`. Whether or not to register the Font Awesome assets.
+
+### ActiveForm Specific Global Options
 
 *   `ActiveFormFixedWidth` bool `true`. Set to `false` to have variable width icons. Overrules
     `fixedWidth`
