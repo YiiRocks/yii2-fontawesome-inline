@@ -32,7 +32,7 @@ class Icon extends \yii\web\View {
 		ArrayHelper::setValue($options, 'name', $name);
 
 		$svg = new Svg($this->defaults);
-		return $svg->getString($options);
+		return $svg->getSvg($options);
 	}
 
 	/**
@@ -52,9 +52,6 @@ class Icon extends \yii\web\View {
 	 */
 	public function activeFieldIcon(string $name, array $options = []): string {
 		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
-		if (!isset($options['fixedWidth'])) {
-			ArrayHelper::setValue($options, 'fixedWidth', $this->defaults->activeFormFixedWidth);
-		}
 
 		$append = ArrayHelper::remove($options, 'append', $this->defaults->append);
 		$icon = $Html::activeFieldIcon($append);

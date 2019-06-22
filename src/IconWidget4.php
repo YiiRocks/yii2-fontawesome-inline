@@ -53,6 +53,6 @@ class IconWidget4 extends \yii\bootstrap4\Widget {
 		ArrayHelper::setValue($this->options, 'name', $this->name);
 
 		$svg = new Svg(static::$defaults);
-		return $svg->getString($this->options);
+		return $svg->getSvg($this->options);
 	}
 }

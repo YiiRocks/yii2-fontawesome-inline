@@ -16,10 +16,10 @@ class Config extends \PhpCsFixer\Config {
 	public function __construct($name = 'mr42-cs-config') {
 		parent::__construct($name);
 
-		$header = <<<'HEADER'
+		$header = <<<'header'
  @link https://fontawesome.mr42.me/
  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
-HEADER;
+header;
 
 		$this->setRiskyAllowed(true);
 

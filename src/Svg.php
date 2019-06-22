@@ -7,18 +7,18 @@
 namespace thoulah\fontawesome;
 
 use DOMDocument;
-use DOMElement;
 use Yii;
 use yii\helpers\ArrayHelper;
 
 class Svg {
 	private $svg;
+	private $svgElement;
 	private $defaults;
 	private $options;
 	private $validation;
 
-	/*
-	 *	Construct
+	/**
+	 *	Construct.
 	 */
 	public function __construct(Options $defaults) {
 		$this->svg = new DOMDocument();
@@ -35,17 +35,27 @@ class Svg {
 		}
 	}
 
-	public function getString(array $options): string {
+	/**
+	 *  Magic function, returns the SVG string.
+	 */
+	public function __toString(): string {
+		return $this->validation . $this->svg->saveXML($this->svgElement);
+	}
+
+	public function getSvg(array $options): string {
 		$this->options = $options;
 
 		$this->validation .= $this->defaults->validateOptions($this->options);
 
 		$this->load();
-		return $this->validation . $this->getSvg();
+		$this->setTitle();
+		$this->setSvgSize();
+		$this->setProperties();
+		return $this;
 	}
 
-	/*
-	 *  Load Font Awesome SVG file. Falls back to defaults if not found
+	/**
+	 *  Load Font Awesome SVG file. Falls back to defaults if not found.
 	 *  @see $fallbackIcon
 	 */
 	private function load(): void {
@@ -59,31 +69,26 @@ class Svg {
 		}
 
 		$this->svg->load(Yii::getAlias($fileName));
+		$this->svgElement = $this->svg->getElementsByTagName('svg')->item(0);
 	}
 
-	/*
-	 *  Prepares and adds the SVG data
+	/**
+	 *  Sets the title.
 	 */
-	private function getSvg(): string {
-		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
-
-		$svg = $this->svg->getElementsByTagName('svg')->item(0);
+	private function setTitle(): void {
 		if ($title = ArrayHelper::remove($this->options, 'title')) {
-			$svg->appendChild($this->svg->createElement('title', $title));
+			$this->svgElement->insertBefore($this->svg->createElement('title', $title), $this->svgElement->firstChild);
 		}
+	}
+
+	/**
+	 *  Prepares and adds the SVG data.
+	 */
+	private function setProperties(): void {
+		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 
 		ArrayHelper::setValue($this->options, 'aria-hidden', 'true');
 		ArrayHelper::setValue($this->options, 'role', 'img');
-
-		[$svgWidth, $svgHeight] = $this->getSvgSize($svg);
-		switch ($height = ArrayHelper::getValue($this->options, 'height', 0)) {
-			case 0:
-				$Html::addCssClass($this->options, $this->defaults->prefix);
-				$Html::addCssClass($this->options, $this->defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
-				break;
-			default:
-				ArrayHelper::setValue($this->options, 'width', round($height * $svgWidth / $svgHeight));
-		}
 
 		if (ArrayHelper::remove($this->options, 'fixedWidth')) {
 			$Html::addCssClass($this->options, $this->defaults->prefix . '-fw');
@@ -97,17 +102,27 @@ class Svg {
 		}
 
 		foreach ($this->options as $key => $value) {
-			$svg->setAttribute($key, $value);
+			$this->svgElement->setAttribute($key, $value);
 		}
-
-		return $this->svg->saveXML($svg);
 	}
 
-	/*
-	 *  Return the width and height of the SVG from viewBox
+	/**
+	 *  Sets either the size class (default) or the width/height if height is given manually.
 	 */
-	private function getSvgSize(DOMElement $svg): array {
-		[$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $svg->getAttribute('viewBox'));
-		return [$xEnd - $xStart, $yEnd - $yStart];
+	private function setSvgSize(): void {
+		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		[$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox'));
+		$svgWidth = $xEnd - $xStart;
+		$svgHeight = $yEnd - $yStart;
+
+		$height = ArrayHelper::remove($this->options, 'height', 0);
+		if ($height === 0) {
+			$Html::addCssClass($this->options, $this->defaults->prefix);
+			$Html::addCssClass($this->options, $this->defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+			return;
+		}
+
+		ArrayHelper::setValue($this->options, 'width', round($height * $svgWidth / $svgHeight));
+		ArrayHelper::setValue($this->options, 'height', $height);
 	}
 }

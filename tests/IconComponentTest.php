@@ -14,17 +14,17 @@ class IconComponentTest extends tests {
 		$this->mockWebApplication([
 			'components' => [
 				'fontawesome' => [
-					'class' => '\thoulah\fontawesome\IconComponent',
+					'class' => 'thoulah\fontawesome\IconComponent',
 				],
 			],
 		]);
 	}
 
 	public function testBasic(): void {
-		$this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', (string) Yii::$app->fontawesome->name('cookie'));
-		$this->assertStringContainsString('viewBox="0 0 192 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-6"', (string) Yii::$app->fontawesome->name('ellipsis-v'));
-		$this->assertStringContainsString('viewBox="0 0 496 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', (string) Yii::$app->fontawesome->name('github', 'brands'));
-		$this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', (string) Yii::$app->fontawesome->name('nonexistent'));
+		$this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('cookie'));
+		$this->assertStringContainsString('viewBox="0 0 192 512" class="svg-inline--fa svg-inline--fa-w-6" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('ellipsis-v'));
+		$this->assertStringContainsString('viewBox="0 0 496 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('github', 'brands'));
+		$this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('nonexistent'));
 	}
 
 	public function testClass(): void {
@@ -48,16 +48,16 @@ class IconComponentTest extends tests {
 	}
 
 	public function testHeight(): void {
-		$this->assertStringContainsString('viewBox="0 0 512 512" height="42" aria-hidden="true" role="img" width="42"', (string) Yii::$app->fontawesome->name('cookie')->height(42));
-		$this->assertStringContainsString('viewBox="0 0 192 512" height="42" aria-hidden="true" role="img" width="16"', (string) Yii::$app->fontawesome->name('ellipsis-v')->height(42));
+		$this->assertStringContainsString('viewBox="0 0 512 512" width="42" height="42" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('cookie')->height(42));
+		$this->assertStringContainsString('viewBox="0 0 192 512" width="16" height="42" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('ellipsis-v')->height(42));
 	}
 
 	public function testPrefix(): void {
 		Yii::$app->fontawesome->defaults->prefix = 'icon';
-		$this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', (string) Yii::$app->fontawesome->name('cookie'));
-		$this->assertStringContainsString('viewBox="0 0 192 512" aria-hidden="true" role="img" class="icon icon-w-6"', (string) Yii::$app->fontawesome->name('ellipsis-v'));
-		$this->assertStringContainsString('viewBox="0 0 496 512" aria-hidden="true" role="img" class="icon icon-w-16"', (string) Yii::$app->fontawesome->name('github', 'brands'));
-		$this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="icon icon-w-16"', (string) Yii::$app->fontawesome->name('nonexistent'));
+		$this->assertStringContainsString('viewBox="0 0 512 512" class="icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('cookie'));
+		$this->assertStringContainsString('viewBox="0 0 192 512" class="icon icon-w-6" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('ellipsis-v'));
+		$this->assertStringContainsString('viewBox="0 0 496 512" class="icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('github', 'brands'));
+		$this->assertStringContainsString('viewBox="0 0 512 512" class="icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('nonexistent'));
 	}
 
 	public function testTitle(): void {

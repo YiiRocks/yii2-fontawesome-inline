@@ -83,9 +83,9 @@ class IconComponent extends \yii\base\Component {
 	 */
 	public function __toString(): string {
 		$svg = new Svg($this->defaults);
-		$string = $svg->getString($this->icon);
+		$svg->getSvg($this->icon);
 		$this->icon = [];
-		return $string;
+		return $svg;
 	}
 
 	/**
