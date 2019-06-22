@@ -28,7 +28,7 @@ class Svg {
 			$this->defaults->$key = $value;
 		}
 
-		$this->validation = $this->defaults->validateDefaults($this->defaults);
+		$this->validation = $this->defaults->validateDefaults();
 
 		if ($this->defaults->registerAssets) {
 			FontAwesomeAsset::register(Yii::$app->getView());

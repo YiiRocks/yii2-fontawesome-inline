@@ -48,7 +48,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField {
 	private function getIcon(): string {
 		$iconName = (is_string($this->icon))
 			? $this->icon
-			: (string) ArrayHelper::remove($this->icon, 'name');
+			: ArrayHelper::remove($this->icon, 'name');
 
 		if (isset(Yii::$app->fontawesome) && Yii::$app->fontawesome instanceof IconComponent) {
 			$iconStyle = ArrayHelper::remove($this->icon, 'style');

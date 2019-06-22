@@ -92,17 +92,13 @@ class Options {
 	}
 
 	public function validateDefaults(): ?string {
-		foreach ($this->defaultOptions as $option) {
-			$values[$option] = ArrayHelper::getValue($this, $option, $this->$option);
-		}
-
 		$model = DynamicModel::validateData(
-			$values,
+			ArrayHelper::toArray($this),
 			[
 				[$this->defaultOptions, 'required'],
 				[['activeFormFixedWidth', 'append', 'fixedWidth', 'registerAssets'], 'boolean'],
-				[['fill', 'fallbackIcon', 'fontAwesomeFolder', 'prefix'], 'string'],
 				[['bootstrap'], 'in', 'range' => $this->validBootstrap],
+				[['fill', 'fallbackIcon', 'fontAwesomeFolder', 'prefix'], 'string'],
 				[['groupSize'], 'in', 'range' => $this->validGroupSizes],
 				[['style'], 'in', 'range' => $this->validStyles],
 			]
@@ -112,19 +108,15 @@ class Options {
 	}
 
 	public function validateOptions(?array $options): ?string {
-		foreach ($this->iconOptions as $option) {
-			$values[$option] = ArrayHelper::getValue($options, $option);
-		}
-
 		$model = DynamicModel::validateData(
-			$values,
+			ArrayHelper::merge(array_fill_keys($this->iconOptions, null), $options ?? []),
 			[
 				[['name'], 'required'],
-				[['style'], 'in', 'range' => $this->validStyles],
 				[['append', 'fixedWidth'], 'boolean'],
 				[['class', 'fill', 'prefix', 'title'], 'string'],
 				[['height'], 'integer', 'min' => 1],
 				[['groupSize'], 'in', 'range' => $this->validGroupSizes],
+				[['style'], 'in', 'range' => $this->validStyles],
 			]
 		);
 
