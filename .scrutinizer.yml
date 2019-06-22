@@ -5,6 +5,10 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
+filter:
+    excluded_paths:
+        - "cs/"
+        - "tests/"
 checks:
     php:
         verify_property_names: true
