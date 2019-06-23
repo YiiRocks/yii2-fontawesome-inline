@@ -1,11 +1,12 @@
 <?php
 /**
- *  @link https://fontawesome.mr42.me/
- *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ * @link https://fontawesome.mr42.me/
+ * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
 namespace thoulah\fontawesome;
 
+use thoulah\fontawesome\config\Defaults;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -57,19 +58,14 @@ class IconComponent extends \yii\base\Component {
 
 	/**
 	 * {@inheritdoc}
+	 * @param string $config configuration of the icon
 	 */
 	public function __construct($config = []) {
-		$this->defaults = new Options();
-
-		if ($config) {
-			foreach (reset($config) as $key => $value) {
-				$this->defaults->$key = $value;
-			}
-		}
+		$this->defaults = new Defaults($config);
 	}
 
 	/**
-	 *  Magic function, sets icon properties.
+	 * Magic function, sets icon properties.
 	 * @param mixed $name
 	 * @param mixed $value
 	 */
@@ -79,7 +75,7 @@ class IconComponent extends \yii\base\Component {
 	}
 
 	/**
-	 *  Magic function, returns the SVG string.
+	 * Magic function, returns the SVG string.
 	 */
 	public function __toString(): string {
 		$svg = new Svg($this->defaults);
@@ -98,10 +94,10 @@ class IconComponent extends \yii\base\Component {
 	}
 
 	/**
-	 *  Returns the ActiveField inputTemplate.
+	 * Returns the ActiveField inputTemplate.
 	 */
 	public function activeFieldAddon(): string {
-		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
 		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
 
 		$append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
@@ -110,10 +106,10 @@ class IconComponent extends \yii\base\Component {
 	}
 
 	/**
-	 *  Returns the ActiveField Icon.
+	 * Returns the ActiveField Icon.
 	 */
 	public function activeFieldIcon(): string {
-		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
 		if (!isset($this->icon['fixedWidth'])) {
 			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
 		}

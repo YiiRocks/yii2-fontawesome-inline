@@ -1,12 +1,13 @@
 <?php
 /**
- *  @link https://fontawesome.mr42.me/
- *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ * @link https://fontawesome.mr42.me/
+ * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
 namespace thoulah\fontawesome;
 
 use DOMDocument;
+use thoulah\fontawesome\config\{Defaults, Options};
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -20,15 +21,15 @@ class Svg {
 	/**
 	 *	Construct.
 	 */
-	public function __construct(Options $defaults) {
+	public function __construct(Defaults $defaults) {
 		$this->svg = new DOMDocument();
-		$this->defaults = new Options();
+		$this->defaults = new Defaults();
 
 		foreach ($defaults as $key => $value) {
 			$this->defaults->$key = $value;
 		}
 
-		$this->validation = $this->defaults->validateDefaults();
+		$this->validation = $this->defaults->validate();
 
 		if ($this->defaults->registerAssets) {
 			FontAwesomeAsset::register(Yii::$app->getView());
@@ -44,8 +45,9 @@ class Svg {
 
 	public function getSvg(array $options): string {
 		$this->options = $options;
+		$options = new Options();
 
-		$this->validation .= $this->defaults->validateOptions($this->options);
+		$this->validation .= $options->validate($this->options);
 
 		$this->load();
 		$this->setTitle();
@@ -85,7 +87,7 @@ class Svg {
 	 *  Prepares and adds the SVG data.
 	 */
 	private function setProperties(): void {
-		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
 
 		ArrayHelper::setValue($this->options, 'aria-hidden', 'true');
 		ArrayHelper::setValue($this->options, 'role', 'img');
@@ -110,7 +112,7 @@ class Svg {
 	 *  Sets either the size class (default) or the width/height if height is given manually.
 	 */
 	private function setSvgSize(): void {
-		$Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
 		[$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox'));
 		$svgWidth = $xEnd - $xStart;
 		$svgHeight = $yEnd - $yStart;

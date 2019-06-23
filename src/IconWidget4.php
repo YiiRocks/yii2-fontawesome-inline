@@ -1,25 +1,26 @@
 <?php
 /**
- *  @link https://fontawesome.mr42.me/
- *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ * @link https://fontawesome.mr42.me/
+ * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
 namespace thoulah\fontawesome;
 
+use thoulah\fontawesome\config\Defaults;
 use yii\helpers\ArrayHelper;
 
 /**
- * IconComponent provides an easy way to access Font Awesome icons using Widget.
+ * IconWidget provides an easy way to access Font Awesome icons using Widget.
  *
  * ```php
  * use thoulah\fontawesome\IconWidget4 as IconWidget;
  * echo IconWidget::widget(['name' => 'at']);
  *
  * echo IconWidget::widget([
- *	'name' => 'github',
- *	'options' => [
- *		'style' => 'brands',
- *		'fill' => '#003865'
+ * 	'name' => 'github',
+ * 	'options' => [
+ * 		'style' => 'brands',
+ * 		'fill' => '#003865'
  * 	]
  * ]);
  *
@@ -33,21 +34,32 @@ use yii\helpers\ArrayHelper;
  * ```
  */
 class IconWidget4 extends \yii\bootstrap4\Widget {
+	/**
+	 * @var Defaults the default settings
+	 */
 	public static $defaults;
+
+	/**
+	 * @var string name of the icon
+	 */
 	public $name;
+
+	/**
+	 * @var array icon settings
+	 */
 	public $options = [];
 
 	/**
-	 * {@inheritdoc}
+	 * Init.
 	 */
 	public function init(): void {
 		$defaults = ArrayHelper::toArray(static::$defaults);
-		static::$defaults = new Options($defaults);
+		static::$defaults = new Defaults($defaults);
 		parent::init();
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * Construct.
 	 */
 	public function run(): string {
 		ArrayHelper::setValue($this->options, 'name', $this->name);

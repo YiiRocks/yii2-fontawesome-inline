@@ -1,12 +1,12 @@
 <?php
 /**
- *  @link https://fontawesome.mr42.me/
- *  @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
+ * @link https://fontawesome.mr42.me/
+ * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
  */
 
 namespace thoulah\fontawesome\bootstrap4;
 
-use thoulah\fontawesome\{Icon, IconComponent, Options};
+use thoulah\fontawesome\{Icon, IconComponent};
 use Yii;
 use yii\helpers\ArrayHelper;
 
