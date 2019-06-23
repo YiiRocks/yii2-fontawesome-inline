@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://fontawesome.mr42.me/
  * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
@@ -17,54 +18,57 @@ use yii\helpers\ArrayHelper;
  * echo IconWidget::widget(['name' => 'at']);
  *
  * echo IconWidget::widget([
- * 	'name' => 'github',
- * 	'options' => [
- * 		'style' => 'brands',
- * 		'fill' => '#003865'
- * 	]
+ *     'name' => 'github',
+ *     'options' => [
+ *         'style' => 'brands',
+ *         'fill' => '#003865'
+ *     ]
  * ]);
  *
  * echo IconWidget::widget([
- * 	'name' => 'font-awesome',
- * 	'options' => [
- * 		'class' => 'yourClass',
- * 		'style' => 'brands'
- * 	],
+ *     'name' => 'font-awesome',
+ *     'options' => [
+ *         'class' => 'yourClass',
+ *         'style' => 'brands'
+ *     ],
  * ]);
  * ```
  */
-class IconWidget4 extends \yii\bootstrap4\Widget {
-	/**
-	 * @var Defaults the default settings
-	 */
-	public static $defaults;
+class IconWidget4 extends \yii\bootstrap4\Widget
+{
+    /**
+     * @var Defaults the default settings
+     */
+    public static $defaults;
 
-	/**
-	 * @var string name of the icon
-	 */
-	public $name;
+    /**
+     * @var string name of the icon
+     */
+    public $name;
 
-	/**
-	 * @var array icon settings
-	 */
-	public $options = [];
+    /**
+     * @var array icon settings
+     */
+    public $options = [];
 
-	/**
-	 * Init.
-	 */
-	public function init(): void {
-		$defaults = ArrayHelper::toArray(static::$defaults);
-		static::$defaults = new Defaults($defaults);
-		parent::init();
-	}
+    /**
+     * Init.
+     */
+    public function init(): void
+    {
+        $defaults = ArrayHelper::toArray(static::$defaults);
+        static::$defaults = new Defaults($defaults);
+        parent::init();
+    }
 
-	/**
-	 * Construct.
-	 */
-	public function run(): string {
-		ArrayHelper::setValue($this->options, 'name', $this->name);
+    /**
+     * Construct.
+     */
+    public function run(): string
+    {
+        ArrayHelper::setValue($this->options, 'name', $this->name);
 
-		$svg = new Svg(static::$defaults);
-		return $svg->getSvg($this->options);
-	}
+        $svg = new Svg(static::$defaults);
+        return $svg->getSvg($this->options);
+    }
 }

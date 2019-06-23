@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://fontawesome.mr42.me/
  * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
@@ -36,33 +37,35 @@ use yii\helpers\ArrayHelper;
  *
  * *   `groupSize` string. Set to `sm` for small or `lg` for large
  */
-class Options extends config {
-	private $iconOptions = [
-		'name',
-		'style',
-		'append',
-		'class',
-		'height',
-		'fill',
-		'fixedWidth',
-		'groupSize',
-		'prefix',
-		'title',
-	];
+class Options extends config
+{
+    private $iconOptions = [
+        'name',
+        'style',
+        'append',
+        'class',
+        'height',
+        'fill',
+        'fixedWidth',
+        'groupSize',
+        'prefix',
+        'title',
+    ];
 
-	public function validate(?array $options): ?string {
-		$model = DynamicModel::validateData(
-			ArrayHelper::merge(array_fill_keys($this->iconOptions, null), $options ?? []),
-			[
-				[['name'], 'required'],
-				[['append', 'fixedWidth'], 'boolean'],
-				[['class', 'fill', 'prefix', 'title'], 'string'],
-				[['height'], 'integer', 'min' => 1],
-				[['groupSize'], 'in', 'range' => $this->validGroupSizes],
-				[['style'], 'in', 'range' => $this->validStyles],
-			]
-		);
+    public function validate(?array $options): ?string
+    {
+        $model = DynamicModel::validateData(
+            ArrayHelper::merge(array_fill_keys($this->iconOptions, null), $options ?? []),
+            [
+                [['name'], 'required'],
+                [['append', 'fixedWidth'], 'boolean'],
+                [['class', 'fill', 'prefix', 'title'], 'string'],
+                [['height'], 'integer', 'min' => 1],
+                [['groupSize'], 'in', 'range' => $this->validGroupSizes],
+                [['style'], 'in', 'range' => $this->validStyles],
+            ]
+        );
 
-		return $this->outputErrors($model);
-	}
+        return $this->outputErrors($model);
+    }
 }

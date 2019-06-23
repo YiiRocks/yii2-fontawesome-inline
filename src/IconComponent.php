@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://fontawesome.mr42.me/
  * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
@@ -43,79 +44,86 @@ use yii\helpers\ArrayHelper;
  * @method height(int $height)
  * @method title(string $title)
  */
-class IconComponent extends \yii\base\Component {
-	private $icon = [];
+class IconComponent extends \yii\base\Component
+{
+    private $icon = [];
 
-	/**
-	 * @var array overrides for the default settings
-	 */
-	public $config;
+    /**
+     * @var array overrides for the default settings
+     */
+    public $config;
 
-	/**
-	 * @var object the default settings
-	 */
-	public $defaults;
+    /**
+     * @var object the default settings
+     */
+    public $defaults;
 
-	/**
-	 * {@inheritdoc}
-	 * @param string $config configuration of the icon
-	 */
-	public function __construct($config = []) {
-		$this->defaults = new Defaults($config);
-	}
+    /**
+     * {@inheritdoc}
+     * @param string $config configuration of the icon
+     */
+    public function __construct($config = [])
+    {
+        $this->defaults = new Defaults($config);
+    }
 
-	/**
-	 * Magic function, sets icon properties.
-	 * @param mixed $name
-	 * @param mixed $value
-	 */
-	public function __call($name, $value): self {
-		$this->icon[$name] = $value[0];
-		return $this;
-	}
+    /**
+     * Magic function, sets icon properties.
+     * @param mixed $name
+     * @param mixed $value
+     */
+    public function __call($name, $value): self
+    {
+        $this->icon[$name] = $value[0];
+        return $this;
+    }
 
-	/**
-	 * Magic function, returns the SVG string.
-	 */
-	public function __toString(): string {
-		$svg = new Svg($this->defaults);
-		$svg->getSvg($this->icon);
-		$this->icon = [];
-		return $svg;
-	}
+    /**
+     * Magic function, returns the SVG string.
+     */
+    public function __toString(): string
+    {
+        $svg = new Svg($this->defaults);
+        $svg->getSvg($this->icon);
+        $this->icon = [];
+        return $svg;
+    }
 
-	/**
-	 * Sets the name and the style of the icon.
-	 */
-	public function name(string $name, ?string $style = null): self {
-		$this->icon['name'] = $name;
-		$this->icon['style'] = $style ?? $this->defaults->style;
-		return $this;
-	}
+    /**
+     * Sets the name and the style of the icon.
+     */
+    public function name(string $name, ?string $style = null): self
+    {
+        $this->icon['name'] = $name;
+        $this->icon['style'] = $style ?? $this->defaults->style;
+        return $this;
+    }
 
-	/**
-	 * Returns the ActiveField inputTemplate.
-	 */
-	public function activeFieldAddon(): string {
-		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
-		$groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
+    /**
+     * Returns the ActiveField inputTemplate.
+     */
+    public function activeFieldAddon(): string
+    {
+        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        $groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
 
-		$append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
-		$icon = $Html::activeFieldAddon($groupSize, $append);
-		return str_replace('{icon}', $this->activeFieldIcon(), $icon);
-	}
+        $append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
+        $icon = $Html::activeFieldAddon($groupSize, $append);
+        return str_replace('{icon}', $this->activeFieldIcon(), $icon);
+    }
 
-	/**
-	 * Returns the ActiveField Icon.
-	 */
-	public function activeFieldIcon(): string {
-		$Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
-		if (!isset($this->icon['fixedWidth'])) {
-			ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
-		}
+    /**
+     * Returns the ActiveField Icon.
+     */
+    public function activeFieldIcon(): string
+    {
+        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        if (!isset($this->icon['fixedWidth'])) {
+            ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
+        }
 
-		$append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
-		$icon = $Html::activeFieldIcon($append);
-		return str_replace('{icon}', $this, $icon);
-	}
+        $append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
+        $icon = $Html::activeFieldIcon($append);
+        return str_replace('{icon}', $this, $icon);
+    }
 }
