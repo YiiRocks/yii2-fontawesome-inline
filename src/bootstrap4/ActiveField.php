@@ -13,8 +13,8 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
-*
-* It is possible to use the icons in forms as described on the Bootstrap [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
+* Provides an easy way to use icons in forms are described on the Boostrap
+* [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
 *
 * ## Automatic
 *
@@ -47,7 +47,7 @@ use yii\helpers\ArrayHelper;
 *
 * ## Manual
 *
-* For `$icon` you can use any earlier described usage method.
+* For `$icon` you can use [[Icon]] or [[IconComponent]].
 *
 * ```php
 * $form = ActiveForm::begin();
@@ -78,8 +78,6 @@ use yii\helpers\ArrayHelper;
 *
 * ActiveForm::end();
 * ```
-*
-* Please see [[\thoulah\fontawesome\config\Options]] for more information.
  */
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
@@ -89,9 +87,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     public $icon;
 
     /**
-     * Rendering our field
+     * Renders the whole field.
+     * @param string|callable $content the content within the field container.
+     * @return string the rendering result.
      */
-    public function render($content = null)
+    public function render($content = null): string
     {
         if (!empty($this->icon)) {
             if (is_string($this->icon)) {
@@ -112,6 +112,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * Tries to find component id. If that cannot be found we fall be to running as class.
+     * @return string The icon
      */
     private function callComponentOrClass(): string
     {
@@ -128,6 +129,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * We run as class.
+     * @return string The icon
      */
     private function runAsClass(): string
     {
@@ -143,6 +145,8 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * We run as component.
+     * @param IconComponent $icon
+     * @return string The icon
      */
     private function runAsComponent(IconComponent $icon): string
     {

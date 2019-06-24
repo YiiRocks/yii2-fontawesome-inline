@@ -11,7 +11,7 @@ use yii\base\DynamicModel;
 use yii\helpers\ArrayHelper;
 
 /**
- * ## Icon Options.
+ * Icon Options.
  *
  * *   `name` string. Name of the icon, picked from [Icons](https://fontawesome.com/icons).
  *
@@ -29,7 +29,7 @@ use yii\helpers\ArrayHelper;
  *
  * *   `title` string. Sets a title to the SVG output.
  *
- * ## ActiveForm Specific Options
+ * ActiveForm Specific Options
  *
  * *   `append` bool. Whether to prepend or append the `input-group`
  *
@@ -52,6 +52,11 @@ class Options extends config
         'title',
     ];
 
+    /**
+     * Validates the options
+     * @param array|null $options Options
+     * @return string|null Validation errors
+     */
     public function validate(?array $options): ?string
     {
         $model = DynamicModel::validateData(
@@ -66,6 +71,6 @@ class Options extends config
             ]
         );
 
-        return $this->outputErrors($model);
+        return $this->errorSummary($model);
     }
 }

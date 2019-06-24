@@ -8,23 +8,22 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * IconComponent provides an easy way to access Font Awesome icons throughout your project. This
- * allows you to override default settings once instead of per usage.
+ * IconComponent provides an easy way to access Font Awesome icons throughout your project.
+ * This allows you to override default settings once instead of per usage.
  *
  * Add `IconComponent` as component to your Yii config file:
  * ```php
  * 'components' => [
- * 	'fontawesome' => [
- * 		'class' => thoulah\fontawesome\IconComponent::class,
- * //		'config' => [
- * //			'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
- * //			'style' => 'regular',
- * //		],
- * 	]
+ *     'fontawesome' => [
+ *         'class' => thoulah\fontawesome\IconComponent::class,
+ * //      'config' => [
+ * //          'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
+ * //          'style' => 'regular',
+ * //      ],
+ *     ]
  * ]
  * ```
  *
@@ -60,17 +59,17 @@ class IconComponent extends \yii\base\Component
 
     /**
      * {@inheritdoc}
-     * @param string $config configuration of the icon
+     * @param array>|null $config configuration of the icon
      */
-    public function __construct($config = [])
+    public function __construct(array $config = [])
     {
         $this->defaults = new Defaults($config);
     }
 
     /**
      * Magic function, sets icon properties.
-     * @param mixed $name
-     * @param mixed $value
+     * @param string $name name of the property
+     * @param array $value property value
      */
     public function __call($name, $value): self
     {
@@ -91,6 +90,9 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Sets the name and the style of the icon.
+     * @param string $name name of the icon
+     * @param string|null $style name of the icon
+     * @return self values
      */
     public function name(string $name, ?string $style = null): self
     {
@@ -101,6 +103,7 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Returns the ActiveField inputTemplate.
+     * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(): string
     {
@@ -114,6 +117,7 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Returns the ActiveField Icon.
+     * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(): string
     {

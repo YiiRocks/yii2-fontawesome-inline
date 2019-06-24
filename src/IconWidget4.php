@@ -11,7 +11,7 @@ use thoulah\fontawesome\config\Defaults;
 use yii\helpers\ArrayHelper;
 
 /**
- * IconWidget provides an easy way to access Font Awesome icons using Widget.
+ * Provides an easy way to access icons as a widget.
  *
  * ```php
  * use thoulah\fontawesome\IconWidget4 as IconWidget;
@@ -52,7 +52,7 @@ class IconWidget4 extends \yii\bootstrap4\Widget
     public $options = [];
 
     /**
-     * Init.
+     * Initializes the object.
      */
     public function init(): void
     {
@@ -62,7 +62,8 @@ class IconWidget4 extends \yii\bootstrap4\Widget
     }
 
     /**
-     * Construct.
+     * Executes the widget.
+     * @return string The icon
      */
     public function run(): string
     {

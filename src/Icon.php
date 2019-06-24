@@ -11,7 +11,7 @@ use thoulah\fontawesome\config\Defaults;
 use yii\helpers\ArrayHelper;
 
 /**
-* # Usage as a Class
+* Provides an easy way to access icons.
 *
 * ```php
 * $icon = new \thoulah\fontawesome\Icon();
@@ -19,13 +19,11 @@ use yii\helpers\ArrayHelper;
 * echo $icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
 * echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
 * ```
-*
-* Please see [Options](options.md) for more information.
  */
-class Icon extends \yii\web\View
+class Icon
 {
     /**
-     * @var object default settings
+     * @var Defaults default settings
      */
     public $defaults;
 
@@ -34,14 +32,14 @@ class Icon extends \yii\web\View
      */
     public function __construct()
     {
-        parent::__construct();
         $this->defaults = new Defaults();
     }
 
     /**
      * Outputs the SVG string.
      * @param string $name Name of the icon
-     * @param array $options Optional options for the icon
+     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the icon
+     * @return string The icon
      */
     public function show(string $name, array $options = []): string
     {
@@ -54,8 +52,8 @@ class Icon extends \yii\web\View
     /**
      * Returns the ActiveField inputTemplate.
      * @param string $name Name of the icon
-     * @param array $options Optional options for the field and the icon
-     * @return string ActiveField icon with proper code
+     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the field and the icon
+     * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, array $options = []): string
     {
@@ -70,7 +68,8 @@ class Icon extends \yii\web\View
     /**
      * Returns the ActiveField Icon.
      * @param string $name Name of the icon
-     * @param array $options Optional options for the field and the icon
+     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the field and the icon
+     * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(string $name, array $options = []): string
     {

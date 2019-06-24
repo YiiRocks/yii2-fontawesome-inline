@@ -23,6 +23,6 @@ class FontAwesomeAsset extends AssetBundle
      * @var array CSS files to load
      */
     public $css = [
-        'svg-with-js' . (YII_DEBUG ? '' : '.min') . '.css',
+        'svg-with-js.min.css'
     ];
 }

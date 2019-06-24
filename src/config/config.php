@@ -10,14 +10,19 @@ namespace thoulah\fontawesome\config;
 use yii\base\DynamicModel;
 use yii\helpers\Html;
 
+/**
+ * Sets default opions
+ * @return array Defaults default values
+ */
 class config
 {
     protected $validBootstrap = ['bootstrap4'];
     protected $validGroupSizes = ['sm', 'md', 'lg'];
     protected $validStyles = ['solid', 'regular', 'light', 'brands'];
 
-    /*
-     *	Construct
+    /**
+     * Construct
+     * @param array $options Options
      */
     public function __construct(array $options = null)
     {
@@ -30,7 +35,12 @@ class config
         return $this;
     }
 
-    protected function outputErrors(DynamicModel $model): ?string
+    /**
+     * Checks if validation returned errors and returns the errors
+     * @param DynamicModel $model Validation model
+     * @return string|null Validation errors
+     */
+    protected function errorSummary(DynamicModel $model): ?string
     {
         return ($model->hasErrors())
             ? Html::errorSummary($model)
