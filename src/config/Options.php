@@ -39,7 +39,10 @@ use yii\helpers\ArrayHelper;
  */
 class Options extends config
 {
-    private $iconOptions = [
+    /**
+     * @var array Valid options
+     */
+    private $_iconOptions = [
         'name',
         'style',
         'append',
@@ -60,7 +63,7 @@ class Options extends config
     public function validate(?array $options): ?string
     {
         $model = DynamicModel::validateData(
-            ArrayHelper::merge(array_fill_keys($this->iconOptions, null), $options ?? []),
+            ArrayHelper::merge(array_fill_keys($this->_iconOptions, null), $options ?? []),
             [
                 [['name'], 'required'],
                 [['append', 'fixedWidth'], 'boolean'],

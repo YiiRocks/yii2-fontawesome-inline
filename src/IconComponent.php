@@ -107,7 +107,7 @@ class IconComponent extends \yii\base\Component
      */
     public function activeFieldAddon(): string
     {
-        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
 
         $append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
@@ -121,7 +121,7 @@ class IconComponent extends \yii\base\Component
      */
     public function activeFieldIcon(): string
     {
-        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         if (!isset($this->icon['fixedWidth'])) {
             ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
         }

@@ -12,19 +12,20 @@ use yii\helpers\Html;
 
 /**
  * Sets default opions
- * @return array Defaults default values
+ *
+ * @return self Defaults default values
  */
 class config
 {
-    protected $validBootstrap = ['bootstrap4'];
     protected $validGroupSizes = ['sm', 'md', 'lg'];
     protected $validStyles = ['solid', 'regular', 'light', 'brands'];
 
     /**
      * Construct
-     * @param array $options Options
+     * @param array|null $options Options
+     * @return self $this default values
      */
-    public function __construct(array $options = null)
+    public function __construct(?array $options = null)
     {
         if ($options !== null) {
             foreach ($options as $key => $value) {

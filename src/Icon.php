@@ -11,14 +11,14 @@ use thoulah\fontawesome\config\Defaults;
 use yii\helpers\ArrayHelper;
 
 /**
-* Provides an easy way to access icons.
-*
-* ```php
-* $icon = new \thoulah\fontawesome\Icon();
-* echo $icon->show('at');
-* echo $icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
-* echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
-* ```
+ * Provides an easy way to access icons.
+ *
+ * ```php
+ * $icon = new \thoulah\fontawesome\Icon();
+ * echo $icon->show('at');
+ * echo $icon->show('github', ['style' => 'brands', 'fill' => '#003865']);
+ * echo $icon->show('font-awesome', ['class' => 'yourClass', 'style' => 'brands']);
+ * ```
  */
 class Icon
 {
@@ -57,7 +57,7 @@ class Icon
      */
     public function activeFieldAddon(string $name, array $options = []): string
     {
-        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($options, 'groupSize', $this->defaults->groupSize);
 
         $append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
@@ -73,7 +73,7 @@ class Icon
      */
     public function activeFieldIcon(string $name, array $options = []): string
     {
-        $Html = "thoulah\\fontawesome\\{$this->defaults->bootstrap}\\Html";
+        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 
         $append = ArrayHelper::remove($options, 'append', $this->defaults->append);
         $icon = $Html::activeFieldIcon($append);

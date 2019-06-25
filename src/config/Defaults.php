@@ -12,11 +12,20 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Sets default opions
- * @return array Defaults default values
+ *
+ * @return self default values
  */
 class Defaults extends config
 {
-    private $defaults = [
+    /**
+     * @var array Valid namespaces of bootstrap versions
+     */
+    private $_validBootstrap = ['bootstrap4'];
+
+    /**
+     * @var array Valid defaults
+     */
+    private $_defaults = [
         'activeFormFixedWidth',
         'append',
         'bootstrap',
@@ -90,20 +99,6 @@ class Defaults extends config
     public $style = 'solid';
 
     /**
-     * Construct
-     */
-    public function __construct(array $options = null)
-    {
-        if ($options !== null) {
-            foreach ($options as $key => $value) {
-                $this->$key = $value;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Validate the defaults
      * @return string|null Validation errors
      */
@@ -112,9 +107,9 @@ class Defaults extends config
         $model = DynamicModel::validateData(
             ArrayHelper::toArray($this),
             [
-                [$this->defaults, 'required'],
+                [$this->_defaults, 'required'],
                 [['activeFormFixedWidth', 'append', 'fixedWidth', 'registerAssets'], 'boolean'],
-                [['bootstrap'], 'in', 'range' => $this->validBootstrap],
+                [['bootstrap'], 'in', 'range' => $this->_validBootstrap],
                 [['fill', 'fallbackIcon', 'fontAwesomeFolder', 'prefix'], 'string'],
                 [['groupSize'], 'in', 'range' => $this->validGroupSizes],
                 [['style'], 'in', 'range' => $this->validStyles],
