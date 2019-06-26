@@ -10,22 +10,22 @@ use thoulah\fontawesome\bootstrap4\ActiveForm;
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field1', [
-	'icon' => 'user',
+    'icon' => 'user',
 ]);
 
 echo $form->field($model, 'field2', [
-	'icon' => [
-		'name' => 'github',
-		'style' => 'brands',
-	],
+    'icon' => [
+        'name' => 'github',
+        'style' => 'brands',
+    ],
 ]);
 
 echo $form->field($model, 'field3', [
-	'icon' => [
-		'name' => 'github',
-		'style' => 'brands',
-		'append' => true,
-	],
+    'icon' => [
+        'name' => 'github',
+        'style' => 'brands',
+        'append' => true,
+    ],
 ]);
 
 ActiveForm::end();
@@ -39,7 +39,7 @@ For `$icon` you can use any earlier described usage method.
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field', [
-	'inputTemplate' => $icon->activeFieldAddon('user'),
+    'inputTemplate' => $icon->activeFieldAddon('user'),
 ]);
 
 ActiveForm::end();
@@ -49,7 +49,7 @@ ActiveForm::end();
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field', [
-	'inputTemplate' => '<div id="yourClass" class="float-right">YourText</div>'.$icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
+    'inputTemplate' => '<div id="yourClass" class="float-right">YourText</div>'.$icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
 ]);
 
 ActiveForm::end();
@@ -59,7 +59,7 @@ ActiveForm::end();
 $form = ActiveForm::begin();
 
 echo $form->field($model, 'field', [
-	'inputTemplate' => '<div class="input-group">YourText'.$icon->activeFieldIcon('font-awesome', ['style' => 'brands']).'{input}</div>',
+    'inputTemplate' => '<div class="input-group">YourText'.$icon->activeFieldIcon('font-awesome', ['style' => 'brands']).'{input}</div>',
 ]);
 
 ActiveForm::end();

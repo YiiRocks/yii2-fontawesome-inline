@@ -56,11 +56,20 @@ class Options extends config
     ];
 
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $options = [])
+    {
+        $allowedOptions = array_intersect_key($options, array_flip($this->_iconOptions));
+
+        return parent::__construct($allowedOptions);
+    }
+    /**
      * Validates the options
      * @param array|null $options Options
      * @return string|null Validation errors
      */
-    public function validate(?array $options): ?string
+    public function validate(array $options): ?string
     {
         $model = DynamicModel::validateData(
             ArrayHelper::merge(array_fill_keys($this->_iconOptions, null), $options ?? []),

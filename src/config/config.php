@@ -22,15 +22,13 @@ class config
 
     /**
      * Construct
-     * @param array|null $options Options
+     * @param array $options Options
      * @return self $this default values
      */
-    public function __construct(?array $options = null)
+    public function __construct(array $options)
     {
-        if ($options !== null) {
-            foreach ($options as $key => $value) {
-                $this->$key = $value;
-            }
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
         }
 
         return $this;

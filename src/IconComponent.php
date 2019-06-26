@@ -19,10 +19,8 @@ use yii\helpers\ArrayHelper;
  * 'components' => [
  *     'fontawesome' => [
  *         'class' => thoulah\fontawesome\IconComponent::class,
- * //      'config' => [
- * //          'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
- * //          'style' => 'regular',
- * //      ],
+ * //      'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
+ * //      'style' => 'regular',
  *     ]
  * ]
  * ```

@@ -29,10 +29,11 @@ class Icon
 
     /**
      * Construct.
+     * @param array>|null $config configuration of the icon
      */
-    public function __construct()
+    public function __construct(array $config = [])
     {
-        $this->defaults = new Defaults();
+        $this->defaults = new Defaults($config);
     }
 
     /**

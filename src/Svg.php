@@ -19,12 +19,12 @@ use yii\helpers\ArrayHelper;
 class Svg
 {
     /**
-     * @var string SVG file
+     * @var DOMDocument SVG file
      */
     private $_svg;
 
     /**
-     * @var string Extracted SVG element from [[$_svg]]
+     * @var \DOMElement Extracted SVG element from [[$_svg]]
      */
     private $_svgElement;
 

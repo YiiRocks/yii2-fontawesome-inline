@@ -5,13 +5,11 @@
 Add `fontawesome` as component to your Yii config file:
 ```php
 'components' => [
-	'fontawesome' => [
-		'class' => thoulah\fontawesome\IconComponent::class,
-//		'config' => [
-//			'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
-//			'style' => 'regular',
-//		],
-	]
+    'fontawesome' => [
+        'class' => thoulah\fontawesome\IconComponent::class,
+//      'fontAwesomeFolder' => '@npm/fontawesome-pro/svgs',
+//      'style' => 'regular',
+    ]
 ]
 ```
 

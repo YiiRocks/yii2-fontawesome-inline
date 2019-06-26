@@ -99,6 +99,16 @@ class Defaults extends config
     public $style = 'solid';
 
     /**
+     * {@inheritdoc}
+     */
+    public function __construct(array $defaults = [])
+    {
+        $allowedDefaults = array_intersect_key($defaults, array_flip($this->_defaults));
+
+        return parent::__construct($allowedDefaults);
+    }
+
+    /**
      * Validate the defaults
      * @return string|null Validation errors
      */
