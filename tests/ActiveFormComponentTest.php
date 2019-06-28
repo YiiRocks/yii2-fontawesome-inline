@@ -25,26 +25,6 @@ class ActiveFormComponentTest extends tests
         ]);
     }
 
-    public function testBasic(): void
-    {
-        ActiveForm::$counter = 0;
-        ob_start();
-        $model = new DynamicModel(['test']);
-        $form = ActiveForm::begin();
-        echo $form->field($model, 'test', [
-                'icon' => 'user',
-            ]);
-        ActiveForm::end();
-        $out = ob_get_clean();
-
-        $expected = <<<'html'
-<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa svg-inline--fa-w-14 svg-inline--fa-fw" aria-hidden="true" role="img"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z" fill="currentColor"/></svg></div></div><input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"></div>
-html;
-
-        $this->assertStringContainsString($expected, $out);
-        $this->assertStringNotContainsString('{icon}', $out);
-    }
-
     public function testActiveFieldAddon(): void
     {
         ActiveForm::$counter = 0;
@@ -91,6 +71,26 @@ html;
         $out = ob_get_clean();
 
         $this->assertStringContainsString('<input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"><div class="input-group-append">', $out);
+    }
+
+    public function testBasic(): void
+    {
+        ActiveForm::$counter = 0;
+        ob_start();
+        $model = new DynamicModel(['test']);
+        $form = ActiveForm::begin();
+        echo $form->field($model, 'test', [
+                'icon' => 'user',
+            ]);
+        ActiveForm::end();
+        $out = ob_get_clean();
+
+        $expected = <<<'html'
+<div class="input-group"><div class="input-group-prepend"><div class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa svg-inline--fa-w-14 svg-inline--fa-fw" aria-hidden="true" role="img"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z" fill="currentColor"/></svg></div></div><input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"></div>
+html;
+
+        $this->assertStringContainsString($expected, $out);
+        $this->assertStringNotContainsString('{icon}', $out);
     }
 
     public function testBrands(): void

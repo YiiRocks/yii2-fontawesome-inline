@@ -18,28 +18,6 @@ use yii\helpers\ArrayHelper;
 class Defaults extends config
 {
     /**
-     * @var array Valid namespaces of bootstrap versions
-     */
-    private $_validBootstrap = ['bootstrap4'];
-
-    /**
-     * @var array Valid defaults
-     */
-    private $_defaults = [
-        'activeFormFixedWidth',
-        'append',
-        'bootstrap',
-        'fallbackIcon',
-        'fill',
-        'fixedWidth',
-        'fontAwesomeFolder',
-        'groupSize',
-        'prefix',
-        'registerAssets',
-        'style',
-    ];
-
-    /**
      * @var bool ActiveForm specific option. Sets fixed width icons.
      * Set to `false` to have variable width icons. Overrules `fixedWidth`
      */
@@ -97,6 +75,28 @@ class Defaults extends config
      * Usable for Font Awesome Pro
      */
     public $style = 'solid';
+
+    /**
+     * @var array Valid defaults
+     */
+    private $_defaults = [
+        'activeFormFixedWidth',
+        'append',
+        'bootstrap',
+        'fallbackIcon',
+        'fill',
+        'fixedWidth',
+        'fontAwesomeFolder',
+        'groupSize',
+        'prefix',
+        'registerAssets',
+        'style',
+    ];
+
+    /**
+     * @var array Valid namespaces of bootstrap versions
+     */
+    private $_validBootstrap = ['bootstrap4'];
 
     /**
      * {@inheritdoc}

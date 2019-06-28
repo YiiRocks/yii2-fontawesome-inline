@@ -19,24 +19,29 @@ use yii\helpers\ArrayHelper;
 class Svg
 {
     /**
-     * @var DOMDocument SVG file
-     */
-    private $_svg;
-
-    /**
-     * @var \DOMElement Extracted SVG element from [[$_svg]]
-     */
-    private $_svgElement;
-
-    /**
      * @var Defaults default options
      */
     private $_defaults;
 
     /**
-     * @var array Individual icon options
+     * @var bool `true` if filename was given manually
+     */
+    private $_isCustomFile = false;
+
+    /**
+     * @var array individual icon options
      */
     private $_options;
+
+    /**
+     * @var DOMDocument SVG file
+     */
+    private $_svg;
+
+    /**
+     * @var \DOMElement extracted SVG element from [[$_svg]]
+     */
+    private $_svgElement;
 
     /**
      * @var string Result op [[]] and [[]] validation
@@ -101,23 +106,18 @@ class Svg
         $style = ArrayHelper::remove($this->_options, 'style', $this->_defaults->style);
         $name = ArrayHelper::remove($this->_options, 'name');
 
-        $fileName = "{$fontAwesomeFolder}/{$style}/{$name}.svg";
-        if (!is_file(Yii::getAlias($fileName))) {
+        $fileName = (is_file(Yii::getAlias($name)))
+            ? $name
+            : "{$fontAwesomeFolder}/{$style}/{$name}.svg";
+
+        if ($fileName === $name) {
+            $this->_isCustomFile = true;
+        } elseif (!is_file(Yii::getAlias($fileName))) {
             $fileName = $this->_defaults->fallbackIcon;
         }
 
         $this->_svg->load(Yii::getAlias($fileName));
         $this->_svgElement = $this->_svg->getElementsByTagName('svg')->item(0);
-    }
-
-    /**
-     * Sets the title.
-     */
-    private function setTitle(): void
-    {
-        if ($title = ArrayHelper::remove($this->_options, 'title')) {
-            $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
-        }
     }
 
     /**
@@ -158,12 +158,24 @@ class Svg
 
         $height = ArrayHelper::remove($this->_options, 'height', 0);
         if ($height === 0) {
-            $Html::addCssClass($this->_options, $this->_defaults->prefix);
-            $Html::addCssClass($this->_options, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+            if (!$this->_isCustomFile) {
+                $Html::addCssClass($this->_options, $this->_defaults->prefix);
+                $Html::addCssClass($this->_options, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+            }
             return;
         }
 
         ArrayHelper::setValue($this->_options, 'width', round($height * $svgWidth / $svgHeight));
         ArrayHelper::setValue($this->_options, 'height', $height);
+    }
+
+    /**
+     * Sets the title.
+     */
+    private function setTitle(): void
+    {
+        if ($title = ArrayHelper::remove($this->_options, 'title')) {
+            $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
+        }
     }
 }

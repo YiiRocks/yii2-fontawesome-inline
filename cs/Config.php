@@ -33,6 +33,9 @@ header;
                 'header' => $header,
                 'commentType' => 'PHPDoc',
             ],
+            'ordered_class_elements' => [
+                'sortAlgorithm' => 'alpha',
+            ],
         ]);
     }
 }

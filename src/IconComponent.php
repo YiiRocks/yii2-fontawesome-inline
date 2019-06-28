@@ -43,17 +43,20 @@ use yii\helpers\ArrayHelper;
  */
 class IconComponent extends \yii\base\Component
 {
-    private $icon = [];
-
     /**
      * @var array overrides for the default settings
      */
     public $config;
 
     /**
-     * @var object the default settings
+     * @var object default settings
      */
     public $defaults;
+
+    /**
+     * @var array icon options
+     */
+    private $icon = [];
 
     /**
      * {@inheritdoc}
@@ -87,19 +90,6 @@ class IconComponent extends \yii\base\Component
     }
 
     /**
-     * Sets the name and the style of the icon.
-     * @param string $name name of the icon
-     * @param string|null $style name of the icon
-     * @return self values
-     */
-    public function name(string $name, ?string $style = null): self
-    {
-        $this->icon['name'] = $name;
-        $this->icon['style'] = $style ?? $this->defaults->style;
-        return $this;
-    }
-
-    /**
      * Returns the ActiveField inputTemplate.
      * @return string ActiveField addon with icon and proper code
      */
@@ -127,5 +117,18 @@ class IconComponent extends \yii\base\Component
         $append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
         $icon = $Html::activeFieldIcon($append);
         return str_replace('{icon}', $this, $icon);
+    }
+
+    /**
+     * Sets the name and the style of the icon.
+     * @param string $name name of the icon, or filename
+     * @param string|null $style name of the icon
+     * @return self values
+     */
+    public function name(string $name, ?string $style = null): self
+    {
+        $this->icon['name'] = $name;
+        $this->icon['style'] = $style ?? $this->defaults->style;
+        return $this;
     }
 }

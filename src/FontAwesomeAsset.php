@@ -15,14 +15,14 @@ use yii\web\AssetBundle;
 class FontAwesomeAsset extends AssetBundle
 {
     /**
-     * @var string Path to Font Awesome CSS folder
-     */
-    public $sourcePath = '@vendor/fortawesome/font-awesome/css';
-
-    /**
      * @var array CSS files to load
      */
     public $css = [
         'svg-with-js.min.css'
     ];
+
+    /**
+     * @var string Path to Font Awesome CSS folder
+     */
+    public $sourcePath = '@vendor/fortawesome/font-awesome/css';
 }

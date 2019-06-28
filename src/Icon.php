@@ -37,20 +37,6 @@ class Icon
     }
 
     /**
-     * Outputs the SVG string.
-     * @param string $name Name of the icon
-     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the icon
-     * @return string The icon
-     */
-    public function show(string $name, array $options = []): string
-    {
-        ArrayHelper::setValue($options, 'name', $name);
-
-        $svg = new Svg($this->defaults);
-        return $svg->getSvg($options);
-    }
-
-    /**
      * Returns the ActiveField inputTemplate.
      * @param string $name Name of the icon
      * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the field and the icon
@@ -79,5 +65,19 @@ class Icon
         $append = ArrayHelper::remove($options, 'append', $this->defaults->append);
         $icon = $Html::activeFieldIcon($append);
         return str_replace('{icon}', $this->show($name, $options), $icon);
+    }
+
+    /**
+     * Outputs the SVG string.
+     * @param string $name Name of the icon, or filename
+     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the icon
+     * @return string The icon
+     */
+    public function show(string $name, array $options = []): string
+    {
+        ArrayHelper::setValue($options, 'name', $name);
+
+        $svg = new Svg($this->defaults);
+        return $svg->getSvg($options);
     }
 }
