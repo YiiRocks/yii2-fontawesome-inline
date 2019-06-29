@@ -125,7 +125,7 @@ class IconComponent extends \yii\base\Component
      * @param string|null $style name of the icon
      * @return self values
      */
-    public function name(string $name, ?string $style = null): self
+    public function name(string $name, string $style = null): self
     {
         $this->icon['name'] = $name;
         $this->icon['style'] = $style ?? $this->defaults->style;

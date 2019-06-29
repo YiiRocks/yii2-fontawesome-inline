@@ -108,7 +108,7 @@ class Svg
 
         $fileName = (is_file(Yii::getAlias($name)))
             ? $name
-            : "{$fontAwesomeFolder}/{$style}/{$name}.svg";
+            : implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
 
         if ($fileName === $name) {
             $this->_isCustomFile = true;
