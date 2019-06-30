@@ -1,23 +1,24 @@
 <?php
-
-/**
- * @link https://fontawesome.mr42.me/
- * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
- */
-
 namespace thoulah\fontawesome\config;
 
 use yii\base\DynamicModel;
 use yii\helpers\Html;
 
 /**
- * Sets default opions
+ * Sets default options
  *
  * @return self Defaults default values
  */
 class config
 {
+    /**
+     * @var array valid options of `groupSize`
+     */
     protected $validGroupSizes = ['sm', 'md', 'lg'];
+
+    /**
+     * @var array valid options of `style`
+     */
     protected $validStyles = ['solid', 'regular', 'light', 'brands'];
 
     /**

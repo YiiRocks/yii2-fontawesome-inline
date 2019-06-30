@@ -1,10 +1,4 @@
 <?php
-
-/**
- * @link https://fontawesome.mr42.me/
- * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
- */
-
 error_reporting(-1);
 
 define('YII_ENABLE_ERROR_HANDLER', false);

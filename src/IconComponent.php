@@ -1,10 +1,4 @@
 <?php
-
-/**
- * @link https://fontawesome.mr42.me/
- * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
- */
-
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
@@ -15,6 +9,7 @@ use yii\helpers\ArrayHelper;
  * This allows you to override default settings once instead of per usage.
  *
  * Add `IconComponent` as component to your Yii config file:
+ *
  * ```php
  * 'components' => [
  *     'fontawesome' => [
@@ -26,30 +21,25 @@ use yii\helpers\ArrayHelper;
  * ```
  *
  * Now you can globally insert an icon:
+ *
  * ```php
  * echo Yii::$app->fontawesome->name('at');
  * echo Yii::$app->fontawesome->name('github', 'brands')->fill->('#003865');
  * echo Yii::$app->fontawesome->name('font-awesome', 'brands')->class('yourClass');
  * ```
  *
- * @method name(string $name, ?string $style)
- * @method append(bool $append)
- * @method class(string $class)
- * @method fill(string $fill)
- * @method fixedWidth(bool $fixedWidth)
- * @method groupSize(string $groupSize)
- * @method height(int $height)
- * @method title(string $title)
+ * @method self append() append(bool $append) Whether to prepend or append the `input-group`
+ * @method self class() class(string $class) Additional custom classes
+ * @method self fill() fill(string $fill) Color of the icon
+ * @method self fixedWidth() fixedWidth(bool $fixedWidth) Whether or not to have fixed width icons
+ * @method self groupSize() groupSize(string $groupSize) Set to `sm` for small or `lg` for large
+ * @method self height() height(int $height) The height of the icon. This will override height and width classes
+ * @method self title() title(string $title) Sets a title to the SVG output
  */
 class IconComponent extends \yii\base\Component
 {
     /**
-     * @var array overrides for the default settings
-     */
-    public $config;
-
-    /**
-     * @var object default settings
+     * @var Defaults default settings
      */
     public $defaults;
 
@@ -59,18 +49,22 @@ class IconComponent extends \yii\base\Component
     private $icon = [];
 
     /**
-     * {@inheritdoc}
-     * @param array>|null $config configuration of the icon
+     * Construct
+     * @param array|null $overrides Overrides of the default settings
      */
-    public function __construct(array $config = [])
+    public function __construct(array $overrides = [])
     {
-        $this->defaults = new Defaults($config);
+        $this->defaults = new Defaults($overrides);
     }
 
     /**
      * Magic function, sets icon properties.
-     * @param string $name name of the property
+     *
+     * Supported options are listed in @method, but
+     * [no support](https://github.com/yiisoft/yii2-apidoc/issues/136) in the docs yet.
+     * @param string $name property name
      * @param array $value property value
+     * @return self updated object
      */
     public function __call($name, $value): self
     {
@@ -80,6 +74,7 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Magic function, returns the SVG string.
+     * @return string SVG data
      */
     public function __toString(): string
     {
@@ -120,10 +115,10 @@ class IconComponent extends \yii\base\Component
     }
 
     /**
-     * Sets the name and the style of the icon.
+     * Sets the name and style of the icon.
      * @param string $name name of the icon, or filename
-     * @param string|null $style name of the icon
-     * @return self values
+     * @param string|null $style style of the icon
+     * @return self component object
      */
     public function name(string $name, string $style = null): self
     {

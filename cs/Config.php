@@ -1,10 +1,4 @@
 <?php
-
-/**
- * @link https://fontawesome.mr42.me/
- * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
- */
-
 namespace thoulah\fontawesome\cs;
 
 /**
@@ -20,19 +14,10 @@ class Config extends \PhpCsFixer\Config
     {
         parent::__construct($name);
 
-        $header = <<<'header'
-@link https://fontawesome.mr42.me/
-@license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
-header;
-
         $this->setRiskyAllowed(true);
 
         $this->setRules([
             '@PSR2' => true,
-            'header_comment' => [
-                'header' => $header,
-                'commentType' => 'PHPDoc',
-            ],
             'ordered_class_elements' => [
                 'sortAlgorithm' => 'alpha',
             ],

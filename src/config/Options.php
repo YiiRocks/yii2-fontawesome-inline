@@ -1,10 +1,4 @@
 <?php
-
-/**
- * @link https://fontawesome.mr42.me/
- * @license https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE
- */
-
 namespace thoulah\fontawesome\config;
 
 use yii\base\DynamicModel;
@@ -21,7 +15,7 @@ use yii\helpers\ArrayHelper;
  *
  * *   `fill` string. Color of the icon
  *
- * *   `fixedWidth` bool. Set to `true` to have a fixed width icon
+ * *   `fixedWidth` bool. Whether or not to have fixed width icons
  *
  * *   `height` int. The height of the icon. This will override height and width classes.
  *
@@ -32,8 +26,6 @@ use yii\helpers\ArrayHelper;
  * ActiveForm Specific Options
  *
  * *   `append` bool. Whether to prepend or append the `input-group`
- *
- * *   `fixedWidth` bool. Set to `false` to have variable width icons
  *
  * *   `groupSize` string. Set to `sm` for small or `lg` for large
  */
@@ -64,6 +56,7 @@ class Options extends config
 
         return parent::__construct($allowedOptions);
     }
+
     /**
      * Validates the options
      * @param array|null $options Options
