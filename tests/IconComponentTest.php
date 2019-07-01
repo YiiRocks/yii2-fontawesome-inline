@@ -35,6 +35,12 @@ class IconComponentTest extends tests
         $this->assertStringContainsString('viewBox="0 0 496 512" class="mr42 icon icon-w-16" aria-hidden="true" role="img"', (string) Yii::$app->fontawesome->name('github', 'brands')->class('mr42'));
     }
 
+    public function testCss(): void
+    {
+        $this->assertStringContainsString('style="text-align: center;"', (string) Yii::$app->fontawesome->name('cookie')->css(['text-align' => 'center']));
+        $this->assertStringContainsString('style="text-align: center;"', (string) Yii::$app->fontawesome->name('github', 'brands')->css(['text-align' => 'center']));
+    }
+
     public function testFill(): void
     {
         $this->assertStringContainsString('fill="currentColor"/></svg>', (string) Yii::$app->fontawesome->name('cookie'));

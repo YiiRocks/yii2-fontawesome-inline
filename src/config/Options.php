@@ -7,27 +7,29 @@ use yii\helpers\ArrayHelper;
 /**
  * Icon Options.
  *
- * *   `name` string. Name of the icon, picked from [Icons](https://fontawesome.com/icons).
+ * *   `name` string Name of the icon, picked from [Icons](https://fontawesome.com/icons).
  *
- * *   `style` string. Style of the icon, must match `name`
+ * *   `style` string Style of the icon, must match `name`
  *
- * *   `class` string. Additional custom classes.
+ * *   `class` string Additional custom classes.
  *
- * *   `fill` string. Color of the icon
+ * *   `css` array Additional CSS attributes
  *
- * *   `fixedWidth` bool. Whether or not to have fixed width icons
+ * *   `fill` string Color of the icon
  *
- * *   `height` int. The height of the icon. This will override height and width classes.
+ * *   `fixedWidth` bool Whether or not to have fixed width icons
  *
- * *   `prefix` string. CSS class name, requires custom CSS if changed
+ * *   `height` int The height of the icon. This will override height and width classes.
  *
- * *   `title` string. Sets a title to the SVG output.
+ * *   `prefix` string CSS class name, requires custom CSS if changed
+ *
+ * *   `title` string Sets a title to the SVG output.
  *
  * ActiveForm Specific Options
  *
- * *   `append` bool. Whether to prepend or append the `input-group`
+ * *   `append` bool Whether to prepend or append the `input-group`
  *
- * *   `groupSize` string. Set to `sm` for small or `lg` for large
+ * *   `groupSize` string Set to `sm` for small or `lg` for large
  */
 class Options extends config
 {
@@ -35,6 +37,7 @@ class Options extends config
      * @var array Valid options
      */
     private $_iconOptions = [
+        'css',
         'name',
         'style',
         'append',

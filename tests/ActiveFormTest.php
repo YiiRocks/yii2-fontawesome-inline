@@ -116,6 +116,24 @@ html;
         $this->assertStringContainsString('class="yourClass svg-inline--fa svg-inline--fa-w-14 svg-inline--fa-fw"', $out);
     }
 
+    public function testCss(): void
+    {
+        ActiveForm::$counter = 0;
+        ob_start();
+        $model = new DynamicModel(['test']);
+        $form = ActiveForm::begin();
+        echo $form->field($model, 'test', [
+            'icon' => [
+                'name' => 'user',
+                'css' => ['text-align' => 'center'],
+            ],
+        ]);
+        ActiveForm::end();
+        $out = ob_get_clean();
+
+        $this->assertStringContainsString('style="text-align: center;"', $out);
+    }
+
     public function testFill(): void
     {
         ActiveForm::$counter = 0;

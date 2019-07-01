@@ -21,6 +21,13 @@ class IconWidget4Test extends tests
         $this->assertStringContainsString('viewBox="0 0 496 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" id="w1" aria-hidden="true" role="img"', IconWidget::widget(['name' => 'github', 'options' => ['class' => 'mr42', 'style' => 'brands']]));
     }
 
+    public function testCss(): void
+    {
+        IconWidget::$counter = 0;
+        $this->assertStringContainsString('style="text-align: center;"', IconWidget::widget(['name' => 'cookie', 'options' => ['css' => ['text-align' => 'center']]]));
+        $this->assertStringContainsString('style="text-align: center;"', IconWidget::widget(['name' => 'github', 'options' => ['css' => ['text-align' => 'center'], 'style' => 'brands']]));
+    }
+
     public function testFill(): void
     {
         $this->assertStringContainsString('fill="currentColor"/></svg>', IconWidget::widget(['name' => 'cookie']));

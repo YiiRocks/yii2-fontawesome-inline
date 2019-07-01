@@ -8,6 +8,8 @@
 
 *   `class` string. Additional custom classes.
 
+*   `css` array. Additional CSS attributes
+
 *   `fill` string. Color of the icon
 
 *   `fixedWidth` bool. Set to `true` to have a fixed width icon

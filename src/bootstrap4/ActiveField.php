@@ -81,6 +81,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     public $icon;
 
     /**
+     * @var array valid options to pass to [[Icon]]
+     */
+    private $_validOptions = ['append', 'css', 'class', 'fill', 'height', 'title'];
+
+    /**
      * Renders the whole field.
      * @param string|callable $content the content within the field container.
      * @return string the rendering result.
@@ -149,7 +154,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         $fixedWidth = ArrayHelper::remove($this->icon, 'fixedWidth', $icon->defaults->activeFormFixedWidth);
         $icon->fixedWidth($fixedWidth);
 
-        foreach (['append', 'class', 'fill', 'height', 'title'] as $property) {
+        foreach ($this->_validOptions as $property) {
             $prop = ArrayHelper::remove($this->icon, $property);
             if ($prop !== null) {
                 $icon->$property($prop);

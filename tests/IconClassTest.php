@@ -21,6 +21,13 @@ class IconClassTest extends tests
         $this->assertStringContainsString('viewBox="0 0 496 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('github', ['class' => 'mr42', 'style' => 'brands']));
     }
 
+    public function testCss(): void
+    {
+        $icon = new Icon();
+        $this->assertStringContainsString('style="text-align: center;"', $icon->show('cookie', ['css' => ['text-align' => 'center']]));
+        $this->assertStringContainsString('style="text-align: center;"', $icon->show('github', ['css' => ['text-align' => 'center'], 'style' => 'brands']));
+    }
+
     public function testFill(): void
     {
         $icon = new Icon();

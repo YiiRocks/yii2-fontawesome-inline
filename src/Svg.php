@@ -128,6 +128,11 @@ class Svg
             $Html::addCssClass($this->_options, $this->_defaults->prefix . '-fw');
         }
 
+        if ($css = ArrayHelper::remove($this->_options, 'css')) {
+            $style = $Html::cssStyleFromArray($css);
+            ArrayHelper::setValue($this->_options, 'style', $style);
+        }
+
         $fill = ArrayHelper::remove($this->_options, 'fill', $this->_defaults->fill);
         if (!empty($fill)) {
             foreach ($this->_svg->getElementsByTagName('path') as $path) {
