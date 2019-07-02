@@ -6,6 +6,7 @@ use thoulah\fontawesome\config\Defaults;
 use thoulah\fontawesome\config\Options;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * Helper class to load and manipulate SVG data
@@ -16,6 +17,11 @@ class Svg
      * @var Defaults default options
      */
     private $_defaults;
+
+    /**
+     * @var string value of the `fill` attribute on the SVG paths
+     */
+    private $_fillColor;
 
     /**
      * @var bool `true` if filename was given manually
@@ -80,13 +86,12 @@ class Svg
     {
         $this->_options = $options;
         $options = new Options();
-
         $this->_validation .= $options->validate($this->_options);
 
-        $this->load();
-        $this->setTitle();
-        $this->setSvgSize();
-        $this->setProperties();
+        $this->getFile();
+        $this->getMeasurement();
+        $this->getProperties();
+        $this->setAttributes();
         return $this;
     }
 
@@ -94,7 +99,7 @@ class Svg
      * Load Font Awesome SVG file. Falls back to default if not found.
      * @see Defaults::$fallbackIcon
      */
-    private function load(): void
+    private function getFile(): void
     {
         $fontAwesomeFolder = ArrayHelper::remove($this->_options, 'fontAwesomeFolder', $this->_defaults->fontAwesomeFolder);
         $style = ArrayHelper::remove($this->_options, 'style', $this->_defaults->style);
@@ -115,42 +120,10 @@ class Svg
     }
 
     /**
-     * Prepares and adds the SVG data.
+     * Prepares either the size class (default) or the width/height if height is given manually.
      */
-    private function setProperties(): void
+    private function getMeasurement(): void
     {
-        $Html = __NAMESPACE__ . "\\{$this->_defaults->bootstrap}\\Html";
-
-        ArrayHelper::setValue($this->_options, 'aria-hidden', 'true');
-        ArrayHelper::setValue($this->_options, 'role', 'img');
-
-        if (ArrayHelper::remove($this->_options, 'fixedWidth')) {
-            $Html::addCssClass($this->_options, $this->_defaults->prefix . '-fw');
-        }
-
-        if ($css = ArrayHelper::remove($this->_options, 'css')) {
-            $style = $Html::cssStyleFromArray($css);
-            ArrayHelper::setValue($this->_options, 'style', $style);
-        }
-
-        $fill = ArrayHelper::remove($this->_options, 'fill', $this->_defaults->fill);
-        if (!empty($fill)) {
-            foreach ($this->_svg->getElementsByTagName('path') as $path) {
-                $path->setAttribute('fill', $fill);
-            }
-        }
-
-        foreach ($this->_options as $key => $value) {
-            $this->_svgElement->setAttribute($key, $value);
-        }
-    }
-
-    /**
-     * Sets either the size class (default) or the width/height if height is given manually.
-     */
-    private function setSvgSize(): void
-    {
-        $Html = __NAMESPACE__ . "\\{$this->_defaults->bootstrap}\\Html";
         [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox'));
         $svgWidth = $xEnd - $xStart;
         $svgHeight = $yEnd - $yStart;
@@ -158,8 +131,8 @@ class Svg
         $height = ArrayHelper::remove($this->_options, 'height', 0);
         if ($height === 0) {
             if (!$this->_isCustomFile) {
-                $Html::addCssClass($this->_options, $this->_defaults->prefix);
-                $Html::addCssClass($this->_options, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+                Html::addCssClass($this->_options, $this->_defaults->prefix);
+                Html::addCssClass($this->_options, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
             }
             return;
         }
@@ -169,12 +142,42 @@ class Svg
     }
 
     /**
-     * Sets the title.
+     * Prepares the values to be set on the SVG.
      */
-    private function setTitle(): void
+    private function getProperties(): void
+    {
+        ArrayHelper::setValue($this->_options, 'aria-hidden', 'true');
+        ArrayHelper::setValue($this->_options, 'role', 'img');
+
+        if (ArrayHelper::remove($this->_options, 'fixedWidth')) {
+            Html::addCssClass($this->_options, $this->_defaults->prefix . '-fw');
+        }
+
+        if ($css = ArrayHelper::remove($this->_options, 'css')) {
+            $style = Html::cssStyleFromArray($css);
+            ArrayHelper::setValue($this->_options, 'style', $style);
+        }
+
+        $this->_fillColor = ArrayHelper::remove($this->_options, 'fill', $this->_defaults->fill);
+    }
+
+    /**
+     * Adds the properties to the SVG.
+     */
+    private function setAttributes(): void
     {
         if ($title = ArrayHelper::remove($this->_options, 'title')) {
             $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
+        }
+
+        foreach ($this->_options as $key => $value) {
+            $this->_svgElement->setAttribute($key, $value);
+        }
+
+        if (!empty($this->_fillColor)) {
+            foreach ($this->_svg->getElementsByTagName('path') as $path) {
+                $path->setAttribute('fill', $this->_fillColor);
+            }
         }
     }
 }
