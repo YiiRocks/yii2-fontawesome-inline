@@ -104,18 +104,15 @@ class Svg
         $fontAwesomeFolder = ArrayHelper::remove($this->_options, 'fontAwesomeFolder', $this->_defaults->fontAwesomeFolder);
         $style = ArrayHelper::remove($this->_options, 'style', $this->_defaults->style);
         $name = ArrayHelper::remove($this->_options, 'name');
+        $fileName = implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
 
-        $fileName = (is_file(Yii::getAlias($name)))
-            ? $name
-            : implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
-
-        if ($fileName === $name) {
+        libxml_use_internal_errors(true);
+        if ($this->_svg->load(Yii::getAlias($name))) {
             $this->_isCustomFile = true;
-        } elseif (!is_file(Yii::getAlias($fileName))) {
-            $fileName = $this->_defaults->fallbackIcon;
+        } elseif (!$this->_svg->load(Yii::getAlias($fileName))) {
+            $this->_svg->load(Yii::getAlias($this->_defaults->fallbackIcon));
         }
 
-        $this->_svg->load(Yii::getAlias($fileName));
         $this->_svgElement = $this->_svg->getElementsByTagName('svg')->item(0);
     }
 
@@ -128,8 +125,8 @@ class Svg
         $svgWidth = $xEnd - $xStart;
         $svgHeight = $yEnd - $yStart;
 
-        $height = ArrayHelper::remove($this->_options, 'height', 0);
-        if ($height === 0) {
+        $height = ArrayHelper::remove($this->_options, 'height');
+        if (!$height) {
             if (!$this->_isCustomFile) {
                 Html::addCssClass($this->_options, $this->_defaults->prefix);
                 Html::addCssClass($this->_options, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));

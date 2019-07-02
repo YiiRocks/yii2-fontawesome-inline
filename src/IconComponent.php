@@ -88,22 +88,23 @@ class IconComponent extends \yii\base\Component
      * Returns the ActiveField inputTemplate.
      * @return string ActiveField addon with icon and proper code
      */
-    public function activeFieldAddon(): string
+    public function activeFieldAddon(string $name, string $style = null): string
     {
         $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
 
         $append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
         $icon = $Html::activeFieldAddon($groupSize, $append);
-        return str_replace('{icon}', $this->activeFieldIcon(), $icon);
+        return str_replace('{icon}', $this->activeFieldIcon($name, $style), $icon);
     }
 
     /**
      * Returns the ActiveField Icon.
      * @return string ActiveField icon with proper code
      */
-    public function activeFieldIcon(): string
+    public function activeFieldIcon(string $name, string $style = null): string
     {
+        $this->name($name, $style);
         $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         if (!isset($this->icon['fixedWidth'])) {
             ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
