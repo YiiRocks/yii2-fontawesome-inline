@@ -19,7 +19,7 @@ class DOMDocument extends \DOMDocument
     /**
      * {@inheritdoc}
      */
-     public function load(string $source, int $options = null): mixed
+     public function load($source, $options = null)
      {
          $fileName = Yii::getAlias($source);
          $fileName = realpath($fileName);
