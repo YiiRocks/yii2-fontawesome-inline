@@ -3,6 +3,9 @@ namespace thoulah\fontawesome\dom;
 
 use Yii;
 
+/**
+ * {@inheritdoc}
+ */
 class DOMDocument extends \DOMDocument
 {
     /**
@@ -12,8 +15,6 @@ class DOMDocument extends \DOMDocument
     {
         libxml_use_internal_errors(true);
         parent::__construct($version, $encoding);
-
-        $this->registerNodeClass('DOMDocument', __CLASS__);
     }
 
     /**
@@ -22,8 +23,6 @@ class DOMDocument extends \DOMDocument
      public function load($source, $options = null)
      {
          $fileName = Yii::getAlias($source);
-         $fileName = realpath($fileName);
-         
-         return parent::load($fileName, $options);
+         return parent::load(realpath($fileName), $options);
      }
 }
