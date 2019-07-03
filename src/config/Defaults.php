@@ -93,7 +93,7 @@ class Defaults extends config
     private $_validBootstrap = ['bootstrap4'];
 
     /**
-     * {@inheritdoc}
+     * Creates a new Defaults object
      */
     public function __construct(array $defaults = [])
     {

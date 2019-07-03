@@ -49,7 +49,7 @@ class Svg
     private $_validation;
 
     /**
-     * Construct.
+     * Creates a new Svg object
      * @param Defaults $defaults default options
      */
     public function __construct(Defaults $defaults)

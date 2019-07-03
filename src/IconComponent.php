@@ -6,9 +6,9 @@ use yii\helpers\ArrayHelper;
 
 /**
  * IconComponent provides an easy way to access Font Awesome icons throughout your project.
- * This allows you to override default settings once instead of per usage.
+ * This allows you to override default settings once instead of per usage or file.
  *
- * Add `IconComponent` as component to your Yii config file:
+ * Add IconComponent as component to your Yii config file:
  *
  * ```php
  * 'components' => [
@@ -49,7 +49,7 @@ class IconComponent extends \yii\base\Component
     private $icon = [];
 
     /**
-     * Construct
+     * Creates a new IconComponent object
      * @param array|null $overrides Overrides of the default settings
      */
     public function __construct(array $overrides = [])
@@ -86,6 +86,8 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Returns the ActiveField inputTemplate.
+     * @param string $name name of the icon, or filename
+     * @param string|null $style style of the icon
      * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, string $style = null): string
@@ -100,6 +102,8 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Returns the ActiveField Icon.
+     * @param string $name name of the icon, or filename
+     * @param string|null $style style of the icon
      * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(string $name, string $style = null): string

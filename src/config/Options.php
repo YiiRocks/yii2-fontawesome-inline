@@ -30,6 +30,7 @@ use yii\helpers\ArrayHelper;
  * *   `append` bool Whether to prepend or append the `input-group`
  *
  * *   `groupSize` string Set to `sm` for small or `lg` for large
+ * @return self Option values
  */
 class Options extends config
 {
@@ -51,7 +52,7 @@ class Options extends config
     ];
 
     /**
-     * {@inheritdoc}
+     * Creates a new Options object
      */
     public function __construct(array $options = [])
     {

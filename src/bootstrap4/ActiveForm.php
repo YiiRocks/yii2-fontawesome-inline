@@ -2,7 +2,7 @@
 namespace thoulah\fontawesome\bootstrap4;
 
 /**
- * A Bootstrap 4 enhanced version of \yii\widgets\ActiveForm.
+ * A Font Awesome enhanced version of \yii\bootstrap4\ActiveForm.
  */
 class ActiveForm extends \yii\bootstrap4\ActiveForm
 {

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /**
  * Sets default options
  *
- * @return self Defaults default values
+ * @return self Option values
  */
 class config
 {
@@ -22,7 +22,7 @@ class config
     protected $validStyles = ['solid', 'regular', 'light', 'brands'];
 
     /**
-     * Construct
+     * Creates a new config object
      * @param array $options Options
      * @return self $this default values
      */

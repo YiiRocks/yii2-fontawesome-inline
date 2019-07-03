@@ -5,7 +5,7 @@ use thoulah\fontawesome\config\Defaults;
 use yii\helpers\ArrayHelper;
 
 /**
- * Provides an easy way to access icons.
+ * Provides a quick and easy way to access icons.
  *
  * ```php
  * $icon = new \thoulah\fontawesome\Icon();
@@ -22,7 +22,7 @@ class Icon
     public $defaults;
 
     /**
-     * Construct.
+     * Creates a new Icon object
      * @param array>|null $config configuration of the icon
      */
     public function __construct(array $config = [])
@@ -33,7 +33,7 @@ class Icon
     /**
      * Returns the ActiveField inputTemplate.
      * @param string $name Name of the icon
-     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the field and the icon
+     * @param array|null $options Options for the field and the icon
      * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, array $options = []): string
@@ -49,7 +49,7 @@ class Icon
     /**
      * Returns the ActiveField Icon.
      * @param string $name Name of the icon
-     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the field and the icon
+     * @param array|null $options Options for the field and the icon
      * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(string $name, array $options = []): string
@@ -64,7 +64,7 @@ class Icon
     /**
      * Outputs the SVG string.
      * @param string $name Name of the icon, or filename
-     * @param array|null $options [[\thoulah\fontawesome\config\Options]] for the icon
+     * @param array|null $options Options for the icon
      * @return string The icon
      */
     public function show(string $name, array $options = []): string
