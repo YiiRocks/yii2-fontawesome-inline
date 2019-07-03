@@ -1,9 +1,9 @@
 <?php
 namespace thoulah\fontawesome;
 
-use DOMDocument;
 use thoulah\fontawesome\config\Defaults;
 use thoulah\fontawesome\config\Options;
+use thoulah\fontawesome\dom\DOMDocument;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -106,11 +106,10 @@ class Svg
         $name = ArrayHelper::remove($this->_options, 'name');
         $fileName = implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
 
-        libxml_use_internal_errors(true);
-        if ($this->_svg->load(Yii::getAlias($name))) {
+        if ($this->_svg->load($name)) {
             $this->_isCustomFile = true;
-        } elseif (!$this->_svg->load(Yii::getAlias($fileName))) {
-            $this->_svg->load(Yii::getAlias($this->_defaults->fallbackIcon));
+        } elseif (!$this->_svg->load($fileName)) {
+            $this->_svg->load($this->_defaults->fallbackIcon);
         }
 
         $this->_svgElement = $this->_svg->getElementsByTagName('svg')->item(0);
