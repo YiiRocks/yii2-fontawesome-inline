@@ -23,7 +23,8 @@ class DOMDocument extends \DOMDocument
      public function load($source, $options = null)
      {
          $fileName = Yii::getAlias($source);
+		 $realFileName = realpath($fileName);
+echo $filename . ' - ' . var_dump($realFileName); //remove output before merge later
          return parent::load($fileName, $options);
-         return parent::load(realpath($fileName), $options);
      }
 }
