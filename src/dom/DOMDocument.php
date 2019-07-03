@@ -24,7 +24,7 @@ class DOMDocument extends \DOMDocument
      {
          $fileName = Yii::getAlias($source);
 		 $realFileName = realpath($fileName);
-echo $filename . ' - ' . var_dump($realFileName); //remove output before merge later
+echo $fileName . ' - ' . var_dump($realFileName); //remove output before merge later
          return parent::load($fileName, $options);
      }
 }
