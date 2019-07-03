@@ -22,8 +22,8 @@ class DOMDocument extends \DOMDocument
      */
      public function load($source, $options = null)
      {
-         return parent::load(source, $options);
          $fileName = Yii::getAlias($source);
+         return parent::load($fileName, $options);
          return parent::load(realpath($fileName), $options);
      }
 }
