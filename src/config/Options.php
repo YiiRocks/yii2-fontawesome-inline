@@ -21,6 +21,8 @@ use yii\helpers\ArrayHelper;
  *
  * *   `height` int The height of the icon. This will override height and width classes.
  *
+ * *   `id` string ID for the SVG tag
+ *
  * *   `prefix` string CSS class name, requires custom CSS if changed
  *
  * *   `title` string Sets a title to the SVG output.
@@ -38,17 +40,18 @@ class Options extends config
      * @var array Valid options
      */
     private $_iconOptions = [
-        'css',
-        'name',
-        'style',
         'append',
         'class',
+        'css',
         'height',
         'fill',
         'fixedWidth',
         'groupSize',
+        'id',
+        'name',
         'prefix',
         'title',
+        'style',
     ];
 
     /**
@@ -66,14 +69,16 @@ class Options extends config
      * @param array|null $options Options
      * @return string|null Validation errors
      */
-    public function validate(array $options): ?string
+    public function validate(): ?string
     {
+        $options = ArrayHelper::toArray($this);
+
         $model = DynamicModel::validateData(
             ArrayHelper::merge(array_fill_keys($this->_iconOptions, null), $options ?? []),
             [
                 [['name'], 'required'],
                 [['append', 'fixedWidth'], 'boolean'],
-                [['class', 'fill', 'prefix', 'title'], 'string'],
+                [['class', 'fill', 'id', 'name', 'prefix', 'title'], 'string'],
                 [['height'], 'integer', 'min' => 1],
                 [['groupSize'], 'in', 'range' => $this->validGroupSizes],
                 [['style'], 'in', 'range' => $this->validStyles],

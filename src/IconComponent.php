@@ -34,6 +34,7 @@ use yii\helpers\ArrayHelper;
  * @method self fixedWidth() fixedWidth(bool $fixedWidth) Whether or not to have fixed width icons
  * @method self groupSize() groupSize(string $groupSize) Set to `sm` for small or `lg` for large
  * @method self height() height(int $height) The height of the icon. This will override height and width classes
+ * @method self id() id(string $id) ID for the SVG tag
  * @method self title() title(string $title) Sets a title to the SVG output
  */
 class IconComponent extends \yii\base\Component

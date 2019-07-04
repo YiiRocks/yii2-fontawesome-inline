@@ -84,9 +84,9 @@ class Svg
      */
     public function getSvg(array $options): self
     {
-        $this->_options = $options;
-        $options = new Options();
-        $this->_validation .= $options->validate($this->_options);
+        $this->_options = new Options($options);
+        $this->_validation .= $this->_options->validate();
+        $this->_options = ArrayHelper::toArray($this->_options);
 
         $this->getFile();
         $this->getMeasurement();

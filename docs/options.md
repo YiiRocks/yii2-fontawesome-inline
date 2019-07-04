@@ -16,6 +16,8 @@
 
 *   `height` int. The height of the icon. This will override height and width classes.
 
+*   `id` string. ID for the SVG tag
+
 *   `prefix` string. CSS class name, requires custom CSS if changed
 
 *   `title` string. Sets a title to the SVG output
