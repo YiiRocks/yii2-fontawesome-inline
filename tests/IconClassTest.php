@@ -8,17 +8,17 @@ class IconClassTest extends tests
     public function testBasic(): void
     {
         $icon = new Icon();
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('cookie'));
-        $this->assertStringContainsString('viewBox="0 0 192 512" class="svg-inline--fa svg-inline--fa-w-6" aria-hidden="true" role="img"', $icon->show('ellipsis-v'));
-        $this->assertStringContainsString('viewBox="0 0 496 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('github', ['style' => 'brands']));
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('nonexistent'));
+        $this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('cookie'));
+        $this->assertStringContainsString('viewBox="0 0 192 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-6"', $icon->show('ellipsis-v'));
+        $this->assertStringContainsString('viewBox="0 0 496 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('github', ['style' => 'brands']));
+        $this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('nonexistent'));
     }
 
     public function testClass(): void
     {
         $icon = new Icon();
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('cookie', ['class' => 'mr42']));
-        $this->assertStringContainsString('viewBox="0 0 496 512" class="mr42 svg-inline--fa svg-inline--fa-w-16" aria-hidden="true" role="img"', $icon->show('github', ['class' => 'mr42', 'style' => 'brands']));
+        $this->assertStringContainsString('class="yourClass svg-inline--fa svg-inline--fa-w-16"', $icon->show('cookie', ['class' => 'yourClass']));
+        $this->assertStringContainsString('class="yourClass svg-inline--fa svg-inline--fa-w-16"', $icon->show('github', ['class' => 'yourClass', 'style' => 'brands']));
     }
 
     public function testCss(): void
@@ -56,18 +56,18 @@ html;
     public function testHeight(): void
     {
         $icon = new Icon();
-        $this->assertStringContainsString('viewBox="0 0 512 512" width="42" height="42" aria-hidden="true" role="img"', $icon->show('cookie', ['height' => 42]));
-        $this->assertStringContainsString('viewBox="0 0 192 512" width="16" height="42" aria-hidden="true" role="img"', $icon->show('ellipsis-v', ['height' => 42]));
+        $this->assertStringContainsString('width="42" height="42"', $icon->show('cookie', ['height' => 42]));
+        $this->assertStringContainsString('width="16" height="42"', $icon->show('ellipsis-v', ['height' => 42]));
     }
 
     public function testPrefix(): void
     {
         $icon = new Icon();
         $icon->defaults->prefix = 'icon';
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="icon icon-w-16" aria-hidden="true" role="img"', $icon->show('cookie'));
-        $this->assertStringContainsString('viewBox="0 0 192 512" class="icon icon-w-6" aria-hidden="true" role="img"', $icon->show('ellipsis-v'));
-        $this->assertStringContainsString('viewBox="0 0 496 512" class="icon icon-w-16" aria-hidden="true" role="img"', $icon->show('github', ['style' => 'brands']));
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="icon icon-w-16" aria-hidden="true" role="img"', $icon->show('nonexistent'));
+        $this->assertStringContainsString('class="icon icon-w-16"', $icon->show('cookie'));
+        $this->assertStringContainsString('class="icon icon-w-6"', $icon->show('ellipsis-v'));
+        $this->assertStringContainsString('class="icon icon-w-16"', $icon->show('github', ['style' => 'brands']));
+        $this->assertStringContainsString('class="icon icon-w-16"', $icon->show('nonexistent'));
     }
 
     public function testTitle(): void

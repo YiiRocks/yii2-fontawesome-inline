@@ -6,62 +6,78 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Icon Options.
- *
- * *   `name` string Name of the icon, picked from [Icons](https://fontawesome.com/icons).
- *
- * *   `style` string Style of the icon, must match `name`
- *
- * *   `class` string Additional custom classes.
- *
- * *   `css` array Additional CSS attributes
- *
- * *   `fill` string Color of the icon
- *
- * *   `fixedWidth` bool Whether or not to have fixed width icons
- *
- * *   `height` int The height of the icon. This will override height and width classes.
- *
- * *   `id` string ID for the SVG tag
- *
- * *   `prefix` string CSS class name, requires custom CSS if changed
- *
- * *   `title` string Sets a title to the SVG output.
- *
- * ActiveForm Specific Options
- *
- * *   `append` bool Whether to prepend or append the `input-group`
- *
- * *   `groupSize` string Set to `sm` for small or `lg` for large
  * @return self Option values
  */
 class Options extends config
 {
     /**
-     * @var array Valid options
+     * @var bool ActiveForm specific option. Whether to prepend or append the `input-group`
      */
-    private $_iconOptions = [
-        'append',
-        'class',
-        'css',
-        'height',
-        'fill',
-        'fixedWidth',
-        'groupSize',
-        'id',
-        'name',
-        'prefix',
-        'title',
-        'style',
-    ];
+    public $append = false;
+
+    /**
+    * @var string Additional custom classes
+    */
+    public $class;
+
+    /**
+    * @var array Additional CSS attributes
+    */
+    public $css;
+
+    /**
+    * @var string Color of the icon
+    */
+    public $fill;
+
+    /**
+    * @var bool Whether or not to have fixed width icons
+    */
+    public $fixedWidth;
+
+    /**
+    * @var string ActiveForm specific option. Set to `sm` for small or `lg` for large
+    */
+    public $groupSize;
+
+    /**
+    * @var int The height of the icon. This will override height and width classes.
+    */
+    public $height;
+
+    /**
+    * @var string ID for the SVG tag
+    */
+    public $id;
+
+    /**
+    * @var string Name of the icon, picked from [Icons](https://fontawesome.com/icons)
+    */
+    public $name;
+
+    /**
+    * @var string CSS class name, requires custom CSS if changed
+    */
+    public $prefix;
+
+    /**
+    * @var string Style of the icon, must match `name`
+    */
+    public $style;
+
+    /**
+    * @var string Sets a title to the SVG output
+    */
+    public $title;
 
     /**
      * Creates a new Options object
      */
     public function __construct(array $options = [])
     {
-        $allowedOptions = array_intersect_key($options, array_flip($this->_iconOptions));
+        $allowedOptions = array_intersect_key($options, get_class_vars(__CLASS__));
 
-        return parent::__construct($allowedOptions);
+        parent::__construct($allowedOptions);
     }
 
     /**
@@ -74,14 +90,14 @@ class Options extends config
         $options = ArrayHelper::toArray($this);
 
         $model = DynamicModel::validateData(
-            ArrayHelper::merge(array_fill_keys($this->_iconOptions, null), $options ?? []),
+            ArrayHelper::merge(get_class_vars(__CLASS__), $options),
             [
                 [['name'], 'required'],
                 [['append', 'fixedWidth'], 'boolean'],
                 [['class', 'fill', 'id', 'name', 'prefix', 'title'], 'string'],
                 [['height'], 'integer', 'min' => 1],
-                [['groupSize'], 'in', 'range' => $this->validGroupSizes],
-                [['style'], 'in', 'range' => $this->validStyles],
+                [['groupSize'], 'in', 'range' => self::VALID_GROUPSIZES],
+                [['style'], 'in', 'range' => self::VALID_STYLES],
             ]
         );
 

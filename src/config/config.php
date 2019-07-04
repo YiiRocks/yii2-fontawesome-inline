@@ -9,31 +9,23 @@ use yii\helpers\Html;
  *
  * @return self Option values
  */
-class config
+class config extends \yii\base\BaseObject
 {
+
+    /**
+     * @var array supported bootstrap versions
+     */
+    protected const VALID_BOOTSTRAP = ['bootstrap4'];
+
     /**
      * @var array valid options of `groupSize`
      */
-    protected $validGroupSizes = ['sm', 'md', 'lg'];
+    protected const VALID_GROUPSIZES = ['sm', 'md', 'lg'];
 
     /**
      * @var array valid options of `style`
      */
-    protected $validStyles = ['solid', 'regular', 'light', 'brands'];
-
-    /**
-     * Creates a new config object
-     * @param array $options Options
-     * @return self $this default values
-     */
-    public function __construct(array $options)
-    {
-        foreach ($options as $key => $value) {
-            $this->$key = $value;
-        }
-
-        return $this;
-    }
+    protected const VALID_STYLES = ['solid', 'regular', 'light', 'brands'];
 
     /**
      * Checks if validation returned errors and returns the errors

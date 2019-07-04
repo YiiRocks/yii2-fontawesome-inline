@@ -71,35 +71,13 @@ class Defaults extends config
     public $style = 'solid';
 
     /**
-     * @var array Valid defaults
-     */
-    private $_defaults = [
-        'activeFormFixedWidth',
-        'append',
-        'bootstrap',
-        'fallbackIcon',
-        'fill',
-        'fixedWidth',
-        'fontAwesomeFolder',
-        'groupSize',
-        'prefix',
-        'registerAssets',
-        'style',
-    ];
-
-    /**
-     * @var array Valid namespaces of bootstrap versions
-     */
-    private $_validBootstrap = ['bootstrap4'];
-
-    /**
      * Creates a new Defaults object
      */
     public function __construct(array $defaults = [])
     {
-        $allowedDefaults = array_intersect_key($defaults, array_flip($this->_defaults));
+        $allowedDefaults = array_intersect_key($defaults, get_class_vars(__CLASS__));
 
-        return parent::__construct($allowedDefaults);
+        parent::__construct($allowedDefaults);
     }
 
     /**
@@ -111,12 +89,11 @@ class Defaults extends config
         $model = DynamicModel::validateData(
             ArrayHelper::toArray($this),
             [
-                [$this->_defaults, 'required'],
                 [['activeFormFixedWidth', 'append', 'fixedWidth', 'registerAssets'], 'boolean'],
-                [['bootstrap'], 'in', 'range' => $this->_validBootstrap],
+                [['bootstrap'], 'in', 'range' => self::VALID_BOOTSTRAP],
                 [['fill', 'fallbackIcon', 'fontAwesomeFolder', 'prefix'], 'string'],
-                [['groupSize'], 'in', 'range' => $this->validGroupSizes],
-                [['style'], 'in', 'range' => $this->validStyles],
+                [['groupSize'], 'in', 'range' => self::VALID_GROUPSIZES],
+                [['style'], 'in', 'range' => self::VALID_STYLES],
             ]
         );
 
