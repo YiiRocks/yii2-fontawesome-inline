@@ -3,7 +3,7 @@
     "description": "Inline Font Awesome icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
     "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "component"],
-    "homepage" : "https://thoulah.mr42.me/fontawesome",
+    "homepage": "https://thoulah.mr42.me/fontawesome",
     "license": "MIT",
     "authors": [
         {
@@ -29,6 +29,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.15.0",
+        "phpmd/phpmd": "@stable",
         "phpunit/phpunit": ">=7.5",
         "yiisoft/yii2-apidoc": "~2.1.0"
     },
@@ -50,14 +51,16 @@
         }
     ],
     "scripts": {
-        "codeClean": "@php vendor/bin/php-cs-fixer fix",
-        "codeTest": "@php vendor/bin/phpunit --colors=always",
-        "codeDocs": "@php vendor/bin/apidoc api . ./docs2 --pageTitle='yii2-fontawesome-inline' --exclude='cs/,tests/,vendor/' --interactive=0"
+        "codeDocs": "@php vendor/bin/apidoc api . ./docs2 --pageTitle='yii2-fontawesome-inline' --exclude='cs/,tests/,vendor/' --interactive=0",
+        "php-cs-fixer": "@php vendor/bin/php-cs-fixer fix",
+        "phpmd": "@php vendor/bin/phpmd src/ text tests/data/phpmd_ruleset.xml",
+        "phpunit": "@php vendor/bin/phpunit --colors=always"
     },
     "scripts-descriptions": {
-        "codeClean": "Cleans to code with PHP Coding Standards Fixer.",
-        "codeTest": "Runs the PHPUnit programmer-oriented testing framework.",
-        "codeDocs": "Builds the documentation."
+        "codeDocs": "Builds the documentation.",
+        "php-cs-fixer": "Cleans to code with PHP Coding Standards Fixer.",
+        "phpmd": "Runs the PHP Mess Detector.",
+        "phpunit": "Runs the PHPUnit programmer-oriented testing framework."
     },
     "extra": {
         "branch-alias": {

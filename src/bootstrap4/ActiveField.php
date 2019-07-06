@@ -7,71 +7,73 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
-* Provides an easy way to use icons in forms are described on the Boostrap
-* [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
-*
-* ## Automatic
-*
-* ```php
-* use thoulah\fontawesome\bootstrap4\ActiveForm;
-*
-* $form = ActiveForm::begin();
-*
-* echo $form->field($model, 'field1', [
-*     'icon' => 'user',
-* ]);
-*
-* echo $form->field($model, 'field2', [
-*     'icon' => [
-*         'name' => 'github',
-*         'style' => 'brands',
-*     ],
-* ]);
-*
-* echo $form->field($model, 'field3', [
-*     'icon' => [
-*         'name' => 'github',
-*         'style' => 'brands',
-*         'append' => true,
-*     ],
-* ]);
-*
-* ActiveForm::end();
-* ```
-*
-* ## Manual
-*
-* For `$icon` you can use [[Icon]] or [[IconComponent]].
-*
-* ```php
-* $form = ActiveForm::begin();
-*
-* echo $form->field($model, 'field', [
-*     'inputTemplate' => $icon->activeFieldAddon('user'),
-* ]);
-*
-* ActiveForm::end();
-* ```
-*
-* ```php
-* $form = ActiveForm::begin();
-*
-* echo $form->field($model, 'field', [
-*     'inputTemplate' => '<div id="yourClass" class="float-right">YourText</div>'.$icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
-* ]);
-*
-* ActiveForm::end();
-* ```
-*
-* ```php
-* $form = ActiveForm::begin();
-*
-* echo $form->field($model, 'field', [
-*     'inputTemplate' => '<div class="input-group">YourText'.$icon->activeFieldIcon('font-awesome', ['style' => 'brands']).'{input}</div>',
-* ]);
-*
-* ActiveForm::end();
-* ```
+ * Provides an easy way to use icons in forms are described on the Boostrap
+ * [Input group](https://getbootstrap.com/docs/4.3/components/input-group/) page.
+ *
+ * ## Automatic
+ *
+ * ```php
+ * use thoulah\fontawesome\bootstrap4\ActiveForm;
+ *
+ * $form = ActiveForm::begin();
+ *
+ * echo $form->field($model, 'field1', [
+ *     'icon' => 'user',
+ * ]);
+ *
+ * echo $form->field($model, 'field2', [
+ *     'icon' => [
+ *         'name' => 'github',
+ *         'style' => 'brands',
+ *     ],
+ * ]);
+ *
+ * echo $form->field($model, 'field3', [
+ *     'icon' => [
+ *         'name' => 'github',
+ *         'style' => 'brands',
+ *         'append' => true,
+ *     ],
+ * ]);
+ *
+ * ActiveForm::end();
+ * ```
+ *
+ * ## Manual
+ *
+ * For `$icon` you can use [[Icon]] or [[IconComponent]].
+ *
+ * ```php
+ * $form = ActiveForm::begin();
+ *
+ * echo $form->field($model, 'field', [
+ *     'inputTemplate' => $icon->activeFieldAddon('user'),
+ * ]);
+ *
+ * ActiveForm::end();
+ * ```
+ *
+ * ```php
+ * $form = ActiveForm::begin();
+ *
+ * echo $form->field($model, 'field', [
+ *     'inputTemplate' => '<div id="yourClass" class="float-right">YourText</div>' .
+ *         $icon->activeFieldAddon('font-awesome', ['style' => 'brands']),
+ * ]);
+ *
+ * ActiveForm::end();
+ * ```
+ *
+ * ```php
+ * $form = ActiveForm::begin();
+ *
+ * echo $form->field($model, 'field', [
+ *     'inputTemplate' => '<div class="input-group">YourText' .
+ *         $icon->activeFieldIcon('font-awesome', ['style' => 'brands']).'{input}</div>',
+ * ]);
+ *
+ * ActiveForm::end();
+ * ```
  */
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
@@ -87,6 +89,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * Renders the whole field.
+     *
      * @param string|callable $content the content within the field container.
      * @return string the rendering result.
      */
@@ -111,6 +114,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * Tries to find component id. If that cannot be found we fall be to running as class.
+     *
      * @return string The icon
      */
     private function callComponentOrClass(): string
@@ -126,6 +130,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * We run as class.
+     *
      * @return string The icon
      */
     private function runAsClass(): string
@@ -142,6 +147,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
 
     /**
      * We run as component.
+     *
      * @param IconComponent $icon
      * @return string The icon
      */

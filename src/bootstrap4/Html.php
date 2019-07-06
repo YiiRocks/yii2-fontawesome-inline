@@ -7,7 +7,7 @@ namespace thoulah\fontawesome\bootstrap4;
 class Html extends \yii\bootstrap4\Html
 {
     /**
-     *  Returns the ActiveField inputTemplate.
+     * Returns the ActiveField inputTemplate.
      */
     public static function activeFieldAddon(?string $groupSize, ?bool $append): string
     {
@@ -20,7 +20,7 @@ class Html extends \yii\bootstrap4\Html
     }
 
     /**
-     *  Returns the ActiveField Icon.
+     * Returns the ActiveField Icon.
      */
     public static function activeFieldIcon(?bool $append): string
     {

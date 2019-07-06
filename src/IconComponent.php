@@ -51,6 +51,7 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Creates a new IconComponent object
+     *
      * @param array|null $overrides Overrides of the default settings
      */
     public function __construct(array $overrides = [])
@@ -63,6 +64,7 @@ class IconComponent extends \yii\base\Component
      *
      * Supported options are listed in @method, but
      * [no support](https://github.com/yiisoft/yii2-apidoc/issues/136) in the docs yet.
+     *
      * @param string $name property name
      * @param array $value property value
      * @return self updated object
@@ -75,6 +77,7 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Magic function, returns the SVG string.
+     *
      * @return string SVG data
      */
     public function __toString(): string
@@ -87,22 +90,24 @@ class IconComponent extends \yii\base\Component
 
     /**
      * Returns the ActiveField inputTemplate.
+     *
      * @param string $name name of the icon, or filename
      * @param string|null $style style of the icon
      * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, string $style = null): string
     {
-        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
 
         $append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
-        $icon = $Html::activeFieldAddon($groupSize, $append);
+        $icon = $html::activeFieldAddon($groupSize, $append);
         return str_replace('{icon}', $this->activeFieldIcon($name, $style), $icon);
     }
 
     /**
      * Returns the ActiveField Icon.
+     *
      * @param string $name name of the icon, or filename
      * @param string|null $style style of the icon
      * @return string ActiveField icon with proper code
@@ -110,18 +115,19 @@ class IconComponent extends \yii\base\Component
     public function activeFieldIcon(string $name, string $style = null): string
     {
         $this->name($name, $style);
-        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         if (!isset($this->icon['fixedWidth'])) {
             ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
         }
 
         $append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
-        $icon = $Html::activeFieldIcon($append);
+        $icon = $html::activeFieldIcon($append);
         return str_replace('{icon}', $this, $icon);
     }
 
     /**
      * Sets the name and style of the icon.
+     *
      * @param string $name name of the icon, or filename
      * @param string|null $style style of the icon
      * @return self component object

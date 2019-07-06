@@ -10,6 +10,7 @@ class DOMDocument extends \DOMDocument
 {
     /**
      * Creates a new DOMDocument object
+     *
      * @param string $version The version number of the document as part of the XML declaration.
      * @param string $encoding The encoding of the document as part of the XML declaration.
      */
@@ -21,6 +22,7 @@ class DOMDocument extends \DOMDocument
 
     /**
      * Load XML from a file
+     *
      * @param string $source The path to the XML document.
      * @param int $options [Bitwise OR](https://www.php.net/manual/en/language.operators.bitwise.php)
      * of the [libxml option constants](https://www.php.net/manual/en/libxml.constants.php).

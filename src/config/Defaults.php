@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
  *
  * @return self default values
  */
-class Defaults extends config
+class Defaults extends Config
 {
     /**
      * @var bool ActiveForm specific option. Sets fixed width icons.
@@ -72,6 +72,8 @@ class Defaults extends config
 
     /**
      * Creates a new Defaults object
+     *
+     * @param array $defaults overrides of the default settings
      */
     public function __construct(array $defaults = [])
     {
@@ -82,6 +84,7 @@ class Defaults extends config
 
     /**
      * Validate the defaults
+     *
      * @return string|null Validation errors
      */
     public function validate(): ?string

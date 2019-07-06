@@ -6,9 +6,10 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Icon Options.
+ *
  * @return self Option values
  */
-class Options extends config
+class Options extends Config
 {
     /**
      * @var bool ActiveForm specific option. Whether to prepend or append the `input-group`
@@ -16,62 +17,64 @@ class Options extends config
     public $append = false;
 
     /**
-    * @var string Additional custom classes
-    */
+     * @var string Additional custom classes
+     */
     public $class;
 
     /**
-    * @var array Additional CSS attributes
-    */
+     * @var array Additional CSS attributes
+     */
     public $css;
 
     /**
-    * @var string Color of the icon
-    */
+     * @var string Color of the icon
+     */
     public $fill;
 
     /**
-    * @var bool Whether or not to have fixed width icons
-    */
+     * @var bool Whether or not to have fixed width icons
+     */
     public $fixedWidth;
 
     /**
-    * @var string ActiveForm specific option. Set to `sm` for small or `lg` for large
-    */
+     * @var string ActiveForm specific option. Set to `sm` for small or `lg` for large
+     */
     public $groupSize;
 
     /**
-    * @var int The height of the icon. This will override height and width classes.
-    */
+     * @var int The height of the icon. This will override height and width classes.
+     */
     public $height;
 
     /**
-    * @var string ID for the SVG tag
-    */
+     * @var string ID for the SVG tag
+     */
     public $id;
 
     /**
-    * @var string Name of the icon, picked from [Icons](https://fontawesome.com/icons)
-    */
+     * @var string Name of the icon, picked from [Icons](https://fontawesome.com/icons)
+     */
     public $name;
 
     /**
-    * @var string CSS class name, requires custom CSS if changed
-    */
+     * @var string CSS class name, requires custom CSS if changed
+     */
     public $prefix;
 
     /**
-    * @var string Style of the icon, must match `name`
-    */
+     * @var string Style of the icon, must match `name`
+     */
     public $style;
 
     /**
-    * @var string Sets a title to the SVG output
-    */
+     * @var string Sets a title to the SVG output
+     */
     public $title;
 
     /**
      * Creates a new Options object
+     *
+     * @param array @options Options
      */
     public function __construct(array $options = [])
     {
@@ -82,6 +85,7 @@ class Options extends config
 
     /**
      * Validates the options
+     *
      * @param array|null $options Options
      * @return string|null Validation errors
      */

@@ -61,6 +61,7 @@ class Svg
 
     /**
      * Creates a new Svg object
+     *
      * @param Defaults $defaults default options
      */
     public function __construct(Defaults $defaults)
@@ -81,6 +82,7 @@ class Svg
 
     /**
      * Magic function, returns the SVG string.
+     *
      * @return string The SVG result
      */
     public function __toString(): string
@@ -90,6 +92,7 @@ class Svg
 
     /**
      * Load and process SVG data in correct order
+     *
      * @param array $options options
      * @return self Processed SVG data
      */
@@ -110,6 +113,7 @@ class Svg
 
     /**
      * Load Font Awesome SVG file. Falls back to default if not found.
+     *
      * @see Defaults::$fallbackIcon
      */
     private function getFile(): void
@@ -161,6 +165,7 @@ class Svg
         if (ObjectHelper::remove($this->_options, 'fixedWidth')) {
             Html::addCssClass($this->_class, $this->_defaults->prefix . '-fw');
         }
+
         if ($this->_class['class']) {
             $this->_svgProperties['class'] = $this->_class['class'];
         }
@@ -181,11 +186,8 @@ class Svg
             $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
         }
 
-        foreach ($this->_svgProperties as $key => $value) {
-            $this->_svgElement->setAttribute($key, $value);
-        }
-
-        foreach ($this->_options as $key => $value) {
+        $properties = array_merge(ArrayHelper::toArray($this->_options), ArrayHelper::toArray($this->_svgProperties));
+        foreach ($properties as $key => $value) {
             if (!empty($value)) {
                 $this->_svgElement->setAttribute($key, $value);
             }

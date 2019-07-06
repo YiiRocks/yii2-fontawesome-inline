@@ -9,7 +9,7 @@ use yii\helpers\Html;
  *
  * @return self Option values
  */
-class config extends \yii\base\BaseObject
+class Config extends \yii\base\BaseObject
 {
 
     /**
@@ -29,6 +29,7 @@ class config extends \yii\base\BaseObject
 
     /**
      * Checks if validation returned errors and returns the errors
+     *
      * @param DynamicModel $model Validation model
      * @return string|null Validation errors
      */

@@ -23,6 +23,7 @@ class Icon
 
     /**
      * Creates a new Icon object
+     *
      * @param array>|null $config configuration of the icon
      */
     public function __construct(array $config = [])
@@ -32,37 +33,40 @@ class Icon
 
     /**
      * Returns the ActiveField inputTemplate.
+     *
      * @param string $name Name of the icon
      * @param array|null $options Options for the field and the icon
      * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, array $options = []): string
     {
-        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($options, 'groupSize', $this->defaults->groupSize);
 
         $append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
-        $icon = $Html::activeFieldAddon($groupSize, $append);
+        $icon = $html::activeFieldAddon($groupSize, $append);
         return str_replace('{icon}', $this->activeFieldIcon($name, $options), $icon);
     }
 
     /**
      * Returns the ActiveField Icon.
+     *
      * @param string $name Name of the icon
      * @param array|null $options Options for the field and the icon
      * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(string $name, array $options = []): string
     {
-        $Html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
+        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
 
         $append = ArrayHelper::remove($options, 'append', $this->defaults->append);
-        $icon = $Html::activeFieldIcon($append);
+        $icon = $html::activeFieldIcon($append);
         return str_replace('{icon}', $this->show($name, $options), $icon);
     }
 
     /**
      * Outputs the SVG string.
+     *
      * @param string $name Name of the icon, or filename
      * @param array|null $options Options for the icon
      * @return string The icon

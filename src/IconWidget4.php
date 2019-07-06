@@ -57,6 +57,7 @@ class IconWidget4 extends \yii\bootstrap4\Widget
 
     /**
      * Executes the widget.
+     *
      * @return string The icon
      */
     public function run(): string
