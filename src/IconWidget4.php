@@ -2,6 +2,7 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
+use thoulah\fontawesome\helpers\Svg;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -30,19 +31,13 @@ use yii\helpers\ArrayHelper;
  */
 class IconWidget4 extends \yii\bootstrap4\Widget
 {
-    /**
-     * @var Defaults the default settings
-     */
+    /** @var Defaults the default settings */
     public static $defaults;
 
-    /**
-     * @var string name of the icon
-     */
+    /** @var string name of the icon */
     public $name;
 
-    /**
-     * @var array icon settings
-     */
+    /** @var array icon settings */
     public $options = [];
 
     /**

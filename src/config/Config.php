@@ -12,19 +12,13 @@ use yii\helpers\Html;
 class Config extends \yii\base\BaseObject
 {
 
-    /**
-     * @var array supported bootstrap versions
-     */
+    /** @var array supported bootstrap versions */
     protected const VALID_BOOTSTRAP = ['bootstrap4'];
 
-    /**
-     * @var array valid options of `groupSize`
-     */
+    /** @var array valid options of `groupSize` */
     protected const VALID_GROUPSIZES = ['sm', 'md', 'lg'];
 
-    /**
-     * @var array valid options of `style`
-     */
+    /** @var array valid options of `style` */
     protected const VALID_STYLES = ['solid', 'regular', 'light', 'brands'];
 
     /**

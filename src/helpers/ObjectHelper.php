@@ -4,7 +4,7 @@ namespace thoulah\fontawesome\helpers;
 /**
  * ObjectHelper provides additional object functionality.
  */
-class ObjectHelper extends \yii\base\BaseObject
+class ObjectHelper
 {
     /**
      * Removes an item from an object and returns the value. If the key does not

@@ -2,6 +2,7 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
+use thoulah\fontawesome\helpers\Svg;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -16,9 +17,7 @@ use yii\helpers\ArrayHelper;
  */
 class Icon
 {
-    /**
-     * @var Defaults default settings
-     */
+    /** @var Defaults default settings */
     public $defaults;
 
     /**

@@ -2,6 +2,7 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
+use thoulah\fontawesome\helpers\Svg;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -30,6 +31,7 @@ use yii\helpers\ArrayHelper;
  *
  * @method self append() append(bool $append) Whether to prepend or append the `input-group`
  * @method self class() class(string $class) Additional custom classes
+ * @method self css() css(array $css) Custom CSS style
  * @method self fill() fill(string $fill) Color of the icon
  * @method self fixedWidth() fixedWidth(bool $fixedWidth) Whether or not to have fixed width icons
  * @method self groupSize() groupSize(string $groupSize) Set to `sm` for small or `lg` for large
@@ -39,14 +41,10 @@ use yii\helpers\ArrayHelper;
  */
 class IconComponent extends \yii\base\Component
 {
-    /**
-     * @var Defaults default settings
-     */
+    /** @var Defaults default settings */
     public $defaults;
 
-    /**
-     * @var array icon options
-     */
+    /** @var array icon options */
     private $icon = [];
 
     /**

@@ -17,7 +17,6 @@ class Config extends \PhpCsFixer\Config
         $this->setRiskyAllowed(true);
 
         $this->setRules([
-            '@PSR2' => true,
             'ordered_class_elements' => [
                 'sortAlgorithm' => 'alpha',
             ],

@@ -17,29 +17,19 @@ class Defaults extends Config
      */
     public $activeFormFixedWidth = true;
 
-    /**
-     * @var bool ActiveForm specific option. Whether to prepend or append the `input-group`
-     */
+    /** @var bool ActiveForm specific option. Whether to prepend or append the `input-group` */
     public $append = false;
 
-    /**
-     * @var string Bootstrap namespace to use – Currently the only supported option
-     */
+    /** @var string Bootstrap namespace to use – Currently the only supported option */
     public $bootstrap = 'bootstrap4';
 
-    /**
-     * @var string Backup icon in case requested icon cannot be found
-     */
+    /** @var string Backup icon in case requested icon cannot be found */
     public $fallbackIcon = '@vendor/fortawesome/font-awesome/svgs/solid/question-circle.svg';
 
-    /**
-     * @var string Color of the icon. Set to empty string to disable this attribute
-     */
+    /** @var string Color of the icon. Set to empty string to disable this attribute */
     public $fill = 'currentColor';
 
-    /**
-     * @var bool Set to `true` to have fixed width icons
-     */
+    /** @var bool Set to `true` to have fixed width icons */
     public $fixedWidth = false;
 
     /**
@@ -48,19 +38,13 @@ class Defaults extends Config
      */
     public $fontAwesomeFolder = '@vendor/fortawesome/font-awesome/svgs';
 
-    /**
-     * @var string ActiveForm specific option. Set to `sm` for small or `lg` for large
-     */
+    /** @var string ActiveForm specific option. Set to `sm` for small or `lg` for large */
     public $groupSize = 'md';
 
-    /**
-     * @var string CSS class basename, requires custom CSS if changed
-     */
+    /** @var string CSS class basename, requires custom CSS if changed */
     public $prefix = 'svg-inline--fa';
 
-    /**
-     * @var bool Whether or not to register the Font Awesome assets.
-     */
+    /** @var bool Whether or not to register the Font Awesome assets. */
     public $registerAssets = true;
 
     /**

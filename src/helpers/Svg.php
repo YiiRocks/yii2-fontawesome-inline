@@ -1,10 +1,10 @@
 <?php
-namespace thoulah\fontawesome;
+namespace thoulah\fontawesome\helpers;
 
+use thoulah\fontawesome\assets\FontAwesomeAsset;
 use thoulah\fontawesome\config\Defaults;
 use thoulah\fontawesome\config\Options;
 use thoulah\fontawesome\dom\DOMDocument;
-use thoulah\fontawesome\helpers\ObjectHelper;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -14,49 +14,31 @@ use yii\helpers\Html;
  */
 class Svg
 {
-    /**
-     * @var array class
-     */
+    /** @var array class */
     private $_class;
 
-    /**
-     * @var Defaults default options
-     */
+    /** @var Defaults default options */
     private $_defaults;
 
-    /**
-     * @var string value of the `fill` attribute on the SVG paths
-     */
+    /** @var string value of the `fill` attribute on the SVG paths */
     private $_fillColor;
 
-    /**
-     * @var bool `true` if name resolves to a valid XML file
-     */
+    /** @var bool `true` if name resolves to a valid XML file */
     private $_isCustomFile = false;
 
-    /**
-     * @var Options individual icon options
-     */
+    /** @var Options individual icon options */
     private $_options;
 
-    /**
-     * @var DOMDocument SVG file
-     */
+    /** @var DOMDocument SVG file */
     private $_svg;
 
-    /**
-     * @var \DOMElement extracted SVG element from [[$_svg]]
-     */
+    /** @var \DOMElement extracted SVG element from [[$_svg]] */
     private $_svgElement;
 
-    /**
-     * @var array additional properties for the icon not set with Options
-     */
+    /** @var array additional properties for the icon not set with Options */
     private $_svgProperties;
 
-    /**
-     * @var string Result op [[]] and [[]] validation
-     */
+    /** @var string Result op [[]] and [[]] validation */
     private $_validation;
 
     /**

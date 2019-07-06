@@ -77,15 +77,11 @@ use yii\helpers\ArrayHelper;
  */
 class ActiveField extends \yii\bootstrap4\ActiveField
 {
-    /**
-     * @var array per-icon settings
-     */
+    /** @var array per-icon settings */
     public $icon;
 
-    /**
-     * @var array valid options to pass to [[Icon]]
-     */
-    private $_validOptions = ['append', 'css', 'class', 'fill', 'height', 'title'];
+    /** @var array valid options to pass on */
+    private $_validOptions = ['append', 'class', 'css', 'fill', 'height', 'id', 'title'];
 
     /**
      * Renders the whole field.
