@@ -28,9 +28,9 @@ class IconWidget4Test extends tests
 
     public function testFill(): void
     {
-        $this->assertStringContainsString('fill="currentColor"/></svg>', IconWidget::widget(['name' => 'cookie']));
+        $this->assertStringContainsString('fill="currentColor"', IconWidget::widget(['name' => 'cookie']));
         $this->assertStringNotContainsString('fill', IconWidget::widget(['name' => 'cookie', 'options' => ['fill' => '']]));
-        $this->assertStringContainsString('fill="#003865"/></svg>', IconWidget::widget(['name' => 'cookie', 'options' => ['fill' => '#003865']]));
+        $this->assertStringContainsString('fill="#003865"', IconWidget::widget(['name' => 'cookie', 'options' => ['fill' => '#003865']]));
     }
 
     public function testFixedWidth(): void

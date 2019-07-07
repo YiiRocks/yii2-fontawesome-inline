@@ -152,6 +152,10 @@ class Svg
         if ($css = ObjectHelper::remove($this->_options, 'css')) {
             $this->_svgProperties['style'] = Html::cssStyleFromArray($css);
         }
+
+        if ($fill = ObjectHelper::remove($this->_options, 'fill', $this->_defaults->fill)) {
+            $this->_svgProperties['fill'] = $fill;
+        }
     }
 
     /**
@@ -159,14 +163,9 @@ class Svg
      */
     private function setAttributes(): void
     {
-        if ($fill = ObjectHelper::remove($this->_options, 'fill', $this->_defaults->fill)) {
-            foreach ($this->_svg->getElementsByTagName('path') as $path) {
-                $path->setAttribute('fill', $fill);
-            }
-        }
-
         if ($title = ObjectHelper::remove($this->_options, 'title')) {
-            $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
+            $titleElement = $this->_svg->createElement('title', $title);
+            $this->_svgElement->insertBefore($titleElement, $this->_svgElement->firstChild);
         }
 
         foreach ($this->_options as $key => $value) {
