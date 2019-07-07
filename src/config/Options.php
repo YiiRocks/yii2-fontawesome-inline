@@ -55,7 +55,6 @@ class Options extends Config
     public function __construct(array $options = [])
     {
         $allowedOptions = array_intersect_key($options, get_class_vars(__CLASS__));
-
         parent::__construct($allowedOptions);
     }
 

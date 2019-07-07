@@ -62,7 +62,6 @@ class Defaults extends Config
     public function __construct(array $defaults = [])
     {
         $allowedDefaults = array_intersect_key($defaults, get_class_vars(__CLASS__));
-
         parent::__construct($allowedDefaults);
     }
 

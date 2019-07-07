@@ -20,9 +20,6 @@ class Svg
     /** @var Defaults default options */
     private $_defaults;
 
-    /** @var string value of the `fill` attribute on the SVG paths */
-    private $_fillColor;
-
     /** @var bool `true` if name resolves to a valid XML file */
     private $_isCustomFile = false;
 
@@ -155,8 +152,6 @@ class Svg
         if ($css = ObjectHelper::remove($this->_options, 'css')) {
             $this->_svgProperties['style'] = Html::cssStyleFromArray($css);
         }
-
-        $this->_fillColor = ObjectHelper::remove($this->_options, 'fill', $this->_defaults->fill);
     }
 
     /**
@@ -164,21 +159,24 @@ class Svg
      */
     private function setAttributes(): void
     {
+        if ($fill = ObjectHelper::remove($this->_options, 'fill', $this->_defaults->fill)) {
+            foreach ($this->_svg->getElementsByTagName('path') as $path) {
+                $path->setAttribute('fill', $fill);
+            }
+        }
+
         if ($title = ObjectHelper::remove($this->_options, 'title')) {
             $this->_svgElement->insertBefore($this->_svg->createElement('title', $title), $this->_svgElement->firstChild);
         }
 
-        $properties = array_merge(ArrayHelper::toArray($this->_options), ArrayHelper::toArray($this->_svgProperties));
-        foreach ($properties as $key => $value) {
+        foreach ($this->_options as $key => $value) {
             if (!empty($value)) {
                 $this->_svgElement->setAttribute($key, $value);
             }
         }
 
-        if (!empty($this->_fillColor)) {
-            foreach ($this->_svg->getElementsByTagName('path') as $path) {
-                $path->setAttribute('fill', $this->_fillColor);
-            }
+        foreach ($this->_svgProperties as $key => $value) {
+            $this->_svgElement->setAttribute($key, $value);
         }
     }
 }

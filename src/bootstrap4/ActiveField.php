@@ -3,6 +3,7 @@ namespace thoulah\fontawesome\bootstrap4;
 
 use thoulah\fontawesome\Icon;
 use thoulah\fontawesome\IconComponent;
+use thoulah\fontawesome\config\Options;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -80,9 +81,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /** @var array per-icon settings */
     public $icon;
 
-    /** @var array valid options to pass on */
-    private $_validOptions = ['append', 'class', 'css', 'fill', 'height', 'id', 'title'];
-
     /**
      * Renders the whole field.
      *
@@ -156,10 +154,11 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         $fixedWidth = ArrayHelper::remove($this->icon, 'fixedWidth', $icon->defaults->activeFormFixedWidth);
         $icon->fixedWidth($fixedWidth);
 
-        foreach ($this->_validOptions as $property) {
-            $prop = ArrayHelper::remove($this->icon, $property);
-            if ($prop !== null) {
-                $icon->$property($prop);
+        $properties = get_object_vars(new Options());
+        foreach (array_keys($properties) as $property) {
+            $value = ArrayHelper::remove($this->icon, $property);
+            if ($value !== null) {
+                $icon->$property($value);
             }
         }
 

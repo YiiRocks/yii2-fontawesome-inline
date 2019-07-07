@@ -8,10 +8,10 @@ class IconWidget4Test extends tests
     public function testBasic(): void
     {
         IconWidget::$counter = 0;
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" id="w0" aria-hidden="true" role="img"', IconWidget::widget(['name' => 'cookie']));
-        $this->assertStringContainsString('viewBox="0 0 192 512" class="svg-inline--fa svg-inline--fa-w-6" id="w1" aria-hidden="true" role="img"', IconWidget::widget(['name' => 'ellipsis-v']));
-        $this->assertStringContainsString('viewBox="0 0 496 512" class="svg-inline--fa svg-inline--fa-w-16" id="w2" aria-hidden="true" role="img"', IconWidget::widget(['name' => 'github', 'options' => ['style' => 'brands']]));
-        $this->assertStringContainsString('viewBox="0 0 512 512" class="svg-inline--fa svg-inline--fa-w-16" id="w3" aria-hidden="true" role="img"', IconWidget::widget(['name' => 'nonexistent']));
+        $this->assertStringContainsString('viewBox="0 0 512 512" id="w0" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', IconWidget::widget(['name' => 'cookie']));
+        $this->assertStringContainsString('viewBox="0 0 192 512" id="w1" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-6"', IconWidget::widget(['name' => 'ellipsis-v']));
+        $this->assertStringContainsString('viewBox="0 0 496 512" id="w2" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', IconWidget::widget(['name' => 'github', 'options' => ['style' => 'brands']]));
+        $this->assertStringContainsString('viewBox="0 0 512 512" id="w3" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', IconWidget::widget(['name' => 'nonexistent']));
     }
 
     public function testClass(): void
