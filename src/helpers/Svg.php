@@ -120,17 +120,13 @@ class Svg
         $svgWidth = $xEnd - $xStart;
         $svgHeight = $yEnd - $yStart;
 
-        $height = $this->_options->removeValue('height');
-        if (!$height) {
-            if (!$this->_isCustomFile) {
-                Html::addCssClass($this->_class, $this->_defaults->prefix);
-                Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
-            }
-            return;
+        if ($height = $this->_options->removeValue('height')) {
+            $this->_svgProperties['width'] = round($height * $svgWidth / $svgHeight);
+            $this->_svgProperties['height'] = $height;
+        } elseif (!$this->_isCustomFile) {
+            Html::addCssClass($this->_class, $this->_defaults->prefix);
+            Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
         }
-
-        $this->_svgProperties['width'] = round($height * $svgWidth / $svgHeight);
-        $this->_svgProperties['height'] = $height;
     }
 
     /**
@@ -168,14 +164,12 @@ class Svg
             $this->_svgElement->insertBefore($titleElement, $this->_svgElement->firstChild);
         }
 
-        foreach ($this->_options as $key => $value) {
-            if (!empty($value)) {
-                $this->_svgElement->setAttribute($key, $value);
+        foreach ([$this->_options, $this->_svgProperties] as $data) {
+            foreach ($data as $key => $value) {
+                if (!empty($value)) {
+                    $this->_svgElement->setAttribute($key, $value);
+                }
             }
-        }
-
-        foreach ($this->_svgProperties as $key => $value) {
-            $this->_svgElement->setAttribute($key, $value);
         }
     }
 }
