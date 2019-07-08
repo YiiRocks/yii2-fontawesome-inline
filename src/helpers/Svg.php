@@ -14,7 +14,7 @@ use yii\helpers\Html;
  */
 class Svg
 {
-    /** @var array class */
+    /** @var array class property */
     private $_class;
 
     /** @var Defaults default options */
@@ -35,7 +35,7 @@ class Svg
     /** @var array additional properties for the icon not set with Options */
     private $_svgProperties;
 
-    /** @var string Result op [[]] and [[]] validation */
+    /** @var string result of {@see Defaults} and {@see Options} validation */
     private $_validation;
 
     /**

@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
  *
  * @return self default values
  */
-class Defaults extends Config
+class Defaults extends BaseConfig
 {
     /**
      * @var bool ActiveForm specific option. Sets fixed width icons.

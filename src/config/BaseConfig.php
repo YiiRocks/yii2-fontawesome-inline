@@ -5,13 +5,10 @@ use yii\base\DynamicModel;
 use yii\helpers\Html;
 
 /**
- * Sets default options
- *
- * @return self Option values
+ * Base for configuration, meant to be extended
  */
-class Config extends \yii\base\BaseObject
+class BaseConfig extends \yii\base\BaseObject
 {
-
     /** @var array supported bootstrap versions */
     protected const VALID_BOOTSTRAP = ['bootstrap4'];
 

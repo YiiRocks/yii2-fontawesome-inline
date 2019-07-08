@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
  *
  * @return self Option values
  */
-class Options extends Config
+class Options extends BaseConfig
 {
     /** @var bool ActiveForm specific option. Whether to prepend or append the `input-group` */
     public $append = false;

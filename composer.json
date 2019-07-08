@@ -51,13 +51,11 @@
         }
     ],
     "scripts": {
-        "codeDocs": "@php vendor/bin/apidoc api . ./docs2 --pageTitle='yii2-fontawesome-inline' --exclude='cs/,tests/,vendor/' --interactive=0",
         "php-cs-fixer": "@php vendor/bin/php-cs-fixer fix",
         "phpmd": "@php vendor/bin/phpmd src/ text tests/data/phpmd_ruleset.xml",
         "phpunit": "@php vendor/bin/phpunit --colors=always"
     },
     "scripts-descriptions": {
-        "codeDocs": "Builds the documentation.",
         "php-cs-fixer": "Cleans to code with PHP Coding Standards Fixer.",
         "phpmd": "Runs the PHP Mess Detector.",
         "phpunit": "Runs the PHPUnit programmer-oriented testing framework."
