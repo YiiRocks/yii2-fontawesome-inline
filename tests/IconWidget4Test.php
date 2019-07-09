@@ -58,4 +58,10 @@ class IconWidget4Test extends tests
     {
         $this->assertStringContainsString('<title>Demo Title</title>', IconWidget::widget(['name' => 'cookie', 'options' => ['title' => 'Demo Title']]));
     }
+
+    public function testWidth(): void
+    {
+        $this->assertStringContainsString('width="42" height="42"', IconWidget::widget(['name' => 'cookie', 'options' => ['width' => 42]]));
+        $this->assertStringContainsString('width="42" height="112"', IconWidget::widget(['name' => 'ellipsis-v', 'options' => ['width' => 42]]));
+    }
 }

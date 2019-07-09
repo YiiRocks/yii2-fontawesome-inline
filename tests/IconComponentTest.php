@@ -82,4 +82,10 @@ html;
     {
         $this->assertStringContainsString('<title>Demo Title</title>', (string) Yii::$app->fontawesome->name('cookie')->title('Demo Title'));
     }
+
+    public function testWidth(): void
+    {
+        $this->assertStringContainsString('width="42" height="42"', (string) Yii::$app->fontawesome->name('cookie')->width(42));
+        $this->assertStringContainsString('width="42" height="112"', (string) Yii::$app->fontawesome->name('ellipsis-v')->width(42));
+    }
 }

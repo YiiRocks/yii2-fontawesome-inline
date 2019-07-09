@@ -75,4 +75,11 @@ html;
         $icon = new Icon();
         $this->assertStringContainsString('<title>Demo Title</title>', $icon->show('cookie', ['title' => 'Demo Title']));
     }
+
+    public function testWidth(): void
+    {
+        $icon = new Icon();
+        $this->assertStringContainsString('width="42" height="42"', $icon->show('cookie', ['width' => 42]));
+        $this->assertStringContainsString('width="42" height="112"', $icon->show('ellipsis-v', ['width' => 42]));
+    }
 }

@@ -116,16 +116,26 @@ class Svg
      */
     private function getMeasurement(): void
     {
-        [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox'));
-        $svgWidth = $xEnd - $xStart;
-        $svgHeight = $yEnd - $yStart;
+        if ($this->_svgElement->hasAttribute('width') && $this->_svgElement->hasAttribute('height')) {
+            $svgWidth = $this->_svgElement->getAttribute('width');
+            $svgHeight = $this->_svgElement->getAttribute('height');
+        } elseif ($this->_svgElement->hasAttribute('viewBox')) {
+            [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox'));
+            $svgWidth = $xEnd - $xStart;
+            $svgHeight = $yEnd - $yStart;
+        }
 
-        if ($height = $this->_options->removeValue('height')) {
-            $this->_svgProperties['width'] = round($height * $svgWidth / $svgHeight);
-            $this->_svgProperties['height'] = $height;
-        } elseif (!$this->_isCustomFile) {
-            Html::addCssClass($this->_class, $this->_defaults->prefix);
-            Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+        if (isset($svgWidth, $svgHeight)) {
+            $width = $this->_options->removeValue('width');
+            $height = $this->_options->removeValue('height');
+
+            if ($width || $height) {
+                $this->_svgProperties['width'] = $width ?? round($height * $svgWidth / $svgHeight);
+                $this->_svgProperties['height'] = $height ?? round($width * $svgHeight / $svgWidth);
+            } elseif (!$this->_isCustomFile) {
+                Html::addCssClass($this->_class, $this->_defaults->prefix);
+                Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+            }
         }
     }
 

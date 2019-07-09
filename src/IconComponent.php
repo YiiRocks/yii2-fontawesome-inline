@@ -38,6 +38,7 @@ use yii\helpers\ArrayHelper;
  * @method self height() height(int $height) The height of the icon. This will override height and width classes
  * @method self id() id(string $id) ID for the SVG tag
  * @method self title() title(string $title) Sets a title to the SVG output
+ * @method self width() width(int $width) The width of the icon. This will override height and width classes
  */
 class IconComponent extends \yii\base\Component
 {

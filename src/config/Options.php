@@ -47,6 +47,9 @@ class Options extends BaseConfig
     /** @var string Sets a title to the SVG output */
     public $title;
 
+    /** @var int The width of the icon. This will override height and width classes. */
+    public $width;
+
     /**
      * Creates a new Options object
      *
@@ -74,7 +77,7 @@ class Options extends BaseConfig
                 [['name'], 'required'],
                 [['append', 'fixedWidth'], 'boolean'],
                 [['class', 'fill', 'id', 'name', 'prefix', 'title'], 'string'],
-                [['height'], 'integer', 'min' => 1],
+                [['height', 'width'], 'integer', 'min' => 1],
                 [['groupSize'], 'in', 'range' => self::VALID_GROUPSIZES],
                 [['style'], 'in', 'range' => self::VALID_STYLES],
             ]

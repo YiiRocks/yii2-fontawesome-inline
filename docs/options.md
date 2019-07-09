@@ -22,6 +22,8 @@
 
 *   `title` string. Sets a title to the SVG output
 
+*   `width` int. The width of the icon. This will override height and width classes.
+
 ### ActiveForm Specific Options
 
 *   `append` bool. Whether to prepend or append the `input-group`
