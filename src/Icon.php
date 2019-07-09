@@ -23,7 +23,7 @@ class Icon
     /**
      * Creates a new Icon object
      *
-     * @param array>|null $config configuration of the icon
+     * @param array|null $config configuration of the icon
      */
     public function __construct(array $config = [])
     {
