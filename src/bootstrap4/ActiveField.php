@@ -1,9 +1,9 @@
 <?php
 namespace thoulah\fontawesome\bootstrap4;
 
+use thoulah\fontawesome\config\Options;
 use thoulah\fontawesome\Icon;
 use thoulah\fontawesome\IconComponent;
-use thoulah\fontawesome\config\Options;
 use Yii;
 use yii\helpers\ArrayHelper;
 

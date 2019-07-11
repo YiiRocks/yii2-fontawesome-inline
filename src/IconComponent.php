@@ -82,7 +82,7 @@ class IconComponent extends \yii\base\Component
     public function __toString(): string
     {
         $image = new Image($this->defaults);
-        $image->getSvg($this->icon);
+        $image->get($this->icon);
         $this->icon = [];
         return $image;
     }

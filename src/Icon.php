@@ -75,6 +75,6 @@ class Icon
         ArrayHelper::setValue($options, 'name', $name);
 
         $image = new Image($this->defaults);
-        return $image->getSvg($options);
+        return $image->get($options);
     }
 }

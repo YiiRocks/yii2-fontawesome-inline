@@ -60,6 +60,6 @@ class IconWidget4 extends \yii\bootstrap4\Widget
         ArrayHelper::setValue($this->options, 'name', $this->name);
 
         $image = new Image(static::$defaults);
-        return $image->getSvg($this->options);
+        return $image->get($this->options);
     }
 }

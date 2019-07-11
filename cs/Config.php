@@ -18,7 +18,11 @@ class Config extends \PhpCsFixer\Config
 
         $this->setRules([
             '@PSR2' => true,
+            'no_unused_imports' => true,
             'ordered_class_elements' => [
+                'sortAlgorithm' => 'alpha',
+            ],
+            'ordered_imports' => [
                 'sortAlgorithm' => 'alpha',
             ],
         ]);
