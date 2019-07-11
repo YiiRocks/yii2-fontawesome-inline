@@ -1,5 +1,5 @@
 <?php
-namespace thoulah\fontawesome\dom;
+namespace thoulah\fontawesome\helpers;
 
 use Yii;
 

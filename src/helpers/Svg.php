@@ -1,182 +1,80 @@
 <?php
 namespace thoulah\fontawesome\helpers;
 
-use thoulah\fontawesome\assets\FontAwesomeAsset;
-use thoulah\fontawesome\config\Defaults;
-use thoulah\fontawesome\config\Options;
-use thoulah\fontawesome\dom\DOMDocument;
-use Yii;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use DOMElement;
 
 /**
- * Helper class to load and manipulate SVG data
+ * SVG helper
  */
 class Svg
 {
-    /** @var array class property */
-    private $_class;
-
-    /** @var Defaults default options */
-    private $_defaults;
-
-    /** @var bool `true` if name resolves to a valid XML file */
-    private $_isCustomFile = false;
-
-    /** @var Options individual icon options */
-    private $_options;
-
-    /** @var DOMDocument SVG file */
-    private $_svg;
-
-    /** @var \DOMElement extracted SVG element from [[$_svg]] */
+    /** @var DOMElement SVG */
     private $_svgElement;
 
-    /** @var array additional properties for the icon not set with Options */
-    private $_svgProperties;
-
-    /** @var string result of {@see Defaults} and {@see Options} validation */
-    private $_validation;
-
     /**
-     * Creates a new Svg object
+     * Construct.
      *
-     * @param Defaults $defaults default options
+     * @param DOMElement $svg
      */
-    public function __construct(Defaults $defaults)
+    public function __construct(DOMElement $svgElement)
     {
-        $this->_svg = new DOMDocument();
-        $this->_defaults = new Defaults();
-
-        foreach ($defaults as $key => $value) {
-            $this->_defaults->$key = $value;
-        }
-
-        $this->_validation = $this->_defaults->validate();
-
-        if ($this->_defaults->registerAssets) {
-            FontAwesomeAsset::register(Yii::$app->getView());
-        }
+        $this->_svgElement = $svgElement;
     }
 
     /**
-     * Magic function, returns the SVG string.
+     * Determines size of the SVG element
      *
-     * @return string The SVG result
+     * @return array Width & height
      */
-    public function __toString(): string
+    public function getSize(): array
     {
-        return $this->_validation . $this->_svg->saveXML($this->_svgElement);
+        $width = $this->getPixelValue($this->_svgElement->getAttribute('width'));
+        $height = $this->getPixelValue($this->_svgElement->getAttribute('height'));
+
+        [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox') ?: '');
+        $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
+        $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;
+
+        if ($viewBoxWidth > 0 && $viewBoxHeight > 0) {
+            return [$viewBoxWidth, $viewBoxHeight];
+        } elseif ($width && $height) {
+            return [$width, $height];
+        } elseif ($width) {
+            return [$width, round($width * $viewBoxHeight / $viewBoxWidth)];
+        } elseif ($height) {
+            return [round($height * $viewBoxWidth / $viewBoxHeight), $height];
+        }
+
+        return [1, 1];
     }
 
     /**
-     * Load and process SVG data in correct order
+     * Converts various sizes to pixels.
      *
-     * @param array $options options
-     * @return self Processed SVG data
+     * @param string $size
+     * @return int
      */
-    public function getSvg(array $options): self
+    private function getPixelValue(string $size): int
     {
-        $this->_options = new Options($options);
-        $this->_validation .= $this->_options->validate();
+        $map = [
+            'px' => 1,
+            'em' => 16,
+            'ex' => 16 / 2,
+            'pt' => 16 / 12,
+            'pc' => 16,
+            'in' => 16 * 6,
+            'cm' => 16 / (2.54 / 6),
+            'mm' => 16 / (25.4 / 6),
+        ];
 
-        $class = $this->_options->removeValue('class');
-        $this->_class = (is_array($class)) ? $class : ['class' => $class];
+        $size = trim($size);
+        $value = substr($size, 0, -2);
+        $unit = substr($size, -2);
 
-        $this->getFile();
-        $this->getMeasurement();
-        $this->getProperties();
-        $this->setAttributes();
-        return $this;
-    }
-
-    /**
-     * Load Font Awesome SVG file. Falls back to default if not found.
-     *
-     * @see Defaults::$fallbackIcon
-     */
-    private function getFile(): void
-    {
-        $fontAwesomeFolder = $this->_options->removeValue('fontAwesomeFolder', $this->_defaults->fontAwesomeFolder);
-        $style = $this->_options->removeValue('style', $this->_defaults->style);
-        $name = $this->_options->removeValue('name');
-        $fileName = implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
-
-        if ($this->_svg->load($name)) {
-            $this->_isCustomFile = true;
-        } elseif (!$this->_svg->load($fileName)) {
-            $this->_svg->load($this->_defaults->fallbackIcon);
+        if (is_numeric($value) && isset($map[$unit])) {
+            $size = $value * $map[$unit];
         }
 
-        $this->_svgElement = $this->_svg->getElementsByTagName('svg')->item(0);
-    }
-
-    /**
-     * Prepares either the size class (default) or the width/height if height is given manually.
-     */
-    private function getMeasurement(): void
-    {
-        $width = $this->_options->removeValue('width');
-        $height = $this->_options->removeValue('height');
-        $svgWidth = $this->_svgElement->hasAttribute('width') ? $this->_svgElement->getAttribute('width') : 1;
-        $svgHeight = $this->_svgElement->hasAttribute('height') ? $this->_svgElement->getAttribute('height') : 1;
-
-        if ($this->_svgElement->hasAttribute('viewBox')) {
-            [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox'));
-            $svgWidth = $xEnd - $xStart;
-            $svgHeight = $yEnd - $yStart;
-        }
-
-        if ($width || $height) {
-            $this->_svgProperties['width'] = $width ?? round($height * $svgWidth / $svgHeight);
-            $this->_svgProperties['height'] = $height ?? round($width * $svgHeight / $svgWidth);
-        } elseif (!$this->_isCustomFile) {
-            Html::addCssClass($this->_class, $this->_defaults->prefix);
-            Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
-        }
-    }
-
-    /**
-     * Prepares the values to be set on the SVG.
-     */
-    private function getProperties(): void
-    {
-        $this->_svgProperties['aria-hidden'] = 'true';
-        $this->_svgProperties['role'] = 'img';
-
-        if ($this->_options->removeValue('fixedWidth')) {
-            Html::addCssClass($this->_class, $this->_defaults->prefix . '-fw');
-        }
-
-        if ($this->_class['class']) {
-            $this->_svgProperties['class'] = $this->_class['class'];
-        }
-
-        if ($css = $this->_options->removeValue('css')) {
-            $this->_svgProperties['style'] = Html::cssStyleFromArray($css);
-        }
-
-        if ($fill = $this->_options->removeValue('fill', $this->_defaults->fill)) {
-            $this->_svgProperties['fill'] = $fill;
-        }
-    }
-
-    /**
-     * Adds the properties to the SVG.
-     */
-    private function setAttributes(): void
-    {
-        if ($title = $this->_options->removeValue('title')) {
-            $titleElement = $this->_svg->createElement('title', $title);
-            $this->_svgElement->insertBefore($titleElement, $this->_svgElement->firstChild);
-        }
-
-        foreach ([$this->_options, $this->_svgProperties] as $data) {
-            foreach ($data as $key => $value) {
-                if (!empty($value)) {
-                    $this->_svgElement->setAttribute($key, $value);
-                }
-            }
-        }
+        return (int) round($size);
     }
 }

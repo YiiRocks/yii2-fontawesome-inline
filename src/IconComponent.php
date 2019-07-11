@@ -2,7 +2,7 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
-use thoulah\fontawesome\helpers\Svg;
+use thoulah\fontawesome\helpers\Image;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -81,10 +81,10 @@ class IconComponent extends \yii\base\Component
      */
     public function __toString(): string
     {
-        $svg = new Svg($this->defaults);
-        $svg->getSvg($this->icon);
+        $image = new Image($this->defaults);
+        $image->getSvg($this->icon);
         $this->icon = [];
-        return $svg;
+        return $image;
     }
 
     /**

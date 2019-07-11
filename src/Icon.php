@@ -2,7 +2,7 @@
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
-use thoulah\fontawesome\helpers\Svg;
+use thoulah\fontawesome\helpers\Image;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -74,7 +74,7 @@ class Icon
     {
         ArrayHelper::setValue($options, 'name', $name);
 
-        $svg = new Svg($this->defaults);
-        return $svg->getSvg($options);
+        $image = new Image($this->defaults);
+        return $image->getSvg($options);
     }
 }
