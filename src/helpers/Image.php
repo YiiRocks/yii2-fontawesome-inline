@@ -24,7 +24,7 @@ class Image
     private $_validation;
 
     /**
-     * Creates a new Svg object
+     * Creates a new Image object
      *
      * @param Defaults $defaults default options
      */
@@ -39,13 +39,13 @@ class Image
     }
 
     /**
-     * Magic function, returns the SVG string.
+     * Magic function, returns the image string.
      *
      * @return string The SVG result
      */
     public function __toString(): string
     {
-        return $this->_validation . /** @scrutinizer ignore-type */ $this->_image;
+        return $this->_validation . $this->_image;
     }
 
     /**

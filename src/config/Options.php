@@ -53,7 +53,7 @@ class Options extends BaseConfig
     /**
      * Creates a new Options object
      *
-     * @param array @options Options
+     * @param array $options Options
      */
     public function __construct(array $options = [])
     {

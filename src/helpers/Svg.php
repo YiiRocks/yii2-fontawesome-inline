@@ -10,6 +10,18 @@ use yii\helpers\Html;
  */
 class Svg
 {
+    /** @var array values for converting various units to pixels */
+    private const PIXEL_MAP = [
+        'px' => 1,
+        'em' => 16,
+        'ex' => 16 / 2,
+        'pt' => 16 / 12,
+        'pc' => 16,
+        'in' => 16 * 6,
+        'cm' => 16 / (2.54 / 6),
+        'mm' => 16 / (25.4 / 6),
+    ];
+
     /** @var array class property */
     private $_class;
 
@@ -145,30 +157,18 @@ class Svg
      *
      * @param string $size
      * @return int
-     * @see https://github.com/contao/imagine-svg/blob/master/src/Image.php
      */
     private function getPixelValue(string $size): int
     {
-        $map = [
-            'px' => 1,
-            'em' => 16,
-            'ex' => 16 / 2,
-            'pt' => 16 / 12,
-            'pc' => 16,
-            'in' => 16 * 6,
-            'cm' => 16 / (2.54 / 6),
-            'mm' => 16 / (25.4 / 6),
-        ];
-
         $size = trim($size);
         $value = substr($size, 0, -2);
         $unit = substr($size, -2);
 
-        if (is_numeric($value) && isset($map[$unit])) {
-            $size = $value * $map[$unit];
+        if (is_numeric($value) && isset(self::PIXEL_MAP[$unit])) {
+            $size = $value * self::PIXEL_MAP[$unit];
         }
 
-        return (int) round($size);
+        return (int) round((float) $size);
     }
 
     /**
@@ -178,8 +178,8 @@ class Svg
      */
     private function getSize(): array
     {
-        $width = $this->getPixelValue($this->_svgElement->getAttribute('width'));
-        $height = $this->getPixelValue($this->_svgElement->getAttribute('height'));
+        $svgWidth = $this->getPixelValue($this->_svgElement->getAttribute('width'));
+        $svgHeight = $this->getPixelValue($this->_svgElement->getAttribute('height'));
 
         [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox') ?: '');
         $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
@@ -188,15 +188,6 @@ class Svg
         if ($viewBoxWidth > 0 && $viewBoxHeight > 0) {
             $svgWidth = $viewBoxWidth;
             $svgHeight = $viewBoxHeight;
-        } elseif ($width && $height) {
-            $svgWidth = $width;
-            $svgHeight = $height;
-        } elseif ($width) {
-            $svgWidth = $width;
-            $svgHeight = round($width * $viewBoxHeight / $viewBoxWidth);
-        } elseif ($height) {
-            $svgWidth = round($height * $viewBoxWidth / $viewBoxHeight);
-            $svgHeight = $height;
         }
 
         return [$svgWidth ?? 1, $svgHeight ?? 1];
