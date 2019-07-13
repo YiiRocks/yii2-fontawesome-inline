@@ -82,6 +82,21 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     public $icon;
 
     /**
+     * Constructor.
+     *
+     * @param array $config name-value pairs that will be used to initialize the object properties
+     */
+    public function __construct($config = [])
+    {
+        $icon = ArrayHelper::getValue($config, 'icon');
+        if (is_string($icon)) {
+            ArrayHelper::setValue($config, 'icon', ['name' => $icon]);
+        }
+
+        parent::__construct($config);
+    }
+
+    /**
      * Renders the whole field.
      *
      * @param string|callable $content the content within the field container.
@@ -90,10 +105,6 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     public function render($content = null): string
     {
         if (!empty($this->icon)) {
-            if (is_string($this->icon)) {
-                $this->icon = ['name' => $this->icon];
-            }
-
             $groupSize = ArrayHelper::remove($this->icon, 'groupSize');
             $append = ArrayHelper::getValue($this->icon, 'append');
 
@@ -136,7 +147,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
             $this->icon['fixedWidth'] = $icon->defaults->activeFormFixedWidth;
         }
 
-        return $icon->show($iconName, $this->icon);
+        return $icon->show($iconName ?? '', $this->icon);
     }
 
     /**
@@ -149,7 +160,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     {
         $iconName = ArrayHelper::remove($this->icon, 'name');
         $iconStyle = ArrayHelper::remove($this->icon, 'style');
-        $icon->name($iconName, $iconStyle);
+        $icon->name($iconName ?? '', $iconStyle);
 
         $fixedWidth = ArrayHelper::remove($this->icon, 'fixedWidth', $icon->defaults->activeFormFixedWidth);
         $icon->fixedWidth($fixedWidth);

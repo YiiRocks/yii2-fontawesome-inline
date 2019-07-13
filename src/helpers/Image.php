@@ -45,7 +45,7 @@ class Image
      */
     public function __toString(): string
     {
-        return $this->_validation . $this->_image;
+        return $this->_validation . (string) $this->_image;
     }
 
     /**
