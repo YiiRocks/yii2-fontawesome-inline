@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
@@ -21,7 +22,7 @@ class Icon
     public $defaults;
 
     /**
-     * Creates a new Icon object
+     * Creates a new Icon object.
      *
      * @param array|null $config configuration of the icon
      */
@@ -33,8 +34,9 @@ class Icon
     /**
      * Returns the ActiveField inputTemplate.
      *
-     * @param string $name Name of the icon
+     * @param string     $name    Name of the icon
      * @param array|null $options Options for the field and the icon
+     *
      * @return string ActiveField addon with icon and proper code
      */
     public function activeFieldAddon(string $name, array $options = []): string
@@ -44,14 +46,16 @@ class Icon
 
         $append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
         $icon = $html::activeFieldAddon($groupSize, $append);
+
         return str_replace('{icon}', $this->activeFieldIcon($name, $options), $icon);
     }
 
     /**
      * Returns the ActiveField Icon.
      *
-     * @param string $name Name of the icon
+     * @param string     $name    Name of the icon
      * @param array|null $options Options for the field and the icon
+     *
      * @return string ActiveField icon with proper code
      */
     public function activeFieldIcon(string $name, array $options = []): string
@@ -60,14 +64,16 @@ class Icon
 
         $append = ArrayHelper::remove($options, 'append', $this->defaults->append);
         $icon = $html::activeFieldIcon($append);
+
         return str_replace('{icon}', $this->show($name, $options), $icon);
     }
 
     /**
      * Outputs the SVG string.
      *
-     * @param string $name Name of the icon, or filename
+     * @param string     $name    Name of the icon, or filename
      * @param array|null $options Options for the icon
+     *
      * @return string The icon
      */
     public function show(string $name, array $options = []): string
@@ -75,6 +81,7 @@ class Icon
         ArrayHelper::setValue($options, 'name', $name);
 
         $image = new Image($this->defaults);
+
         return $image->get($options);
     }
 }

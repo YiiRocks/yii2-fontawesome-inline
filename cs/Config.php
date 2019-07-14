@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\cs;
 
 /**
@@ -8,6 +9,7 @@ class Config extends \PhpCsFixer\Config
 {
     /**
      * Construct.
+     *
      * @param mixed $name
      */
     public function __construct($name = 'mr42-cs-config')
@@ -17,6 +19,7 @@ class Config extends \PhpCsFixer\Config
         $this->setRiskyAllowed(true);
 
         $this->setRules([
+            '@PSR1' => true,
             '@PSR2' => true,
             'no_unused_imports' => true,
             'ordered_class_elements' => [

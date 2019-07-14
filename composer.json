@@ -31,6 +31,7 @@
         "friendsofphp/php-cs-fixer": "~2.15.0",
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": ">=7.5",
+        "squizlabs/php_codesniffer": "3.*",
         "yiisoft/yii2-apidoc": "~2.1.0"
     },
     "autoload": {
@@ -52,11 +53,13 @@
     ],
     "scripts": {
         "php-cs-fixer": "@php vendor/bin/php-cs-fixer fix",
+        "phpcs": "@php vendor/bin/phpcs",
         "phpmd": "@php vendor/bin/phpmd src/ text tests/data/phpmd_ruleset.xml",
         "phpunit": "@php vendor/bin/phpunit --colors=always"
     },
     "scripts-descriptions": {
         "php-cs-fixer": "Cleans to code with PHP Coding Standards Fixer.",
+        "phpcs": "@php vendor/bin/phpcs",
         "phpmd": "Runs the PHP Mess Detector.",
         "phpunit": "Runs the PHPUnit programmer-oriented testing framework."
     },

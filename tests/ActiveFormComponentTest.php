@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\tests;
 
 use thoulah\fontawesome\bootstrap4\ActiveForm;

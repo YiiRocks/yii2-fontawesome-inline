@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\config;
 
 use yii\base\DynamicModel;
@@ -51,7 +52,7 @@ class Options extends BaseConfig
     public $width;
 
     /**
-     * Creates a new Options object
+     * Creates a new Options object.
      *
      * @param array $options Options
      */
@@ -62,9 +63,10 @@ class Options extends BaseConfig
     }
 
     /**
-     * Validates the options
+     * Validates the options.
      *
      * @param array|null $options Options
+     *
      * @return string|null Validation errors
      */
     public function validate(): ?string

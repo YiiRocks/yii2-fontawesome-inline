@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\helpers;
 
 use Yii;
@@ -9,10 +10,10 @@ use Yii;
 class DOMDocument extends \DOMDocument
 {
     /**
-     * Creates a new DOMDocument object
+     * Creates a new DOMDocument object.
      *
-     * @param string $version The version number of the document as part of the XML declaration.
-     * @param string $encoding The encoding of the document as part of the XML declaration.
+     * @param string $version  the version number of the document as part of the XML declaration
+     * @param string $encoding the encoding of the document as part of the XML declaration
      */
     public function __construct($version = null, $encoding = null)
     {
@@ -21,17 +22,19 @@ class DOMDocument extends \DOMDocument
     }
 
     /**
-     * Load XML from a file
+     * Load XML from a file.
      *
-     * @param string $source The path to the XML document.
-     * @param int $options [Bitwise OR](https://www.php.net/manual/en/language.operators.bitwise.php)
-     * of the [libxml option constants](https://www.php.net/manual/en/libxml.constants.php).
+     * @param string $source  the path to the XML document
+     * @param int    $options [Bitwise OR](https://www.php.net/manual/en/language.operators.bitwise.php)
+     *                        of the [libxml option constants](https://www.php.net/manual/en/libxml.constants.php).
+     *
      * @return mixed Returns `TRUE` on success or `FALSE` on failure. If called
-     * statically, returns a [[DOMDocument]] or `FALSE` on failure.
+     *               statically, returns a [[DOMDocument]] or `FALSE` on failure.
      */
     public function load($source, $options = null)
     {
         $fileName = Yii::getAlias($source);
+
         return parent::load($fileName, $options);
     }
 }

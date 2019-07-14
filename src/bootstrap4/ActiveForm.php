@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\bootstrap4;
 
 /**

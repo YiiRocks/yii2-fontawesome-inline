@@ -1,11 +1,12 @@
 <?php
+
 namespace thoulah\fontawesome\config;
 
 use yii\base\DynamicModel;
 use yii\helpers\ArrayHelper;
 
 /**
- * Sets default opions
+ * Sets default opions.
  *
  * @return self default values
  */
@@ -13,7 +14,7 @@ class Defaults extends BaseConfig
 {
     /**
      * @var bool ActiveForm specific option. Sets fixed width icons.
-     * Set to `false` to have variable width icons. Overrules `fixedWidth`
+     *           Set to `false` to have variable width icons. Overrules `fixedWidth`
      */
     public $activeFormFixedWidth = true;
 
@@ -34,7 +35,7 @@ class Defaults extends BaseConfig
 
     /**
      * @var string Path to your Font Awesome installation
-     * Usable for Font Awesome Pro
+     *             Usable for Font Awesome Pro
      */
     public $fontAwesomeFolder = '@vendor/fortawesome/font-awesome/svgs';
 
@@ -49,13 +50,13 @@ class Defaults extends BaseConfig
 
     /**
      * @var string See
-     * [Referencing Icons](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)
-     * Usable for Font Awesome Pro
+     *             [Referencing Icons](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)
+     *             Usable for Font Awesome Pro
      */
     public $style = 'solid';
 
     /**
-     * Creates a new Defaults object
+     * Creates a new Defaults object.
      *
      * @param array $defaults overrides of the default settings
      */
@@ -66,7 +67,7 @@ class Defaults extends BaseConfig
     }
 
     /**
-     * Validate the defaults
+     * Validate the defaults.
      *
      * @return string|null Validation errors
      */

@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\assets;
 
 use yii\web\AssetBundle;
@@ -10,7 +11,7 @@ class FontAwesomeAsset extends AssetBundle
 {
     /** @var array CSS files to load */
     public $css = [
-        'svg-with-js.min.css'
+        'svg-with-js.min.css',
     ];
 
     /** @var string Path to Font Awesome CSS folder */

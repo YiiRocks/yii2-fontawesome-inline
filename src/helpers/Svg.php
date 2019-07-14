@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\helpers;
 
 use thoulah\fontawesome\config\Defaults;
@@ -6,7 +7,7 @@ use thoulah\fontawesome\config\Options;
 use yii\helpers\Html;
 
 /**
- * SVG helper
+ * SVG helper.
  */
 class Svg
 {
@@ -23,40 +24,40 @@ class Svg
     ];
 
     /** @var array class property */
-    private $_class;
+    private $class;
 
     /** @var Defaults default options */
-    private $_defaults;
+    private $defaults;
 
     /** @var bool `true` if name resolves to a valid XML file */
-    private $_isCustomFile = false;
+    private $isCustomFile = false;
 
     /** @var Options individual icon options */
-    private $_options;
+    private $options;
 
     /** @var DOMDocument SVG file */
-    private $_svg;
+    private $svg;
 
     /** @var \DOMNode SVG */
-    private $_svgElement;
+    private $svgElement;
 
     /** @var array additional properties for the icon not set with Options */
-    private $_svgProperties;
+    private $svgProperties;
 
     /**
      * Construct.
      *
      * @param Defaults $defaults default options
-     * @param Options $options individual icon options
+     * @param Options  $options  individual icon options
      */
     public function __construct(Defaults $defaults, Options $options)
     {
-        $this->_svg = new DOMDocument();
-        $this->_defaults = $defaults;
-        $this->_options = $options;
+        $this->svg = new DOMDocument();
+        $this->defaults = $defaults;
+        $this->options = $options;
 
-        $class = $this->_options->removeValue('class');
-        $this->_class = (is_array($class)) ? $class : ['class' => $class];
+        $class = $this->options->removeValue('class');
+        $this->class = (is_array($class)) ? $class : ['class' => $class];
     }
 
     /**
@@ -66,7 +67,7 @@ class Svg
      */
     public function __toString(): string
     {
-        return $this->_svg->saveXML($this->_svgElement);
+        return $this->svg->saveXML($this->svgElement);
     }
 
     /**
@@ -76,14 +77,14 @@ class Svg
     {
         [$svgWidth, $svgHeight] = $this->getSize();
 
-        $width = $this->_options->removeValue('width');
-        $height = $this->_options->removeValue('height');
+        $width = $this->options->removeValue('width');
+        $height = $this->options->removeValue('height');
         if ($width || $height) {
-            $this->_svgProperties['width'] = $width ?? round($height * $svgWidth / $svgHeight);
-            $this->_svgProperties['height'] = $height ?? round($width * $svgHeight / $svgWidth);
-        } elseif (!$this->_isCustomFile) {
-            Html::addCssClass($this->_class, $this->_defaults->prefix);
-            Html::addCssClass($this->_class, $this->_defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
+            $this->svgProperties['width'] = $width ?? round($height * $svgWidth / $svgHeight);
+            $this->svgProperties['height'] = $height ?? round($width * $svgHeight / $svgWidth);
+        } elseif (!$this->isCustomFile) {
+            Html::addCssClass($this->class, $this->defaults->prefix);
+            Html::addCssClass($this->class, $this->defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
         }
     }
 
@@ -92,23 +93,23 @@ class Svg
      */
     public function getProperties(): void
     {
-        $this->_svgProperties['aria-hidden'] = 'true';
-        $this->_svgProperties['role'] = 'img';
+        $this->svgProperties['aria-hidden'] = 'true';
+        $this->svgProperties['role'] = 'img';
 
-        if ($this->_options->removeValue('fixedWidth')) {
-            Html::addCssClass($this->_class, $this->_defaults->prefix . '-fw');
+        if ($this->options->removeValue('fixedWidth')) {
+            Html::addCssClass($this->class, $this->defaults->prefix . '-fw');
         }
 
-        if ($this->_class['class']) {
-            $this->_svgProperties['class'] = $this->_class['class'];
+        if ($this->class['class']) {
+            $this->svgProperties['class'] = $this->class['class'];
         }
 
-        if ($css = $this->_options->removeValue('css')) {
-            $this->_svgProperties['style'] = Html::cssStyleFromArray($css);
+        if ($css = $this->options->removeValue('css')) {
+            $this->svgProperties['style'] = Html::cssStyleFromArray($css);
         }
 
-        if ($fill = $this->_options->removeValue('fill', $this->_defaults->fill)) {
-            $this->_svgProperties['fill'] = $fill;
+        if ($fill = $this->options->removeValue('fill', $this->defaults->fill)) {
+            $this->svgProperties['fill'] = $fill;
         }
     }
 
@@ -119,18 +120,18 @@ class Svg
      */
     public function load(): void
     {
-        $fontAwesomeFolder = $this->_options->removeValue('fontAwesomeFolder', $this->_defaults->fontAwesomeFolder);
-        $style = $this->_options->removeValue('style', $this->_defaults->style);
-        $name = $this->_options->removeValue('name');
+        $fontAwesomeFolder = $this->options->removeValue('fontAwesomeFolder', $this->defaults->fontAwesomeFolder);
+        $style = $this->options->removeValue('style', $this->defaults->style);
+        $name = $this->options->removeValue('name');
         $fileName = implode(DIRECTORY_SEPARATOR, [$fontAwesomeFolder, $style, "{$name}.svg"]);
 
-        if ($this->_svg->load($name)) {
-            $this->_isCustomFile = true;
-        } elseif (!$this->_svg->load($fileName)) {
-            $this->_svg->load($this->_defaults->fallbackIcon);
+        if ($this->svg->load($name)) {
+            $this->isCustomFile = true;
+        } elseif (!$this->svg->load($fileName)) {
+            $this->svg->load($this->defaults->fallbackIcon);
         }
 
-        $this->_svgElement = $this->_svg->getElementsByTagName('svg')->item(0);
+        $this->svgElement = $this->svg->getElementsByTagName('svg')->item(0);
     }
 
     /**
@@ -138,15 +139,15 @@ class Svg
      */
     public function setAttributes(): void
     {
-        if ($title = $this->_options->removeValue('title')) {
-            $titleElement = $this->_svg->createElement('title', $title);
-            $this->_svgElement->insertBefore($titleElement, $this->_svgElement->firstChild);
+        if ($title = $this->options->removeValue('title')) {
+            $titleElement = $this->svg->createElement('title', $title);
+            $this->svgElement->insertBefore($titleElement, $this->svgElement->firstChild);
         }
 
-        foreach ([$this->_options, $this->_svgProperties] as $data) {
+        foreach ([$this->options, $this->svgProperties] as $data) {
             foreach ($data as $key => $value) {
                 if (!empty($value)) {
-                    $this->_svgElement->setAttribute($key, $value);
+                    $this->svgElement->setAttribute($key, $value);
                 }
             }
         }
@@ -156,6 +157,7 @@ class Svg
      * Converts various sizes to pixels.
      *
      * @param string $size
+     *
      * @return int
      */
     private function getPixelValue(string $size): int
@@ -172,16 +174,16 @@ class Svg
     }
 
     /**
-     * Determines size of the SVG element
+     * Determines size of the SVG element.
      *
      * @return array Width & height
      */
     private function getSize(): array
     {
-        $svgWidth = $this->getPixelValue($this->_svgElement->getAttribute('width'));
-        $svgHeight = $this->getPixelValue($this->_svgElement->getAttribute('height'));
+        $svgWidth = $this->getPixelValue($this->svgElement->getAttribute('width'));
+        $svgHeight = $this->getPixelValue($this->svgElement->getAttribute('height'));
 
-        [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->_svgElement->getAttribute('viewBox') ?: '');
+        [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox') ?: '');
         $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
         $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;
 

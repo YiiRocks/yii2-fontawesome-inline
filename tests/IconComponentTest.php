@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\tests;
 
 use Yii;

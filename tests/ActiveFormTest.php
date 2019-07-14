@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\tests;
 
 use thoulah\fontawesome\bootstrap4\ActiveForm;
@@ -56,6 +57,7 @@ class ActiveFormTest extends tests
 
         $this->assertStringContainsString('<input type="text" id="dynamicmodel-test" class="form-control" name="DynamicModel[test]"><div class="input-group-append">', $out);
     }
+
     public function testBasic(): void
     {
         ActiveForm::$counter = 0;

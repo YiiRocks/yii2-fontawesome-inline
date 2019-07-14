@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\tests;
 
 use yii\helpers\ArrayHelper;
@@ -17,14 +18,14 @@ class tests extends \PHPUnit\Framework\TestCase
         new $appClass(ArrayHelper::merge([
             'id' => 'testapp',
             'basePath' => __DIR__,
-            'vendorPath' => dirname(__DIR__) . '/vendor',
+            'vendorPath' => dirname(__DIR__).'/vendor',
             'aliases' => [
                 '@bower' => '@vendor/bower-asset',
             ],
             'components' => [
                 'request' => [
                     'cookieValidationKey' => '42',
-                    'scriptFile' => __DIR__ . '/index.php',
+                    'scriptFile' => __DIR__.'/index.php',
                     'scriptUrl' => '/index.php',
                 ],
             ],

@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
@@ -50,6 +51,7 @@ class IconWidget4 extends \yii\bootstrap4\Widget
         $image = new Image($defaults);
 
         $this->options['name'] = $this->name;
+
         return $image->get($this->options);
     }
 }

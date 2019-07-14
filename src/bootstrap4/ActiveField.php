@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\bootstrap4;
 
 use thoulah\fontawesome\config\Options;
@@ -99,8 +100,9 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     /**
      * Renders the whole field.
      *
-     * @param string|callable $content the content within the field container.
-     * @return string the rendering result.
+     * @param string|callable $content the content within the field container
+     *
+     * @return string the rendering result
      */
     public function render($content = null): string
     {
@@ -154,6 +156,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
      * We run as component.
      *
      * @param IconComponent $icon
+     *
      * @return string The icon
      */
     private function runAsComponent(IconComponent $icon): string
@@ -168,7 +171,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
         $properties = get_object_vars(new Options());
         foreach (array_keys($properties) as $property) {
             $value = ArrayHelper::remove($this->icon, $property);
-            if ($value !== null) {
+            if (null !== $value) {
                 $icon->$property($value);
             }
         }

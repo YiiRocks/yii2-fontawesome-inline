@@ -1,4 +1,5 @@
 <?php
+
 namespace thoulah\fontawesome\helpers;
 
 use thoulah\fontawesome\assets\FontAwesomeAsset;
@@ -7,33 +8,33 @@ use thoulah\fontawesome\config\Options;
 use Yii;
 
 /**
- * Helper class to load and manipulate images
+ * Helper class to load and manipulate images.
  */
 class Image
 {
     /** @var Defaults default options */
-    private $_defaults;
+    private $defaults;
 
     /** @var object image data */
-    private $_image;
+    private $image;
 
     /** @var Options individual icon options */
-    private $_options;
+    private $options;
 
     /** @var string result of {@see Defaults} and {@see Options} validation */
-    private $_validation;
+    private $validation;
 
     /**
-     * Creates a new Image object
+     * Creates a new Image object.
      *
      * @param Defaults $defaults default options
      */
     public function __construct(Defaults $defaults)
     {
-        $this->_defaults = $defaults;
-        $this->_validation = $this->_defaults->validate();
+        $this->defaults = $defaults;
+        $this->validation = $this->defaults->validate();
 
-        if ($this->_defaults->registerAssets) {
+        if ($this->defaults->registerAssets) {
             FontAwesomeAsset::register(Yii::$app->getView());
         }
     }
@@ -45,36 +46,37 @@ class Image
      */
     public function __toString(): string
     {
-        return $this->_validation . (string) $this->_image;
+        return $this->validation . (string) $this->image;
     }
 
     /**
-     * Load and process image
+     * Load and process image.
      *
      * @param array $options options
+     *
      * @return Svg Processed image data
      */
     public function get(array $options): Svg
     {
-        $this->_options = new Options($options);
-        $this->_validation .= $this->_options->validate();
+        $this->options = new Options($options);
+        $this->validation .= $this->options->validate();
 
         return $this->getSvg();
     }
 
     /**
-     * Load and process SVG data in correct order
+     * Load and process SVG data in correct order.
      *
      * @return Svg Processed SVG data
      */
     private function getSvg(): Svg
     {
-        $this->_image = new Svg($this->_defaults, $this->_options);
-        $this->_image->load();
-        $this->_image->getMeasurement();
-        $this->_image->getProperties();
-        $this->_image->setAttributes();
+        $this->image = new Svg($this->defaults, $this->options);
+        $this->image->load();
+        $this->image->getMeasurement();
+        $this->image->getProperties();
+        $this->image->setAttributes();
 
-        return $this->_image;
+        return $this->image;
     }
 }
