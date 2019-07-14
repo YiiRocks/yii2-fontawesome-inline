@@ -3,7 +3,6 @@ namespace thoulah\fontawesome;
 
 use thoulah\fontawesome\config\Defaults;
 use thoulah\fontawesome\helpers\Image;
-use yii\helpers\ArrayHelper;
 
 /**
  * Provides an easy way to access icons as a widget.
@@ -31,7 +30,7 @@ use yii\helpers\ArrayHelper;
  */
 class IconWidget4 extends \yii\bootstrap4\Widget
 {
-    /** @var Defaults the default settings */
+    /** @var array|null overrides of the default settings */
     public static $defaults;
 
     /** @var string name of the icon */
@@ -41,25 +40,16 @@ class IconWidget4 extends \yii\bootstrap4\Widget
     public $options = [];
 
     /**
-     * Initializes the object.
-     */
-    public function init(): void
-    {
-        $defaults = ArrayHelper::toArray(static::$defaults);
-        static::$defaults = new Defaults($defaults);
-        parent::init();
-    }
-
-    /**
      * Executes the widget.
      *
      * @return string The icon
      */
     public function run(): string
     {
-        ArrayHelper::setValue($this->options, 'name', $this->name);
+        $defaults = new Defaults(static::$defaults ?? []);
+        $image = new Image($defaults);
 
-        $image = new Image(static::$defaults);
+        $this->options['name'] = $this->name;
         return $image->get($this->options);
     }
 }
