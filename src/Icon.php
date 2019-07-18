@@ -21,6 +21,9 @@ class Icon
     /** @var Defaults default settings */
     public $defaults;
 
+    /** @var string fully qualified name of Html */
+    private $html;
+
     /**
      * Creates a new Icon object.
      *
@@ -29,6 +32,7 @@ class Icon
     public function __construct(array $config = [])
     {
         $this->defaults = new Defaults($config);
+        $this->html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
     }
 
     /**
@@ -41,11 +45,9 @@ class Icon
      */
     public function activeFieldAddon(string $name, array $options = []): string
     {
-        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($options, 'groupSize', $this->defaults->groupSize);
-
         $append = ArrayHelper::getValue($options, 'append', $this->defaults->append);
-        $icon = $html::activeFieldAddon($groupSize, $append);
+        $icon = forward_static_call([$this->html, 'activeFieldAddon'], $groupSize, $append);
 
         return str_replace('{icon}', $this->activeFieldIcon($name, $options), $icon);
     }
@@ -60,10 +62,8 @@ class Icon
      */
     public function activeFieldIcon(string $name, array $options = []): string
     {
-        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
-
         $append = ArrayHelper::remove($options, 'append', $this->defaults->append);
-        $icon = $html::activeFieldIcon($append);
+        $icon = forward_static_call([$this->html, 'activeFieldIcon'], $append);
 
         return str_replace('{icon}', $this->show($name, $options), $icon);
     }

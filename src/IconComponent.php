@@ -46,6 +46,9 @@ class IconComponent extends \yii\base\Component
     /** @var Defaults default settings */
     public $defaults;
 
+    /** @var string fully qualified name of Html */
+    private $html;
+
     /** @var array icon options */
     private $icon = [];
 
@@ -57,6 +60,7 @@ class IconComponent extends \yii\base\Component
     public function __construct(array $overrides = [])
     {
         $this->defaults = new Defaults($overrides);
+        $this->html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
     }
 
     /**
@@ -101,11 +105,9 @@ class IconComponent extends \yii\base\Component
      */
     public function activeFieldAddon(string $name, string $style = null): string
     {
-        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         $groupSize = ArrayHelper::remove($this->icon, 'groupSize', $this->defaults->groupSize);
-
         $append = ArrayHelper::getValue($this->icon, 'append', $this->defaults->append);
-        $icon = $html::activeFieldAddon($groupSize, $append);
+        $icon = forward_static_call([$this->html, 'activeFieldAddon'], $groupSize, $append);
 
         return str_replace('{icon}', $this->activeFieldIcon($name, $style), $icon);
     }
@@ -121,13 +123,12 @@ class IconComponent extends \yii\base\Component
     public function activeFieldIcon(string $name, string $style = null): string
     {
         $this->name($name, $style);
-        $html = __NAMESPACE__ . "\\{$this->defaults->bootstrap}\\Html";
         if (!isset($this->icon['fixedWidth'])) {
             ArrayHelper::setValue($this->icon, 'fixedWidth', $this->defaults->activeFormFixedWidth);
         }
 
         $append = ArrayHelper::remove($this->icon, 'append', $this->defaults->append);
-        $icon = $html::activeFieldIcon($append);
+        $icon = forward_static_call([$this->html, 'activeFieldIcon'], $append);
 
         return str_replace('{icon}', $this, $icon);
     }
