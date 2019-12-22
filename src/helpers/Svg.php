@@ -79,10 +79,11 @@ class Svg
 
         $width = $this->options->removeValue('width');
         $height = $this->options->removeValue('height');
+        $addClass = $this->options->removeValue('addClass');
         if ($width || $height) {
             $this->svgProperties['width'] = $width ?? round($height * $svgWidth / $svgHeight);
             $this->svgProperties['height'] = $height ?? round($width * $svgHeight / $svgWidth);
-        } elseif (!$this->isCustomFile) {
+        } elseif (!$this->isCustomFile || ($this->isCustomFile && $addClass)) {
             Html::addCssClass($this->class, $this->defaults->prefix);
             Html::addCssClass($this->class, $this->defaults->prefix . '-w-' . ceil($svgWidth / $svgHeight * 16));
         }

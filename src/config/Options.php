@@ -16,6 +16,9 @@ class Options extends BaseConfig
      * This will change both tag order and applied class. */
     public $append = false;
 
+    /** @var bool Whether or not to add calculated classes to custom files */
+    public $addClass = false;
+
     /** @var string Additional custom classes */
     public $class;
 

@@ -10,9 +10,9 @@ This extension provides simple functions for [Yii framework 2.0](http://www.yiif
 [Font Awesome](https://fontawesome.com/) [icons](https://fontawesome.com/icons) inline
 ***without the use of JavaScript***.
 
-[![Packagist Version](https://img.shields.io/packagist/v/Thoulah/yii2-fontawesome-inline.svg)](https://packagist.org/packages/thoulah/yii2-fontawesome-inline)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/Thoulah/yii2-fontawesome-inline.svg)](https://php.net/)
-[![Packagist](https://img.shields.io/packagist/dt/Thoulah/yii2-fontawesome-inline.svg)](https://packagist.org/packages/thoulah/yii2-fontawesome-inline)
+[![Packagist Version](https://img.shields.io/packagist/v/thoulah/yii2-fontawesome-inline.svg)](https://packagist.org/packages/thoulah/yii2-fontawesome-inline)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/thoulah/yii2-fontawesome-inline.svg)](https://php.net/)
+[![Packagist](https://img.shields.io/packagist/dt/thoulah/yii2-fontawesome-inline.svg)](https://packagist.org/packages/thoulah/yii2-fontawesome-inline)
 [![GitHub](https://img.shields.io/github/license/Thoulah/yii2-fontawesome-inline.svg)](https://github.com/Thoulah/yii2-fontawesome-inline/blob/master/LICENSE)
 
 *   [Installation](docs/installation.md)

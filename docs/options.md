@@ -2,11 +2,14 @@
 
 ## Icon Options
 
-*   `name` string. Name of the icon, picked from [Icons](https://fontawesome.com/icons).
+*   `name` string. Name of the icon, picked from [Icons](https://fontawesome.com/icons),
+    or a valid path to a custom file.
 
 *   `style` string. Style of the icon, must match `name`.
 
 *   `class` string. Additional custom classes.
+
+*   `addClass` bool. Whether or not to add calculated classes to custom files.
 
 *   `css` array. Additional CSS attributes.
 
