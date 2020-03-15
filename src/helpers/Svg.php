@@ -75,7 +75,6 @@ class Svg
      */
     public function getMeasurement(): void
     {
-        $svgWidth = $svgHeight = 0;
         [$svgWidth, $svgHeight] = $this->getSize();
 
         $width = $this->options->removeValue('width');
@@ -106,8 +105,8 @@ class Svg
             $this->svgProperties['class'] = $this->class['class'];
         }
 
-        if ($this->options->css) {
-            $css = $this->options->removeValue('css');
+        if (!empty($this->options->css)) {
+            $css = $this->options->removeValue('css', []);
             $this->svgProperties['style'] = Html::cssStyleFromArray($css);
         }
 
@@ -185,7 +184,6 @@ class Svg
         $svgWidth = $this->getPixelValue($this->svgElement->getAttribute('width'));
         $svgHeight = $this->getPixelValue($this->svgElement->getAttribute('height'));
 
-        $xStart = $yStart = $xEnd = $yEnd = 0;
         [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox') ?: '');
         $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
         $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;
