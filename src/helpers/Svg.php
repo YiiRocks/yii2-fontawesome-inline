@@ -75,6 +75,7 @@ class Svg
      */
     public function getMeasurement(): void
     {
+        $svgWidth = $svgHeight = 0;
         [$svgWidth, $svgHeight] = $this->getSize();
 
         $width = $this->options->removeValue('width');
@@ -105,13 +106,12 @@ class Svg
             $this->svgProperties['class'] = $this->class['class'];
         }
 
-        if ($css = $this->options->removeValue('css')) {
+        if ($this->options->css) {
+            $css = $this->options->removeValue('css');
             $this->svgProperties['style'] = Html::cssStyleFromArray($css);
         }
 
-        if ($fill = $this->options->removeValue('fill', $this->defaults->fill)) {
-            $this->svgProperties['fill'] = $fill;
-        }
+        $this->svgProperties['fill'] = $this->options->removeValue('fill', $this->defaults->fill);
     }
 
     /**
@@ -140,7 +140,8 @@ class Svg
      */
     public function setAttributes(): void
     {
-        if ($title = $this->options->removeValue('title')) {
+        if ($this->options->title) {
+            $title = $this->options->removeValue('title');
             $titleElement = $this->svg->createElement('title', $title);
             $this->svgElement->insertBefore($titleElement, $this->svgElement->firstChild);
         }
@@ -184,6 +185,7 @@ class Svg
         $svgWidth = $this->getPixelValue($this->svgElement->getAttribute('width'));
         $svgHeight = $this->getPixelValue($this->svgElement->getAttribute('height'));
 
+        $xStart = $yStart = $xEnd = $yEnd = 0;
         [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox') ?: '');
         $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
         $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;

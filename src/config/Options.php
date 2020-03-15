@@ -12,12 +12,12 @@ use yii\helpers\ArrayHelper;
  */
 class Options extends BaseConfig
 {
+    /** @var bool Whether or not to add calculated classes to custom files */
+    public $addClass = false;
+
     /** @var bool ActiveForm specific option. Whether to prepend or append the `input-group`
      * This will change both tag order and applied class. */
     public $append = false;
-
-    /** @var bool Whether or not to add calculated classes to custom files */
-    public $addClass = false;
 
     /** @var string Additional custom classes */
     public $class;
