@@ -3,7 +3,7 @@
     "description": "Inline Font Awesome icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
     "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "component"],
-    "homepage": "https://thoulah.mr42.me/fontawesome",
+    "homepage": "https://thoulah.github.io/yii2-fontawesome-inline/",
     "license": "MIT",
     "authors": [
         {
@@ -59,7 +59,7 @@
     },
     "scripts-descriptions": {
         "php-cs-fixer": "Cleans to code with PHP Coding Standards Fixer.",
-        "phpcs": "@php vendor/bin/phpcs",
+        "phpcs": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
         "phpmd": "Runs the PHP Mess Detector.",
         "phpunit": "Runs the PHPUnit programmer-oriented testing framework."
     },
