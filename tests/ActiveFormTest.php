@@ -94,7 +94,7 @@ html;
         $out = ob_get_clean();
 
         $expected = <<<'html'
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16 svg-inline--fa-fw" fill="currentColor"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm48.2 326.1h-181L199.9 178h181l-84.7 156.1z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16 svg-inline--fa-fw" fill="currentColor"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm48.2,326.1h-181L207.9,178h181Z"/></svg>
 html;
 
         $this->assertStringContainsString($expected, $out);
