@@ -13,6 +13,7 @@ class IconClassTest extends tests
         $this->assertStringContainsString('viewBox="0 0 192 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-6"', $icon->show('ellipsis-v'));
         $this->assertStringContainsString('viewBox="0 0 496 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('github', ['style' => 'brands']));
         $this->assertStringContainsString('viewBox="0 0 512 512" aria-hidden="true" role="img" class="svg-inline--fa svg-inline--fa-w-16"', $icon->show('nonexistent'));
+        $this->assertStringContainsString('width="390" height="250"', $icon->show('@vendor/pdepend/pdepend/src/main/php/PDepend/Report/Jdepend/chart.svg'));
     }
 
     public function testClass(): void
@@ -39,8 +40,8 @@ html;
 html;
 
         $icon = new Icon();
-        $this->assertEquals($expected1, $icon->show('@vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/icons/file-code.svg'));
-        $this->assertEquals($expected2, $icon->show('@vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/icons/file-code.svg', ['addClass' => true]));
+        $this->assertSame($expected1, $icon->show('@vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/icons/file-code.svg'));
+        $this->assertSame($expected2, $icon->show('@vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/icons/file-code.svg', ['addClass' => true]));
     }
 
     public function testFill(): void

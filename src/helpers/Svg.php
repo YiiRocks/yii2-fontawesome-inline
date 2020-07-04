@@ -184,13 +184,15 @@ class Svg
         $svgWidth = $this->getPixelValue($this->svgElement->getAttribute('width'));
         $svgHeight = $this->getPixelValue($this->svgElement->getAttribute('height'));
 
-        [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox') ?: '');
-        $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
-        $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;
+        if ($this->svgElement->hasAttribute('viewBox')) {
+            [$xStart, $yStart, $xEnd, $yEnd] = explode(' ', $this->svgElement->getAttribute('viewBox'));
+            $viewBoxWidth = isset($xStart, $xEnd) ? $xEnd - $xStart : 0;
+            $viewBoxHeight = isset($yStart, $yEnd) ? $yEnd - $yStart : 0;
 
-        if ($viewBoxWidth > 0 && $viewBoxHeight > 0) {
-            $svgWidth = $viewBoxWidth;
-            $svgHeight = $viewBoxHeight;
+            if ($viewBoxWidth > 0 && $viewBoxHeight > 0) {
+                $svgWidth = $viewBoxWidth;
+                $svgHeight = $viewBoxHeight;
+            }
         }
 
         return [$svgWidth ?? 1, $svgHeight ?? 1];
