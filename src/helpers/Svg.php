@@ -38,7 +38,7 @@ class Svg
     /** @var DOMDocument SVG file */
     private $svg;
 
-    /** @var \DOMNode SVG */
+    /** @var \DOMElement SVG */
     private $svgElement;
 
     /** @var array additional properties for the icon not set with Options */
