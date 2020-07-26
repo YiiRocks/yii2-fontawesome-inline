@@ -1,9 +1,9 @@
 {
     "name": "thoulah/yii2-fontawesome-inline",
-    "description": "Inline Font Awesome icons for Yii2 – without JavaScript",
+    "description": "Inline Font Awesome Icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
     "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "component"],
-    "homepage": "https://thoulah.github.io/yii2-fontawesome-inline/",
+    "homepage": "https://yii.rocks/yii2-fontawesome-inline/",
     "license": "MIT",
     "authors": [
         {
@@ -17,8 +17,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/Thoulah/yii2-fontawesome-inline/issues",
-        "source": "https://github.com/Thoulah/yii2-fontawesome-inline/tree/master"
+        "issues": "https://github.com/YiiRocks/yii2-fontawesome-inline/issues",
+        "source": "https://github.com/YiiRocks/yii2-fontawesome-inline/tree/master"
     },
     "require": {
         "php": ">=7.1.0",
