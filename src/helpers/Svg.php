@@ -2,6 +2,7 @@
 
 namespace thoulah\fontawesome\helpers;
 
+use DOMXPath;
 use thoulah\fontawesome\config\Defaults;
 use thoulah\fontawesome\config\Options;
 use yii\helpers\Html;
@@ -131,6 +132,12 @@ class Svg
             $this->svg->load($this->defaults->fallbackIcon);
         }
 
+        $xpath = new DOMXPath($this->svg);
+        while ($node = $xpath->query('//comment()')->item(0)) {
+            if ($node->parentNode) {
+                $node->parentNode->removeChild($node);
+            }
+        }
         $this->svgElement = $this->svg->getElementsByTagName('svg')->item(0);
     }
 
