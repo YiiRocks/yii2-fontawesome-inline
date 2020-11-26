@@ -7,13 +7,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Thoulah",
-            "role": "Developer"
-        },
-        {
             "name": "Mr.42",
             "homepage": "https://mr42.me/",
-            "role": "Tester"
+            "role": "Developer"
         }
     ],
     "support": {
