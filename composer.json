@@ -2,7 +2,23 @@
     "name": "thoulah/yii2-fontawesome-inline",
     "description": "Inline Font Awesome Icons for Yii2 – without JavaScript",
     "type": "yii2-extension",
-    "keywords": ["yii", "yii2", "font", "awesome", "fontawesome", "icon", "svg", "bootstrap", "asset", "bundle", "inline", "widget", "helper", "component"],
+    "keywords": [
+        "yii",
+        "yii2",
+        "extension",
+        "font",
+        "awesome",
+        "fontawesome",
+        "icon",
+        "svg",
+        "bootstrap",
+        "asset",
+        "bundle",
+        "inline",
+        "widget",
+        "helper",
+        "component"
+    ],
     "homepage": "https://yii.rocks/yii2-fontawesome-inline/",
     "license": "MIT",
     "authors": [
@@ -19,16 +35,15 @@
     "require": {
         "php": ">=7.1.0",
         "ext-dom": "*",
+        "fortawesome/font-awesome": "~5.1",
         "yiisoft/yii2": "~2.0",
-        "yiisoft/yii2-bootstrap4": "~2.0",
-        "fortawesome/font-awesome": "~5.1"
+        "yiisoft/yii2-bootstrap4": "~2.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~2.15.0",
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": ">=7.5",
-        "squizlabs/php_codesniffer": "3.*",
-        "yiisoft/yii2-apidoc": "~2.1.0"
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
@@ -37,7 +52,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "thoulah\\fontawesome\\cs\\": "cs",
             "thoulah\\fontawesome\\tests\\": "tests"
         }
     },
@@ -63,5 +77,8 @@
         "branch-alias": {
             "dev-master": "1.1.x-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
