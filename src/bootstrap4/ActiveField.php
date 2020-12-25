@@ -127,7 +127,7 @@ class ActiveField extends \yii\bootstrap4\ActiveField
     private function callComponentOrClass(): string
     {
         foreach (Yii::$app->components as $key => $value) {
-            if (in_array(IconComponent::class, [$value['class'], get_parent_class($value['class'])])) {
+            if (is_object($value['class']) && in_array(IconComponent::class, [$value['class'], get_parent_class($value['class'])])) {
                 return $this->runAsComponent(Yii::$app->$key);
             }
         }
