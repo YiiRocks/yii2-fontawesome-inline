@@ -20,7 +20,7 @@
         "component"
     ],
     "homepage": "https://yii.rocks/yii2-fontawesome-inline/",
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Mr.42",
@@ -80,5 +80,11 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/YiiRocks"
+        }
+    ]
 }
